@@ -15,15 +15,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { useFormState } from "react-dom";
 import {
-    callEmailSignAction,
-    callEmailSignActionProgressive,
+    callVerifyOtpAction,
+    callVerifyOtpActionProgressive,
 } from "@/server/auth/otp-actions";
+import { OtpSchema } from "@/server/auth/otp";
 
-const EmailFormSchema = z.object({
-    email: z.string().email({
-        message: "Emailul este invalid.",
-    }),
-});
+const VerifyOtpFormSchema = z.object({ otp: OtpSchema });
 
 function ProgressiveMessage({ children }: { children: string | undefined }) {
     return <p className="text-sm font-medium text-destructive">{children}</p>;
@@ -31,21 +28,22 @@ function ProgressiveMessage({ children }: { children: string | undefined }) {
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
-        callEmailSignActionProgressive,
+        callVerifyOtpActionProgressive,
         undefined,
     );
 
-    const form = useForm<z.infer<typeof EmailFormSchema>>({
-        resolver: zodResolver(EmailFormSchema),
+    const form = useForm<z.infer<typeof VerifyOtpFormSchema>>({
+        resolver: zodResolver(VerifyOtpFormSchema),
         defaultValues: {
-            email: "",
+            otp: "",
         },
     });
-    const onSubmit = async (data: z.infer<typeof EmailFormSchema>) => {
-        const response = await callEmailSignAction(data);
+
+    const onSubmit = async (data: z.infer<typeof VerifyOtpFormSchema>) => {
+        const response = await callVerifyOtpAction(data);
 
         if (response) {
-            form.setError("email", {
+            form.setError("otp", {
                 type: "server",
                 message: response,
             });
@@ -60,7 +58,7 @@ export function EmailForm() {
             >
                 <FormField
                     control={form.control}
-                    name="email"
+                    name="otp"
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>Email</FormLabel>

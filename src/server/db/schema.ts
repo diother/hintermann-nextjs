@@ -1,34 +1,27 @@
-// Example model schema from the Drizzle docs
-// https://orm.drizzle.team/docs/sql-schema-declaration
-
 import { sql } from "drizzle-orm";
 import {
-  bigint,
-  index,
-  mysqlTableCreator,
-  timestamp,
-  varchar,
+    binary,
+    boolean,
+    char,
+    mysqlTable,
+    timestamp,
+    varchar,
 } from "drizzle-orm/mysql-core";
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-export const createTable = mysqlTableCreator((name) => `hintermann-webapp_${name}`);
+export const users = mysqlTable("users", {
+    id: binary("id", { length: 6 }).primaryKey(),
+    email: varchar("email", { length: 254 }).unique().notNull(),
+    emailVerified: boolean("email_verified").default(false).notNull(),
+    otp: char("otp", { length: 6 }),
+    otpExpiresAt: timestamp("otp_expires_at").default(sql`utc_timestamp()`),
+    createdAt: timestamp("created_at").default(sql`utc_timestamp()`),
+    googleId: varchar("google_id", { length: 254 }), // unoptimized
+});
 
-export const posts = createTable(
-  "post",
-  {
-    id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }),
-    createdAt: timestamp("created_at")
-      .default(sql`CURRENT_TIMESTAMP`)
-      .notNull(),
-    updatedAt: timestamp("updatedAt").onUpdateNow(),
-  },
-  (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
-);
+export const sessions = mysqlTable("sessions", {
+    id: binary("id", { length: 6 }).primaryKey(),
+    userId: binary("user_id", { length: 6 })
+        .references(() => users.id)
+        .notNull(),
+    expiresAt: timestamp("created_at").default(sql`utc_timestamp()`),
+});
