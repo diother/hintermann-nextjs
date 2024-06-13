@@ -7,13 +7,10 @@ import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { useFormState } from "react-dom";
 import {
     callVerifyOtpAction,
@@ -25,7 +22,6 @@ import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 export function VerifyOtpForm() {
-    const slotClasses = "h-11 w-11 border-muted-foreground/35 text-base";
     const [state, formAction] = useFormState(
         callVerifyOtpActionProgressive,
         undefined,
@@ -46,18 +42,19 @@ export function VerifyOtpForm() {
             });
         }
     };
+    const slotClasses = "h-11 w-11 border-muted-foreground/35 text-base";
     return (
         <Form {...form}>
             <form
                 action={formAction}
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex w-[16.5rem] flex-col items-center gap-4"
+                className="flex w-[16.5rem] flex-col items-center gap-2"
             >
                 <FormField
                     control={form.control}
                     name="otp"
                     render={({ field }) => (
-                        <FormItem>
+                        <FormItem className="space-y-2">
                             <FormControl>
                                 <InputOTP
                                     maxLength={6}
@@ -92,6 +89,7 @@ export function VerifyOtpForm() {
                                     </InputOTPGroup>
                                 </InputOTP>
                             </FormControl>
+                            <ProgressiveMessage>{state}</ProgressiveMessage>
                             <FormMessage />
                         </FormItem>
                     )}
@@ -103,21 +101,6 @@ export function VerifyOtpForm() {
         </Form>
     );
 }
-// <div className="flex w-[16.5rem] flex-col items-center gap-4">
-//     <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS_AND_CHARS}>
-//         <InputOTPGroup>
-//             <InputOTPSlot index={0} className={slotClasses} />
-//             <InputOTPSlot index={1} className={slotClasses} />
-//             <InputOTPSlot index={2} className={slotClasses} />
-//             <InputOTPSlot index={3} className={slotClasses} />
-//             <InputOTPSlot index={4} className={slotClasses} />
-//             <InputOTPSlot index={5} className={slotClasses} />
-//         </InputOTPGroup>
-//     </InputOTP>
-//     <Button className="h-11 w-full text-base">
-//         Validează codul
-//     </Button>
-// </div>
 
 function ProgressiveMessage({ children }: { children: ErrorSchema }) {
     return <p className="text-sm font-medium text-destructive">{children}</p>;

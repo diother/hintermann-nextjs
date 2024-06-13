@@ -40,17 +40,6 @@ export function EmailForm() {
             });
         }
     };
-    // <div className="flex flex-col gap-3">
-    //     <Input
-    //     id="email"
-    //     type="email"
-    //     className="h-12 text-base"
-    //     placeholder="nume@exemplu.ro"
-    //     />
-    //     <Button className="h-12 w-full text-base">
-    //     Continuă cu Email
-    //     </Button>
-    //     </div>
     return (
         <Form {...form}>
             <form action={formAction} onSubmit={form.handleSubmit(onSubmit)}>
