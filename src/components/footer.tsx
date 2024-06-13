@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { Icons } from "./icons";
 
 export default function Footer() {
     const navLinks = [
@@ -11,29 +11,29 @@ export default function Footer() {
     const socialIcons = [
         {
             name: "Facebook",
-            svg: <Facebook className="h-5 w-5" />,
+            svg: <Icons.facebook className="h-5 w-5" />,
             href: "https://www.facebook.com/people/Hintermann-Charity/61556605667252/",
         },
         {
             name: "Instagram",
-            svg: <Instagram className="h-5 w-5" />,
+            svg: <Icons.instagram className="h-5 w-5" />,
             href: "https://www.instagram.com/hintermann_charity/",
         },
         {
             name: "LinkedIn",
-            svg: <Linkedin className="h-5 w-5" />,
+            svg: <Icons.linkedin className="h-5 w-5" />,
             href: "https://www.linkedin.com/company/101937853/",
         },
         {
             name: "X",
-            svg: <Twitter className="h-5 w-5" />,
+            svg: <Icons.twitter className="h-5 w-5" />,
             href: "https://twitter.com/hintermann_",
         },
     ];
     return (
         <footer className="border-t">
-            <div className="mx-auto flex max-w-[1440px] flex-col gap-6 p-6 pb-8">
-                <div className="flex items-center justify-between">
+            <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 sm:flex-row sm:items-center">
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
                     <div className="flex items-center gap-1.5">
                         <Link href="/">
                             <Image
@@ -47,9 +47,6 @@ export default function Footer() {
                             © 2024
                         </span>
                     </div>
-                    <ThemeToggle />
-                </div>
-                <div className="flex flex-col gap-6 sm:flex-row-reverse sm:justify-end sm:gap-10">
                     <div className="flex flex-col gap-4 sm:flex-row sm:gap-10">
                         {navLinks.map((link) => (
                             <Link
@@ -61,7 +58,9 @@ export default function Footer() {
                             </Link>
                         ))}
                     </div>
-                    <div className="flex items-center gap-3">
+                </div>
+                <div className="flex items-center justify-between gap-10">
+                    <div className="flex items-center gap-5">
                         {socialIcons.map((icon) => (
                             <Link
                                 key={icon.name}
@@ -73,6 +72,7 @@ export default function Footer() {
                             </Link>
                         ))}
                     </div>
+                    <ThemeToggle />
                 </div>
             </div>
         </footer>

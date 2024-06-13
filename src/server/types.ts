@@ -12,7 +12,7 @@ export interface CookieAttributes {
     maxAge?: number;
     expires?: Date;
 }
-export type FormSchema = string | undefined;
+export type ErrorSchema = string | undefined;
 export class FormError extends Error {
     constructor(message?: string) {
         super(message);

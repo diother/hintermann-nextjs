@@ -9,7 +9,6 @@ import {
     FormControl,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -18,23 +17,13 @@ import {
     callEmailSignAction,
     callEmailSignActionProgressive,
 } from "@/server/auth/otp-actions";
-
-const EmailFormSchema = z.object({
-    email: z.string().email({
-        message: "Emailul este invalid.",
-    }),
-});
-
-function ProgressiveMessage({ children }: { children: string | undefined }) {
-    return <p className="text-sm font-medium text-destructive">{children}</p>;
-}
+import { type ErrorSchema } from "@/server/types";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
         callEmailSignActionProgressive,
         undefined,
     );
-
     const form = useForm<z.infer<typeof EmailFormSchema>>({
         resolver: zodResolver(EmailFormSchema),
         defaultValues: {
@@ -51,22 +40,29 @@ export function EmailForm() {
             });
         }
     };
+    // <div className="flex flex-col gap-3">
+    //     <Input
+    //     id="email"
+    //     type="email"
+    //     className="h-12 text-base"
+    //     placeholder="nume@exemplu.ro"
+    //     />
+    //     <Button className="h-12 w-full text-base">
+    //     Continuă cu Email
+    //     </Button>
+    //     </div>
     return (
         <Form {...form}>
-            <form
-                action={formAction}
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-8"
-            >
+            <form action={formAction} onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
+                        <FormItem className="space-y-2">
                             <FormControl>
                                 <Input
-                                    placeholder="nume@domeniu.ro"
+                                    className="h-12 text-base"
+                                    placeholder="nume@exemplu.ro"
                                     {...field}
                                 />
                             </FormControl>
@@ -75,8 +71,20 @@ export function EmailForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type="submit" className="mt-2 h-12 w-full text-base">
+                    Continuă cu Email
+                </Button>
             </form>
         </Form>
     );
+}
+
+const EmailFormSchema = z.object({
+    email: z.string().email({
+        message: "Te rugăm introdu un email valid.",
+    }),
+});
+
+function ProgressiveMessage({ children }: { children: ErrorSchema }) {
+    return <p className="text-sm font-medium text-destructive">{children}</p>;
 }

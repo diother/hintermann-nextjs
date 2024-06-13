@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { FormError } from "../types";
+import { type ErrorSchema, FormError } from "../types";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import {
     createSession,
@@ -21,23 +21,21 @@ export async function callEmailSignActionProgressive(
     formData: FormData,
 ): Promise<ErrorSchema> {
     const email = formData.get("email") as string;
-    const error = await emailSignAction(email);
-    return error;
+    return await emailSignAction(email);
 }
 
 export async function callEmailSignAction(
     data: z.infer<typeof EmailFormSchema>,
 ): Promise<ErrorSchema> {
     const email = data.email;
-    const error = await emailSignAction(email);
-    return error;
+    return await emailSignAction(email);
 }
 
 async function emailSignAction(email: string) {
     try {
         validateEmailForm(email);
         const [userId, otp] = await createOtpSession(email);
-        exposeOtpSession(userId, otp);
+        exposeOtpSession(userId, otp, email);
     } catch (error) {
         if (isRedirectError(error)) {
             throw error;
@@ -52,7 +50,7 @@ function validateEmailForm(email: string): ErrorSchema {
     const valid = z.string().email().safeParse(email);
 
     if (!valid.success) {
-        throw new FormError("Email is not valid");
+        throw new FormError("Te rugăm introdu un email valid.");
     }
     return undefined;
 }
@@ -67,17 +65,17 @@ async function createOtpSession(email: string): Promise<[Buffer, string]> {
         : await createUserWithOtp(id, email, otp, otpExpiresAt);
 
     if (!res) {
-        throw new FormError("Failed to generate OTP");
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
     }
     return [id, otp];
 }
 
-function exposeOtpSession(userId: Buffer, otp: string): void {
+function exposeOtpSession(userId: Buffer, otp: string, email: string): void {
     const cookie = new Cookie("otp_token", userId);
     cookie.set();
 
     console.log(otp);
-    redirect("login/verify-otp");
+    redirect(`/login/verify-otp?email=${encodeURIComponent(email)}`);
 }
 
 export async function callVerifyOtpActionProgressive(
@@ -121,7 +119,7 @@ function validateOtpForm(otp: string): Buffer {
     }
     const valid = OtpSchema.safeParse(otp);
     if (!valid.success) {
-        throw new FormError("OTP is not valid");
+        throw new FormError("Codul de verificare este invalid.");
     }
     return userId;
 }
@@ -129,7 +127,7 @@ function validateOtpForm(otp: string): Buffer {
 async function checkOtp(id: Buffer, otp: string): Promise<void> {
     const res = await validateOtp(id, otp);
     if (!res) {
-        throw new FormError("OTP is not valid");
+        throw new FormError("Codul de verificare este invalid.");
     }
     cookies().delete("otp_token");
 }
@@ -139,7 +137,7 @@ async function startSession(userId: Buffer): Promise<Buffer> {
     const expiresAt = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
     const session = await createSession(userId, sessionId, expiresAt);
     if (!session) {
-        throw new FormError("Problem with our servers");
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
     }
     return sessionId;
 }
@@ -148,13 +146,12 @@ function exposeSession(sessionId: Buffer): void {
     const expiresAt = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
     const cookie = new Cookie("auth_token", sessionId, expiresAt);
     cookie.set();
-    redirect("/dashboard");
+    redirect("/");
 }
 
-type ErrorSchema = string | undefined;
 const EmailFormSchema = z.object({
     email: z.string().email({
-        message: "Emailul este invalid.",
+        message: "Te rugăm introdu un email valid.",
     }),
 });
 const VerifyOtpFormSchema = z.object({ otp: OtpSchema });
