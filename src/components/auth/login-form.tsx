@@ -9,6 +9,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -18,6 +19,8 @@ import {
     callEmailSignActionProgressive,
 } from "@/server/auth/otp-actions";
 import { type ErrorSchema } from "@/server/types";
+import { googleSignAction } from "@/server/auth/oauth-actions";
+import { Icons } from "../icons";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
@@ -48,6 +51,7 @@ export function EmailForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem className="space-y-2">
+                            <FormLabel className="hidden">Email</FormLabel>
                             <FormControl>
                                 <Input
                                     className="h-12 text-base"
@@ -65,6 +69,18 @@ export function EmailForm() {
                 </Button>
             </form>
         </Form>
+    );
+}
+
+export function GoogleForm() {
+    const [state, formAction] = useFormState(googleSignAction, undefined);
+    return (
+        <form action={formAction} className="flex flex-col gap-2">
+            <Button variant="secondary" className="h-12 text-base">
+                <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
+                Continuă cu Google
+            </Button>
+        </form>
     );
 }
 

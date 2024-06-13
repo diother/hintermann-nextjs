@@ -1,6 +1,4 @@
-import { EmailForm } from "@/components/auth/login-form";
-import { Button } from "@/components/ui/button";
-import { Icons } from "@/components/icons";
+import { EmailForm, GoogleForm } from "@/components/auth/login-form";
 
 export default function Page() {
     return (
@@ -8,16 +6,7 @@ export default function Page() {
             <h1 className="pb-8 text-center text-4xl font-semibold leading-tight tracking-tighter">
                 Autentificare
             </h1>
-            <div className="flex flex-col gap-4">
-                <Button variant="secondary" className="h-12 text-base">
-                    <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
-                    Continuă cu Google
-                </Button>
-                <Button variant="secondary" className="h-12 text-base">
-                    <Icons.apple className="-mt-1 mr-3 h-[1.375rem] w-[1.375rem] brightness-0 dark:brightness-100" />
-                    Continuă cu Apple
-                </Button>
-            </div>
+            <GoogleForm />
             <div className="relative py-8">
                 <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />

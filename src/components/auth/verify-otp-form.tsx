@@ -9,6 +9,7 @@ import {
     FormControl,
     FormField,
     FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { useFormState } from "react-dom";
@@ -55,6 +56,7 @@ export function VerifyOtpForm() {
                     name="otp"
                     render={({ field }) => (
                         <FormItem className="space-y-2">
+                            <FormLabel>Cod de verificare</FormLabel>
                             <FormControl>
                                 <InputOTP
                                     maxLength={6}
