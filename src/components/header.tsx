@@ -2,12 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
+import { SignOutForm } from "./auth/login-form";
+import { getUserSession } from "@/server/auth/authorize";
 
-export default function Header() {
+export default async function Header() {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
     ];
+    const user = await getUserSession();
+    if (user) {
+        console.log("we are logged in");
+    } else {
+        console.log("we are out");
+    }
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6">
@@ -35,9 +43,17 @@ export default function Header() {
                         ))}
                     </div>
                 </div>
-                <Button className="hidden lg:flex" variant="outline" asChild>
-                    <Link href="/login">Autentifică-te</Link>
-                </Button>
+                {user ? (
+                    <SignOutForm />
+                ) : (
+                    <Button
+                        className="hidden lg:flex"
+                        variant="outline"
+                        asChild
+                    >
+                        <Link href="/login">Autentifică-te</Link>
+                    </Button>
+                )}
                 <MobileMenu />
             </div>
         </header>

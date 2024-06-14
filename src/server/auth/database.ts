@@ -96,3 +96,23 @@ export async function createSession(
     });
     return !!insert[0].affectedRows;
 }
+
+export async function validateSession(
+    sessionId: Buffer,
+): Promise<Buffer | undefined> {
+    const user = await db
+        .select({ id: sessions.userId })
+        .from(sessions)
+        .where(
+            and(
+                eq(sessions.id, sql`${sessionId}`),
+                gt(sessions.expiresAt, new Date()),
+            ),
+        );
+    return user[0]?.id as Buffer | undefined;
+}
+
+export async function deleteSession(id: Buffer): Promise<boolean> {
+    const query = await db.delete(sessions).where(eq(sessions.id, sql`${id}`));
+    return !!query[0].affectedRows;
+}

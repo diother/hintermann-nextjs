@@ -21,6 +21,7 @@ import {
 import { type ErrorSchema } from "@/server/types";
 import { googleSignAction } from "@/server/auth/oauth-actions";
 import { Icons } from "../icons";
+import { deleteCurrentSession } from "@/server/auth/actions";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
@@ -75,11 +76,20 @@ export function EmailForm() {
 export function GoogleForm() {
     const [state, formAction] = useFormState(googleSignAction, undefined);
     return (
-        <form action={formAction} className="flex flex-col gap-2">
+        <form action={formAction} className="flex flex-col">
             <Button variant="secondary" className="h-12 text-base">
                 <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
                 Continuă cu Google
             </Button>
+        </form>
+    );
+}
+
+export function SignOutForm() {
+    const [state, formAction] = useFormState(deleteCurrentSession, undefined);
+    return (
+        <form action={formAction}>
+            <Button variant="outline">Deconectează-te</Button>
         </form>
     );
 }

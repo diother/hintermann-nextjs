@@ -5,7 +5,7 @@ import { Home, Phone, Rss, Smartphone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function HomePage() {
+export default async function HomePage() {
     const values = [
         {
             svg: <Home className="h-9 w-9" />,
