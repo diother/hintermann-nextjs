@@ -3,7 +3,6 @@ import { allowOnlyUnauthenticatedUsers } from "@/server/auth/authorize";
 
 export default async function Page() {
     await allowOnlyUnauthenticatedUsers();
-
     return (
         <main className="mx-auto flex min-h-[100vh] w-full max-w-sm flex-col justify-center px-6 py-10">
             <h1 className="pb-8 text-center text-4xl font-semibold leading-tight tracking-tighter">

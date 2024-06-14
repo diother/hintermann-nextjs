@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
-import { SignOutForm } from "./auth/login-form";
 import { getUserSession } from "@/server/auth/authorize";
+import { AvatarMenu } from "./header-avatar";
+import { getUserEmail } from "@/server/auth/database";
 
 export default async function Header() {
     const navLinks = [
@@ -11,10 +12,9 @@ export default async function Header() {
         { name: "Contact", href: "/contact" },
     ];
     const user = await getUserSession();
+    let email: string | undefined;
     if (user) {
-        console.log("we are logged in");
-    } else {
-        console.log("we are out");
+        email = await getUserEmail(user);
     }
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -44,7 +44,7 @@ export default async function Header() {
                     </div>
                 </div>
                 {user ? (
-                    <SignOutForm />
+                    <AvatarMenu className="hidden lg:flex" email={email} />
                 ) : (
                     <Button
                         className="hidden lg:flex"
@@ -54,7 +54,7 @@ export default async function Header() {
                         <Link href="/login">Autentifică-te</Link>
                     </Button>
                 )}
-                <MobileMenu />
+                <MobileMenu email={email} />
             </div>
         </header>
     );

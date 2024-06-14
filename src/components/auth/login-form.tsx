@@ -85,15 +85,6 @@ export function GoogleForm() {
     );
 }
 
-export function SignOutForm() {
-    const [state, formAction] = useFormState(deleteCurrentSession, undefined);
-    return (
-        <form action={formAction}>
-            <Button variant="outline">Deconectează-te</Button>
-        </form>
-    );
-}
-
 const EmailFormSchema = z.object({
     email: z.string().email({
         message: "Te rugăm introdu un email valid.",

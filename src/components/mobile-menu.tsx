@@ -8,14 +8,17 @@ import {
     SheetFooter,
     SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { deleteCurrentSession } from "@/server/auth/actions";
+import { LogOut, Menu } from "lucide-react";
 import Link from "next/link";
+import { useFormState } from "react-dom";
 
-export function MobileMenu() {
+export function MobileMenu({ email }: { email?: string }) {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
     ];
+    const [state, formAction] = useFormState(deleteCurrentSession, undefined);
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -34,13 +37,33 @@ export function MobileMenu() {
                         </SheetClose>
                     ))}
                 </nav>
-                <SheetFooter className="mt-6">
-                    <SheetClose asChild>
-                        <Button className="w-full" asChild>
-                            <Link href="/login">Autentifică-te</Link>
-                        </Button>
-                    </SheetClose>
-                </SheetFooter>
+                {email ? (
+                    <div className="flex flex-col justify-end gap-4 py-12">
+                        <span className="border-b py-3 text-sm font-semibold">
+                            {email}
+                        </span>
+                        <SheetClose asChild>
+                            <form action={formAction} className="flex flex-col">
+                                <Button
+                                    variant="secondary"
+                                    type="submit"
+                                    className="flex items-center justify-between"
+                                >
+                                    Deconectează-te
+                                    <LogOut className="h-4 w-4" />
+                                </Button>
+                            </form>
+                        </SheetClose>
+                    </div>
+                ) : (
+                    <SheetFooter className="mt-6">
+                        <SheetClose asChild>
+                            <Button className="w-full" asChild>
+                                <Link href="/login">Autentifică-te</Link>
+                            </Button>
+                        </SheetClose>
+                    </SheetFooter>
+                )}
             </SheetContent>
         </Sheet>
     );

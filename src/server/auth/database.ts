@@ -116,3 +116,13 @@ export async function deleteSession(id: Buffer): Promise<boolean> {
     const query = await db.delete(sessions).where(eq(sessions.id, sql`${id}`));
     return !!query[0].affectedRows;
 }
+
+export async function getUserEmail(
+    userId: Buffer,
+): Promise<string | undefined> {
+    const user = await db
+        .select({ email: users.email })
+        .from(users)
+        .where(eq(users.id, sql`${userId}`));
+    return user[0]?.email;
+}

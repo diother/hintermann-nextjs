@@ -21,6 +21,7 @@ import { OtpSchema } from "@/server/auth/otp";
 import { type ErrorSchema } from "@/server/types";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import React from "react";
 
 export function VerifyOtpForm() {
     const [state, formAction] = useFormState(
@@ -44,6 +45,7 @@ export function VerifyOtpForm() {
         }
     };
     const slotClasses = "h-11 w-11 border-muted-foreground/35 text-base";
+
     return (
         <Form {...form}>
             <form
