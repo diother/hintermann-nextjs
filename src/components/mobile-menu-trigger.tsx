@@ -32,7 +32,7 @@ export default function MobileMenuTrigger({
             <Button
                 variant="outline"
                 onClick={toggleMenu}
-                className="relative aspect-square border lg:hidden"
+                className="relative h-10 w-10 border lg:hidden"
                 aria-label="Menu trigger button"
             >
                 {isOpen ? (
