@@ -18,7 +18,7 @@ export default async function Header() {
         email = await getUserEmail(user);
     }
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 before:absolute before:inset-0 before:backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 before:absolute before:inset-0 before:-z-10 before:backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6">
                 <div className="z-50 flex items-center gap-8">
                     <Link href="/" className="flex items-center gap-1.5">
