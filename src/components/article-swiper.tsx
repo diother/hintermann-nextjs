@@ -52,6 +52,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
                 variant="secondary"
                 slot="container-end"
                 className="button-prev absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-xl transition sm:h-12 sm:w-12 lg:h-14 lg:w-14"
+                aria-label="Slider button prev"
             >
                 <ArrowLeft className="shrink-0" />
             </Button>
@@ -59,6 +60,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
                 variant="secondary"
                 slot="container-end"
                 className="button-next absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-xl transition sm:h-12 sm:w-12 lg:h-14 lg:w-14"
+                aria-label="Slider button next"
             >
                 <ArrowRight className="shrink-0" />
             </Button>

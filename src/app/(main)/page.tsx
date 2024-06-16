@@ -1,6 +1,7 @@
 import DecorationSection, { DecorationCross } from "@/components/decoration";
 import { Button } from "@/components/ui/button";
 import { logos } from "@/lib/logos";
+import { formatDate } from "@/lib/utils";
 import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 import { Home, Phone, Rss, Smartphone } from "lucide-react";
@@ -8,9 +9,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function HomePage() {
-    const posts = allPosts.sort((a, b) => {
-        return compareDesc(new Date(a.date), new Date(b.date));
-    });
+    const posts = allPosts
+        .sort((a, b) => {
+            return compareDesc(new Date(a.date), new Date(b.date));
+        })
+        .slice(0, 3);
 
     return (
         <main className="mx-auto flex w-full max-w-6xl flex-col p-4 sm:p-10 lg:py-16">
@@ -34,61 +37,37 @@ export default async function HomePage() {
             </section>
             <DecorationSection position="bottom-right" />
             <section className="border-x xl:grid xl:grid-cols-12 xl:p-0">
-                <Link
-                    href="/projects/article1"
-                    className={`z-10 grid gap-4 p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
-                >
-                    <span className="text-xs text-muted-foreground sm:text-sm">
-                        20 MAI 2024
-                    </span>
-                    <div className="overflow-hidden md:row-span-3 md:row-start-1">
-                        <Image
-                            priority={true}
-                            className="h-auto w-full transition"
-                            src="/article1/image1.jpg"
-                            width="300"
-                            height="200"
-                            alt="Project photo"
-                        />
-                    </div>
-                    <h2 className="font-semibold sm:text-xl lg:text-2xl">
-                        Campania de Paști „Fire de compasiune”
-                    </h2>
-                    <p className="text-sm text-muted-foreground sm:text-base">
-                        Suntem încântați să împărtășim cu voi momentele speciale
-                        din cadrul campaniei noastre „Fire de compasiune”,
-                        realizată în parteneriat cu Humana.
-                    </p>
-                </Link>
-                <Link
-                    href="/projects/article"
-                    className={`z-10 grid gap-4 border-t p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
-                >
-                    <span className="text-xs text-muted-foreground sm:text-sm">
-                        11 MAI 2024
-                    </span>
-                    <div className="overflow-hidden md:row-span-3 md:row-start-1">
-                        <Image
-                            priority={true}
-                            className="h-auto w-full transition"
-                            src="/article/image1.jpg"
-                            width="300"
-                            height="200"
-                            alt="Project photo"
-                        />
-                    </div>
-                    <h2 className="font-semibold sm:text-xl lg:text-2xl">
-                        Cum am adus bucurie familiilor defavorizate din
-                        Împrejurimile Brașovului.
-                    </h2>
-                    <p className="text-sm text-muted-foreground sm:text-base">
-                        Familiile ajutate au fost profund emoționate de gestul
-                        asociației noastre, care le-a trimis pachete cu
-                        alimente. Acest sprijin le-a oferit speranța în mijlocul
-                        vremurilor dificile.
-                    </p>
-                </Link>
-                <div className="lg:col-start-12 lg:row-span-2 lg:row-start-1 lg:border-l" />
+                {posts?.length &&
+                    posts.map((post, index) => (
+                        <Link
+                            key={post._id}
+                            href={post.slug}
+                            className={`z-10 grid gap-4 p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
+                        >
+                            <p className="text-sm text-muted-foreground">
+                                {formatDate(post.date)}
+                            </p>
+                            <div className="overflow-hidden md:row-span-3 md:row-start-1">
+                                <Image
+                                    priority={index <= 1}
+                                    className="h-auto w-full transition"
+                                    src="/article1/image1.jpg"
+                                    width="300"
+                                    height="200"
+                                    alt={post.title}
+                                />
+                            </div>
+                            <h2 className="font-semibold sm:text-xl lg:text-2xl">
+                                {post.title}
+                            </h2>
+                            <p className="text-sm text-muted-foreground sm:text-base">
+                                {post.description}
+                            </p>
+                        </Link>
+                    ))}
+                <div
+                    className={`lg:col-start-12 lg:row-span-${posts.length} lg:row-start-1 lg:border-l`}
+                />
             </section>
             <DecorationSection position="bottom-left" />
             <section

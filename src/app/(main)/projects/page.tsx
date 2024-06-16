@@ -1,11 +1,3 @@
-// import type { Metadata } from "next";
-// import Image from "next/image";
-// import Link from "next/link";
-//
-// export const metadata: Metadata = {
-//     title: "Proiecte",
-// };
-
 import Image from "next/image";
 import Link from "next/link";
 import { allPosts } from "contentlayer/generated";
@@ -38,7 +30,7 @@ export default function Page() {
                         <Link
                             key={post._id}
                             href={post.slug}
-                            className={`relative z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110`}
+                            className={`z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110`}
                         >
                             <p className="text-sm text-muted-foreground">
                                 {formatDate(post.date)}
