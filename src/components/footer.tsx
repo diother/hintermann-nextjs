@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { ThemeToggle } from "./theme-toggle";
 import { Icons } from "./icons";
 
@@ -36,12 +35,7 @@ export default function Footer() {
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
                     <div className="flex items-center gap-1.5">
                         <Link href="/">
-                            <Image
-                                src="/hintermann-logo.svg"
-                                width={28}
-                                height={28}
-                                alt="Logo of Hintermann"
-                            />
+                            <Icons.logo />
                         </Link>
                         <span className="text-sm text-muted-foreground">
                             © 2024

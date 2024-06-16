@@ -1,10 +1,11 @@
-import Image from "next/image";
 import Link from "next/link";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
 import { getUserSession } from "@/server/auth/authorize";
 import { AvatarMenu } from "./header-avatar";
 import { getUserEmail } from "@/server/auth/database";
+import { Icons } from "./icons";
+import MobileMenuTrigger from "./mobile-menu-trigger";
 
 export default async function Header() {
     const navLinks = [
@@ -17,16 +18,11 @@ export default async function Header() {
         email = await getUserEmail(user);
     }
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 before:absolute before:inset-0 before:backdrop-blur supports-[backdrop-filter]:bg-background/60">
             <div className="mx-auto flex h-16 max-w-[1440px] items-center justify-between px-6">
                 <div className="z-50 flex items-center gap-8">
                     <Link href="/" className="flex items-center gap-1.5">
-                        <Image
-                            src="/hintermann-logo.svg"
-                            width={28}
-                            height={28}
-                            alt="Hintermann Charity Logo"
-                        />
+                        <Icons.logo />
                         <span className="text-center text-xl font-semibold leading-tight tracking-tighter">
                             Hintermann Charity
                         </span>
@@ -54,7 +50,9 @@ export default async function Header() {
                         <Link href="/login">Autentifică-te</Link>
                     </Button>
                 )}
-                <MobileMenu email={email} />
+                <MobileMenuTrigger>
+                    <MobileMenu email={email} />
+                </MobileMenuTrigger>
             </div>
         </header>
     );
