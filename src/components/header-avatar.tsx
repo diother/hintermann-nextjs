@@ -27,7 +27,7 @@ export function AvatarMenu({
     email?: string;
 }) {
     React.useState<Checked>(false);
-    const [state, formAction] = useFormState(deleteCurrentSession, undefined);
+    const [, formAction] = useFormState(deleteCurrentSession, undefined);
     const avatar = email?.slice(0, 2).toUpperCase();
 
     return (

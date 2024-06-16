@@ -18,7 +18,7 @@ export function MobileMenu({ email }: { email?: string }) {
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
     ];
-    const [state, formAction] = useFormState(deleteCurrentSession, undefined);
+    const [, formAction] = useFormState(deleteCurrentSession, undefined);
     return (
         <Sheet>
             <SheetTrigger asChild>

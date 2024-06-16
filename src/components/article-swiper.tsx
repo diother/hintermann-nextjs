@@ -14,7 +14,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
         return (
             <Image
                 className="my-10 w-full rounded-md"
-                src={images[0] as string}
+                src={images[0]!}
                 width="510"
                 height="340"
                 alt="Article image"
@@ -40,7 +40,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
                 <SwiperSlide key={image} className="cursor-grab">
                     <Image
                         className="w-full"
-                        src={image as string}
+                        src={image}
                         width="510"
                         height="340"
                         alt={`Article image ${index}`}

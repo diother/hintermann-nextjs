@@ -19,9 +19,8 @@ import {
     callEmailSignActionProgressive,
 } from "@/server/auth/otp-actions";
 import { type ErrorSchema } from "@/server/types";
-import { googleSignAction } from "@/server/auth/oauth-actions";
+// import { googleSignAction } from "@/server/auth/oauth-actions";
 import { Icons } from "../icons";
-import { deleteCurrentSession } from "@/server/auth/actions";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
@@ -74,7 +73,7 @@ export function EmailForm() {
 }
 
 export function GoogleForm() {
-    const [state, formAction] = useFormState(googleSignAction, undefined);
+    // const [state, formAction] = useFormState(googleSignAction, undefined);
     return (
         <Button variant="secondary" className="h-12 text-base">
             <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
