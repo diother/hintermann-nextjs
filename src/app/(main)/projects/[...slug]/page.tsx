@@ -57,7 +57,7 @@ export default async function Page({ params }: PostPageProps) {
             <hr className="mt-12" />
             <div className="flex justify-center py-6 lg:py-10">
                 <Link
-                    href="/blog"
+                    href="/projects"
                     className={cn(buttonVariants({ variant: "ghost" }))}
                 >
                     <ArrowLeft className="mr-2 h-4 w-4" />
