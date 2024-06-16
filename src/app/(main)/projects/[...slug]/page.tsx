@@ -1,7 +1,12 @@
+import "@/styles/mdx.css";
+import ArticleSwiper from "@/components/article-swiper";
 import { Mdx } from "@/components/mdx/mdx-components";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
+import { buttonVariants } from "@/components/ui/button";
 
 interface PostPageProps {
     params: {
@@ -22,7 +27,18 @@ export default async function Page({ params }: PostPageProps) {
     const post = await getPostFromParams(slug);
 
     return (
-        <article className="container relative max-w-3xl py-6 lg:py-10">
+        <article className="container relative max-w-3xl p-6 lg:py-10">
+            <Link
+                href="/projects"
+                className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "absolute left-[-200px] top-14 hidden xl:inline-flex",
+                )}
+            >
+                <ArrowLeft className="mr-2 h-4 w-4" />
+                Toate proiectele
+            </Link>
+
             <div>
                 {post.date && (
                     <time
@@ -32,22 +48,22 @@ export default async function Page({ params }: PostPageProps) {
                         Publicat în {formatDate(post.date)}
                     </time>
                 )}
-                <h1 className="font-heading mt-2 inline-block text-4xl leading-tight lg:text-5xl">
+                <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl">
                     {post.title}
                 </h1>
             </div>
+            {post.images && <ArticleSwiper images={post.images} />}
             <Mdx code={post.body.code} />
             <hr className="mt-12" />
+            <div className="flex justify-center py-6 lg:py-10">
+                <Link
+                    href="/blog"
+                    className={cn(buttonVariants({ variant: "ghost" }))}
+                >
+                    <ArrowLeft className="mr-2 h-4 w-4" />
+                    Vezi toate proiectele
+                </Link>
+            </div>
         </article>
     );
 }
-// {post.image && (
-//     <Image
-//         src={post.image}
-//         alt={post.title}
-//         width={720}
-//         height={405}
-//         className="my-8 rounded-md border bg-muted transition-colors"
-//         priority
-//     />
-// )}

@@ -1,28 +1,16 @@
 import DecorationSection, { DecorationCross } from "@/components/decoration";
 import { Button } from "@/components/ui/button";
 import { logos } from "@/lib/logos";
+import { allPosts } from "contentlayer/generated";
+import { compareDesc } from "date-fns";
 import { Home, Phone, Rss, Smartphone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default async function HomePage() {
-    const values = [
-        {
-            svg: <Home className="h-9 w-9" />,
-            value: "Românesc.",
-            desc: "Nevoile și aspirațiile românilor încă trebuie atinse.",
-        },
-        {
-            svg: <Smartphone className="h-9 w-9" />,
-            value: "Ușor.",
-            desc: "Contribuția și impactul la o atingere distanță.",
-        },
-        {
-            svg: <Rss className="h-9 w-9" />,
-            value: "Modern.",
-            desc: "Eforturile caritabile adaptate la inovațiile tehnologice.",
-        },
-    ];
+    const posts = allPosts.sort((a, b) => {
+        return compareDesc(new Date(a.date), new Date(b.date));
+    });
 
     return (
         <main className="mx-auto flex w-full max-w-6xl flex-col p-4 sm:p-10 lg:py-16">
@@ -177,3 +165,21 @@ export default async function HomePage() {
         </main>
     );
 }
+
+const values = [
+    {
+        svg: <Home className="h-9 w-9" />,
+        value: "Românesc.",
+        desc: "Nevoile și aspirațiile românilor încă trebuie atinse.",
+    },
+    {
+        svg: <Smartphone className="h-9 w-9" />,
+        value: "Ușor.",
+        desc: "Contribuția și impactul la o atingere distanță.",
+    },
+    {
+        svg: <Rss className="h-9 w-9" />,
+        value: "Modern.",
+        desc: "Eforturile caritabile adaptate la inovațiile tehnologice.",
+    },
+];
