@@ -1,6 +1,6 @@
 # Hintermann Charity Web App
 
-Welcome to the repository for the Hintermann Charity web app. This project is based on Theo`s `create-t3-app` and is deployed to Vercel. It uses shadcn/ui, Drizzle, ContentLayer, Lucia-like auth, and soon Stripe.
+Welcome to the repository for the Hintermann Charity web app. This project is based on Theo's `create-t3-app` and is deployed to Vercel. It uses shadcn/ui, Drizzle, ContentLayer, Lucia-like auth, and soon Stripe.
 
 ## Project Overview
 
