@@ -27,12 +27,12 @@ export default async function Page({ params }: PostPageProps) {
     const post = await getPostFromParams(slug);
 
     return (
-        <article className="container relative max-w-3xl p-6 lg:py-10">
+        <main className="container relative max-w-3xl p-6 sm:p-10 lg:py-16">
             <Link
                 href="/projects"
                 className={cn(
                     buttonVariants({ variant: "ghost" }),
-                    "absolute left-[-200px] top-14 hidden xl:inline-flex",
+                    "absolute left-[-200px] top-24 hidden xl:inline-flex",
                 )}
             >
                 <ArrowLeft className="mr-2 h-4 w-4" />
@@ -45,7 +45,7 @@ export default async function Page({ params }: PostPageProps) {
                         dateTime={post.date}
                         className="block text-sm text-muted-foreground"
                     >
-                        Publicat în {formatDate(post.date)}
+                        Publicat pe {formatDate(post.date)}
                     </time>
                 )}
                 <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl">
@@ -64,6 +64,6 @@ export default async function Page({ params }: PostPageProps) {
                     Vezi toate proiectele
                 </Link>
             </div>
-        </article>
+        </main>
     );
 }

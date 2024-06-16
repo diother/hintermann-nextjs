@@ -13,7 +13,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
     if (images.length === 1) {
         return (
             <Image
-                className="mt-10 w-full rounded-md"
+                className="my-10 w-full rounded-md"
                 src={images[0] as string}
                 width="510"
                 height="340"
@@ -34,7 +34,7 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
             pagination={{ clickable: true }}
             spaceBetween={50}
             slidesPerView={1}
-            className={`mt-10 rounded-md [&_.disabled]:opacity-45 [&_.swiper-pagination-bullet-active]:bg-white [&_.swiper-pagination-bullet]:bg-white`}
+            className={`my-10 rounded-md [&_.disabled]:opacity-45 [&_.swiper-pagination-bullet-active]:bg-white [&_.swiper-pagination-bullet]:bg-white`}
         >
             {images.map((image, index) => (
                 <SwiperSlide key={image} className="cursor-grab">

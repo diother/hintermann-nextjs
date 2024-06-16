@@ -42,22 +42,24 @@ export default async function HomePage() {
                         <Link
                             key={post._id}
                             href={post.slug}
-                            className={`z-10 grid gap-4 p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
+                            className={`${!index ? "" : "border-t"} z-10 grid gap-4 p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
                         >
                             <p className="text-sm text-muted-foreground">
                                 {formatDate(post.date)}
                             </p>
-                            <div className="overflow-hidden md:row-span-3 md:row-start-1">
-                                <Image
-                                    priority={index <= 1}
-                                    className="h-auto w-full transition"
-                                    src="/article1/image1.jpg"
-                                    width="300"
-                                    height="200"
-                                    alt={post.title}
-                                />
-                            </div>
-                            <h2 className="font-semibold sm:text-xl lg:text-2xl">
+                            {post.images?.[0] && (
+                                <div className="overflow-hidden rounded-md md:row-span-3 md:row-start-1">
+                                    <Image
+                                        priority={index <= 1}
+                                        className="h-auto w-full transition"
+                                        src={post.images[0]}
+                                        width="300"
+                                        height="200"
+                                        alt={post.title}
+                                    />
+                                </div>
+                            )}
+                            <h2 className="font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl">
                                 {post.title}
                             </h2>
                             <p className="text-sm text-muted-foreground sm:text-base">

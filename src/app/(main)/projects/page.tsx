@@ -35,17 +35,19 @@ export default function Page() {
                             <p className="text-sm text-muted-foreground">
                                 {formatDate(post.date)}
                             </p>
-                            <div className="overflow-hidden md:row-span-3 md:row-start-1">
-                                <Image
-                                    priority={index <= 1}
-                                    className="h-auto w-full transition"
-                                    src="/article1/image1.jpg"
-                                    width="300"
-                                    height="200"
-                                    alt={post.title}
-                                />
-                            </div>
-                            <h2 className="font-semibold sm:text-xl lg:text-2xl">
+                            {post.images?.[0] && (
+                                <div className="overflow-hidden rounded-md md:row-span-3 md:row-start-1">
+                                    <Image
+                                        priority={index <= 1}
+                                        className="h-auto w-full transition"
+                                        src={post.images[0]}
+                                        width="300"
+                                        height="200"
+                                        alt={post.title}
+                                    />
+                                </div>
+                            )}
+                            <h2 className="font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl">
                                 {post.title}
                             </h2>
                             <p className="text-sm text-muted-foreground sm:text-base">
