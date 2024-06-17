@@ -6,10 +6,10 @@ export default {
     schema: "./src/server/db/schema.ts",
     dialect: "mysql",
     dbCredentials: {
-        host: env.DB_HOST,
-        user: env.DB_USER,
-        password: env.DB_PASSWORD,
-        database: env.DB_NAME,
+        host: env.DATABASE_HOST,
+        user: env.DATABASE_USER,
+        password: env.DATABASE_PASSWORD,
+        database: env.DATABASE_NAME,
     },
     tablesFilter: ["hintermann-webapp_*"],
 } satisfies Config;

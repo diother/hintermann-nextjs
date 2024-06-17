@@ -1,12 +1,13 @@
 import "@/styles/mdx.css";
 import ArticleSwiper from "@/components/article-swiper";
 import { Mdx } from "@/components/mdx/mdx-components";
-import { cn, formatDate } from "@/lib/utils";
 import { allPosts } from "contentlayer/generated";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { absoluteUrl, cn, formatDate } from "@/lib/utils";
+import { Metadata } from "next";
 
 interface PostPageProps {
     params: {
@@ -17,14 +18,65 @@ interface PostPageProps {
 async function getPostFromParams(slug: string) {
     const post = allPosts.find((post) => post.slugAsParams === slug);
     if (!post) {
-        notFound();
+        null;
     }
     return post;
+}
+
+export async function generateMetadata({
+    params,
+}: PostPageProps): Promise<Metadata> {
+    const slug = params.slug[0]!;
+    const post = await getPostFromParams(slug);
+    const ogImage = post?.images?.[0];
+
+    if (!post) {
+        return {};
+    }
+
+    return {
+        title: post.title,
+        description: post.description,
+        openGraph: {
+            title: post.title,
+            description: post.description,
+            type: "article",
+            url: absoluteUrl(post.slug),
+            images: ogImage
+                ? [
+                      {
+                          url: ogImage,
+                          width: 300,
+                          height: 200,
+                          alt: post.title,
+                      },
+                  ]
+                : undefined,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.description,
+            images: ogImage ? [ogImage] : undefined,
+        },
+    };
+}
+
+export async function generateStaticParams(): Promise<
+    PostPageProps["params"][]
+> {
+    return allPosts.map((post) => ({
+        slug: post.slugAsParams.split("/"),
+    }));
 }
 
 export default async function Page({ params }: PostPageProps) {
     const slug = params.slug[0]!;
     const post = await getPostFromParams(slug);
+
+    if (!post) {
+        notFound();
+    }
 
     return (
         <main className="container relative max-w-3xl p-6 sm:p-10 lg:py-16">

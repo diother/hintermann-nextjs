@@ -13,10 +13,10 @@ const globalForDb = globalThis as unknown as {
 const conn =
     globalForDb.conn ??
     createPool({
-        host: env.DB_HOST,
-        user: env.DB_USER,
-        password: env.DB_PASSWORD,
-        database: env.DB_NAME,
+        host: env.DATABASE_HOST,
+        user: env.DATABASE_USER,
+        password: env.DATABASE_PASSWORD,
+        database: env.DATABASE_NAME,
     });
 if (env.NODE_ENV !== "production") globalForDb.conn = conn;
 
