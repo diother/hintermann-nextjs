@@ -6,8 +6,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { absoluteUrl, cn, formatDate } from "@/lib/utils";
-import { Metadata } from "next";
+import { cn, formatDate } from "@/lib/utils";
+import type { Metadata } from "next";
+import { env } from "@/env";
 
 interface PostPageProps {
     params: {
@@ -35,13 +36,14 @@ export async function generateMetadata({
     }
 
     return {
+        metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
         title: post.title,
         description: post.description,
         openGraph: {
             title: post.title,
             description: post.description,
             type: "article",
-            url: absoluteUrl(post.slug),
+            url: post.slug,
             images: ogImage
                 ? [
                       {
