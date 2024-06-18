@@ -46,4 +46,4 @@ This project is deployed on Vercel. Any push to the `main` branch will deploy in
 
 ## Contact
 
-For any inquiries or support, please reach out to us to me at ungureanurobertbv@gmail.ro
+For any inquiries or support, please reach out to me at ungureanurobertbv@gmail.ro.

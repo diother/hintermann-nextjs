@@ -5,6 +5,25 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "Contact",
+    openGraph: {
+        title: "Contact",
+        description: "Pagina de contact Hintermann Charity",
+        type: "website",
+        images: [
+            {
+                url: "/hintermann-logo.png",
+                width: 300,
+                height: 300,
+                alt: "Hintermann Logo",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Contact",
+        description: "Pagina de contact Hintermann Charity",
+        images: "/hintermann-logo.png",
+    },
 };
 
 export default function Page() {

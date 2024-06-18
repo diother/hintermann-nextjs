@@ -11,6 +11,31 @@ export const metadata: Metadata = {
         default: "Hintermann Charity",
     },
     description: "Pagina oficială Hintermann Charity",
+    openGraph: {
+        title: {
+            template: "%s | Hintermann Charity",
+            default: "Hintermann Charity",
+        },
+        description: "Pagina oficială Hintermann Charity",
+        type: "website",
+        images: [
+            {
+                url: "/hintermann-logo.png",
+                width: 300,
+                height: 300,
+                alt: "Hintermann Logo",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: {
+            template: "%s | Hintermann Charity",
+            default: "Hintermann Charity",
+        },
+        description: "Pagina oficială Hintermann Charity",
+        images: "/hintermann-logo.png",
+    },
 };
 
 export default function RootLayout({

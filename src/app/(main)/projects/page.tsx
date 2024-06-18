@@ -4,9 +4,29 @@ import { allPosts } from "contentlayer/generated";
 import { compareDesc } from "date-fns";
 
 import { formatDate } from "@/lib/utils";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Proiecte",
+    openGraph: {
+        title: "Proiecte",
+        description: "Pagina de proiecte Hintermann Charity",
+        type: "website",
+        images: [
+            {
+                url: "/hintermann-logo.png",
+                width: 300,
+                height: 300,
+                alt: "Hintermann Logo",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Proiecte",
+        description: "Pagina de proiecte Hintermann Charity",
+        images: "/hintermann-logo.png",
+    },
 };
 
 export default function Page() {
