@@ -2,8 +2,10 @@ import DecorationSection from "@/components/decoration";
 import { logos } from "@/lib/logos";
 import type { Metadata } from "next";
 import Image from "next/image";
+import { env } from "@/env";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: "Contact",
     openGraph: {
         title: "Contact",

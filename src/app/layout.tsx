@@ -4,8 +4,10 @@ import { GeistSans } from "geist/font/sans";
 import { ThemeProvider } from "@/components/theme-provider";
 import { type Metadata } from "next";
 import { cn } from "@/lib/utils";
+import { env } from "@/env";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: {
         template: "%s | Hintermann Charity",
         default: "Hintermann Charity",

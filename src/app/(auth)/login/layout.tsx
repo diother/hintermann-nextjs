@@ -1,8 +1,10 @@
 import AuthHeader from "@/components/auth-header";
 import Footer from "@/components/footer";
 import type { Metadata } from "next";
+import { env } from "@/env";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: "Autentificare",
     openGraph: {
         title: "Autentificare",

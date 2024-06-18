@@ -5,8 +5,10 @@ import { compareDesc } from "date-fns";
 
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
+import { env } from "@/env";
 
 export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
     title: "Proiecte",
     openGraph: {
         title: "Proiecte",
