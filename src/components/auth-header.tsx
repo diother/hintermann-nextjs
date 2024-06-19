@@ -7,6 +7,7 @@ export default function AuthHeader() {
         <header className="absolute top-0 flex h-16 w-full items-center justify-between px-6 lg:px-8">
             <Link href="/" className="flex items-center gap-1.5">
                 <Icons.logo />
+                <span className="sr-only">Hintermann Charity</span>
             </Link>
             <Button variant="outline" asChild>
                 <Link href="/contact">Contact</Link>

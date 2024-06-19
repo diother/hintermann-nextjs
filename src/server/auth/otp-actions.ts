@@ -15,6 +15,7 @@ import { Snowflake } from "../snowflake";
 import { Cookie } from "./cookie";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { sendEmail } from "./send-email";
 
 export async function callEmailSignActionProgressive(
     prev: ErrorSchema,
@@ -35,7 +36,7 @@ async function emailSignAction(email: string) {
     try {
         validateEmailForm(email);
         const [userId, otp] = await createOtpSession(email);
-        exposeOtpSession(userId, otp, email);
+        await exposeOtpSession(userId, otp, email);
     } catch (error) {
         if (isRedirectError(error)) {
             throw error;
@@ -70,11 +71,18 @@ async function createOtpSession(email: string): Promise<[Buffer, string]> {
     return [id, otp];
 }
 
-function exposeOtpSession(userId: Buffer, otp: string, email: string): void {
+async function exposeOtpSession(
+    userId: Buffer,
+    otp: string,
+    email: string,
+): Promise<void> {
     const cookie = new Cookie("otp_token", userId);
     cookie.set();
 
-    console.log(otp);
+    const send = await sendEmail(email, otp);
+    if (!send) {
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
+    }
     redirect(`/login/verify-otp?email=${encodeURIComponent(email)}`);
 }
 

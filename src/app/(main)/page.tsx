@@ -68,7 +68,7 @@ export default async function HomePage() {
                         </Link>
                     ))}
                 <div
-                    className={`lg:col-start-12 lg:row-span-${posts.length} lg:row-start-1 lg:border-l`}
+                    className={`xl:col-start-12 xl:row-span-3 xl:row-start-1 xl:border-l`}
                 />
             </section>
             <DecorationSection position="bottom-left" />

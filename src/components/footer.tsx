@@ -36,6 +36,7 @@ export default function Footer() {
                     <div className="flex items-center gap-1.5">
                         <Link href="/">
                             <Icons.logo />
+                            <span className="sr-only">Hintermann Charity</span>
                         </Link>
                         <span className="text-sm text-muted-foreground">
                             © 2024

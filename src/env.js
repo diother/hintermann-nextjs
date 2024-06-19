@@ -9,6 +9,7 @@ export const env = createEnv({
         DATABASE_NAME: z.string(),
         GOOGLE_ID: z.string(),
         GOOGLE_SECRET: z.string(),
+        RESEND: z.string(),
         NODE_ENV: z
             .enum(["development", "test", "production"])
             .default("development"),
@@ -23,6 +24,7 @@ export const env = createEnv({
         DATABASE_NAME: process.env.DATABASE_NAME,
         GOOGLE_ID: process.env.GOOGLE_ID,
         GOOGLE_SECRET: process.env.GOOGLE_SECRET,
+        RESEND: process.env.RESEND,
         NODE_ENV: process.env.NODE_ENV,
         NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     },
