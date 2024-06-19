@@ -5,4 +5,7 @@
 await import("./src/env.js");
 const { withContentlayer } = require("next-contentlayer");
 
-module.exports = withContentlayer();
+/** @type {import('next').NextConfig} */
+const nextConfig = {};
+
+module.exports = withContentlayer(nextConfig);
