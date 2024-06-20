@@ -22,6 +22,7 @@ import { type ErrorSchema } from "@/lib/types";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import React from "react";
+import { LoadingSpinner } from "../ui/spinner";
 
 export function VerifyOtpForm() {
     const [state, formAction] = useFormState(
@@ -115,6 +116,9 @@ export function VerifyOtpForm() {
                     disabled={isLoading}
                     className="h-11 w-full text-base"
                 >
+                    {isLoading && (
+                        <LoadingSpinner className="absolute left-4" />
+                    )}
                     Validează codul
                 </Button>
             </form>

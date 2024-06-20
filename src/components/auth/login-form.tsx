@@ -19,9 +19,10 @@ import {
     callEmailSignActionProgressive,
 } from "@/actions/auth-actions";
 import { type ErrorSchema } from "@/lib/types";
-import { googleSignAction } from "@/actions/auth-actions";
+// import { googleSignAction } from "@/actions/auth-actions";
 import { Icons } from "../icons";
 import React from "react";
+import { LoadingSpinner } from "../ui/spinner";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
@@ -81,8 +82,11 @@ export function EmailForm() {
                 <Button
                     type="submit"
                     disabled={isLoading}
-                    className="mt-2 h-12 w-full text-base"
+                    className="relative mt-2 h-12 w-full text-base"
                 >
+                    {isLoading && (
+                        <LoadingSpinner className="absolute left-4" />
+                    )}
                     Continuă cu Email
                 </Button>
             </form>
