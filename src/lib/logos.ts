@@ -28,11 +28,19 @@ export const logos = [
         width: 100,
         height: 50.39,
         href: "https://www.carmeuse.com/ro-ro",
+        className: "-mt-[10px]",
     },
     {
         name: "panfood",
         width: 78,
         height: 64.29,
         href: "https://panfood.ro/",
+    },
+    {
+        name: "plai",
+        width: 60,
+        height: 57.65,
+        href: "https://plaicashcarry.ro/",
+        className: "-mt-[7px]",
     },
 ];

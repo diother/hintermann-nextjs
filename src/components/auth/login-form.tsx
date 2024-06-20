@@ -19,7 +19,7 @@ import {
     callEmailSignActionProgressive,
 } from "@/actions/auth-actions";
 import { type ErrorSchema } from "@/lib/types";
-// import { googleSignAction } from "@/server/auth/oauth-actions";
+import { googleSignAction } from "@/actions/auth-actions";
 import { Icons } from "../icons";
 
 export function EmailForm() {
@@ -73,16 +73,16 @@ export function EmailForm() {
 }
 
 export function GoogleForm() {
-    // const [state, formAction] = useFormState(googleSignAction, undefined);
+    const [, formAction] = useFormState(googleSignAction, undefined);
     return (
-        <Button variant="secondary" className="h-12 text-base">
-            <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
-            Continuă cu Google
-        </Button>
+        <form action={formAction} className="flex flex-col">
+            <Button variant="secondary" className="h-12 text-base">
+                <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
+                Continuă cu Google
+            </Button>
+        </form>
     );
 }
-// <form action={formAction} className="flex flex-col">
-// </form>
 
 const EmailFormSchema = z.object({
     email: z.string().email({

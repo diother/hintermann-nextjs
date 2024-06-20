@@ -2,7 +2,7 @@ import DecorationSection, { DecorationCross } from "@/components/decoration";
 import { Button } from "@/components/ui/button";
 import { logos } from "@/lib/logos";
 import { allPosts } from "@/lib/mdx";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 import { compareDesc } from "date-fns";
 import { Home, Phone, Rss, Smartphone } from "lucide-react";
 import Image from "next/image";
@@ -113,14 +113,17 @@ export default async function HomePage() {
                         className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 transition hover:bg-accent lg:h-36"
                     >
                         <Image
-                            className="dark:hidden"
+                            className={cn("dark:hidden", logo.className)}
                             src={`/logos/logo-${logo.name}-light.png`}
                             width={logo.width}
                             height={logo.height}
                             alt={`Logo ${logo.name}`}
                         />
                         <Image
-                            className="hidden brightness-[93%] dark:block"
+                            className={cn(
+                                "hidden brightness-[93%] dark:block",
+                                logo.className,
+                            )}
                             src={`/logos/logo-${logo.name}-dark.png`}
                             width={logo.width}
                             height={logo.height}
