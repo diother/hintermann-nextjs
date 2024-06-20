@@ -21,6 +21,7 @@ import {
 import { type ErrorSchema } from "@/lib/types";
 import { googleSignAction } from "@/actions/auth-actions";
 import { Icons } from "../icons";
+import React from "react";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
@@ -33,16 +34,29 @@ export function EmailForm() {
             email: "",
         },
     });
-    const onSubmit = async (data: z.infer<typeof EmailFormSchema>) => {
-        const response = await callEmailSignAction(data);
 
-        if (response) {
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    const onSubmit = async (data: z.infer<typeof EmailFormSchema>) => {
+        setIsLoading(true);
+        try {
+            const response = await callEmailSignAction(data);
+            if (response) {
+                form.setError("email", {
+                    type: "server",
+                    message: response,
+                });
+                setIsLoading(false);
+            }
+        } catch (error) {
             form.setError("email", {
                 type: "server",
-                message: response,
+                message: "Serverele noastre nu au putut procesa cerința.",
             });
+            setIsLoading(false);
         }
     };
+
     return (
         <Form {...form}>
             <form action={formAction} onSubmit={form.handleSubmit(onSubmit)}>
@@ -64,7 +78,11 @@ export function EmailForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="mt-2 h-12 w-full text-base">
+                <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="mt-2 h-12 w-full text-base"
+                >
                     Continuă cu Email
                 </Button>
             </form>
@@ -73,16 +91,16 @@ export function EmailForm() {
 }
 
 export function GoogleForm() {
-    const [, formAction] = useFormState(googleSignAction, undefined);
+    // const [, formAction] = useFormState(googleSignAction, undefined);
     return (
-        <form action={formAction} className="flex flex-col">
-            <Button variant="secondary" className="h-12 text-base">
-                <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
-                Continuă cu Google
-            </Button>
-        </form>
+        <Button variant="secondary" className="h-12 text-base">
+            <Icons.google className="mr-3 h-[1.375rem] w-[1.375rem] rounded-full bg-white p-[2px]" />
+            Continuă cu Google
+        </Button>
     );
 }
+// <form action={formAction} className="flex flex-col">
+// </form>
 
 const EmailFormSchema = z.object({
     email: z.string().email({

@@ -34,14 +34,26 @@ export function VerifyOtpForm() {
             otp: "",
         },
     });
-    const onSubmit = async (data: z.infer<typeof VerifyOtpFormSchema>) => {
-        const response = await callVerifyOtpAction(data);
 
-        if (response) {
+    const [isLoading, setIsLoading] = React.useState(false);
+
+    const onSubmit = async (data: z.infer<typeof VerifyOtpFormSchema>) => {
+        setIsLoading(true);
+        try {
+            const response = await callVerifyOtpAction(data);
+            if (response) {
+                form.setError("otp", {
+                    type: "server",
+                    message: response,
+                });
+            }
+            setIsLoading(false);
+        } catch (error) {
             form.setError("otp", {
                 type: "server",
-                message: response,
+                message: "Serverele noastre nu au putut procesa cerința.",
             });
+            setIsLoading(false);
         }
     };
     const slotClasses = "h-11 w-11 border-muted-foreground/35 text-base";
@@ -98,7 +110,11 @@ export function VerifyOtpForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="h-11 w-full text-base">
+                <Button
+                    type="submit"
+                    disabled={isLoading}
+                    className="h-11 w-full text-base"
+                >
                     Validează codul
                 </Button>
             </form>
