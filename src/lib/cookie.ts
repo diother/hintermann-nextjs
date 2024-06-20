@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { SnowflakeSchema } from "../snowflake";
+import { SnowflakeSchema } from "./snowflake";
 
 export class Cookie {
     private name: string;

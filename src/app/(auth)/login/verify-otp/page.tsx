@@ -1,6 +1,6 @@
 import { VerifyOtpForm } from "@/components/auth/verify-otp-form";
-import { allowOnlyUnauthenticatedUsers } from "@/server/auth/authorize";
-import { Cookie } from "@/server/auth/cookie";
+// import { allowOnlyUnauthenticatedUsers } from "@/server/auth/authorize";
+import { Cookie } from "@/lib/cookie";
 import { redirect } from "next/navigation";
 
 export default async function Page({
@@ -8,7 +8,7 @@ export default async function Page({
 }: {
     searchParams?: Record<string, string | string[] | undefined>;
 }) {
-    await allowOnlyUnauthenticatedUsers();
+    // await allowOnlyUnauthenticatedUsers();
     validateOtpSession();
     const email = searchParams?.email;
 

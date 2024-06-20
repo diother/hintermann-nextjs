@@ -1,4 +1,3 @@
-import { Icons } from "@/components/icons";
 import {
     Body,
     Container,
@@ -7,21 +6,14 @@ import {
     Hr,
     Html,
     Img,
-    Link,
     Preview,
     Section,
     Tailwind,
     Text,
 } from "@react-email/components";
-import React from "react";
+import * as React from "react";
 
 export default function OtpEmail({ previewText, otp }: OtpEmailSchema) {
-    const facebookHref =
-        "https://www.facebook.com/people/Hintermann-Charity/61556605667252/";
-    const instagramHref = "https://www.instagram.com/hintermann_charity/";
-    const linkedinHref = "https://www.linkedin.com/company/101937853/";
-    const twitterHref = "https://twitter.com/hintermann_";
-
     return (
         <Html>
             <Head />
@@ -54,46 +46,11 @@ export default function OtpEmail({ previewText, otp }: OtpEmailSchema) {
                             email.
                         </Text>
                         <Hr />
-                        <Container className="mx-auto w-fit pt-[32px] text-[#65758c]">
-                            <Link href={facebookHref} className="text-inherit">
-                                <Img
-                                    src="https://hintermann.ro/email-icons/Facebook.png"
-                                    width="20"
-                                    height="20"
-                                    alt="Facebook Icon"
-                                />
-                            </Link>
-                            <Link href={instagramHref} className="text-inherit">
-                                <Img
-                                    src="https://hintermann.ro/email-icons/Instagram.png"
-                                    width="20"
-                                    height="20"
-                                    alt="Instagram Icon"
-                                />
-                            </Link>
-                            <Link href={linkedinHref} className="text-inherit">
-                                <Img
-                                    src="https://hintermann.ro/email-icons/Linkedin.png"
-                                    width="20"
-                                    height="20"
-                                    alt="Linkedin Icon"
-                                />
-                            </Link>
-                            <Link href={twitterHref} className="text-inherit">
-                                <Img
-                                    src="https://hintermann.ro/email-icons/X.png"
-                                    width="20"
-                                    height="20"
-                                    alt="X Icon"
-                                />
-                            </Link>
+                        <Container className="mx-auto h-[20px] w-fit text-[#65758c]">
+                            <Text className="mb-0 text-center text-[14px] leading-[24px] text-[#65758c]">
+                                Hintermann Charity © 2024
+                            </Text>
                         </Container>
-                        <Text className="mb-0 text-center text-[14px] leading-[24px] text-[#65758c]">
-                            Asociația noastră asigură accesul celor defavorizați
-                            la locuințe sigure, consiliere, și resursele
-                            esențiale pentru formarea autosuficienței
-                            financiare.
-                        </Text>
                     </Container>
                 </Body>
             </Tailwind>

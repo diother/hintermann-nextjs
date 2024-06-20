@@ -16,9 +16,9 @@ import { useFormState } from "react-dom";
 import {
     callVerifyOtpAction,
     callVerifyOtpActionProgressive,
-} from "@/server/auth/otp-actions";
-import { OtpSchema } from "@/server/auth/otp";
-import { type ErrorSchema } from "@/server/types";
+} from "@/actions/otp-actions";
+import { OtpSchema } from "@/lib/otp";
+import { type ErrorSchema } from "@/lib/types";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import React from "react";

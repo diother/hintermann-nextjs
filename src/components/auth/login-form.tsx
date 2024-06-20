@@ -17,8 +17,8 @@ import { useFormState } from "react-dom";
 import {
     callEmailSignAction,
     callEmailSignActionProgressive,
-} from "@/server/auth/otp-actions";
-import { type ErrorSchema } from "@/server/types";
+} from "@/actions/otp-actions";
+import { type ErrorSchema } from "@/lib/types";
 // import { googleSignAction } from "@/server/auth/oauth-actions";
 import { Icons } from "../icons";
 

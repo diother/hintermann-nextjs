@@ -1,5 +1,5 @@
-import { db } from "@/server/db";
-import { sessions, users } from "@/server/db/schema";
+import { db } from "./connection";
+import { sessions, users } from "./schema";
 import { and, eq, gt, sql } from "drizzle-orm";
 
 export async function getUserByEmail(

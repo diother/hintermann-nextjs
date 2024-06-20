@@ -17,7 +17,7 @@ export async function sendEmail(
         react: OtpEmail({ previewText: previewText, otp: otp }),
     });
     if (!data) {
-        return false;
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
     }
     return data;
 }
