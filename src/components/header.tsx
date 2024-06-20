@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
-import { getUserSession } from "@/server/auth/authorize";
 import { AvatarMenu } from "./header-avatar";
-import { getUserEmail } from "@/server/auth/database";
 import { Icons } from "./icons";
 import MobileMenuTrigger from "./mobile-menu-trigger";
+import { getUserSession } from "@/actions/auth-actions";
+import { getUserEmail } from "@/database/auth";
 
 export default async function Header() {
     const navLinks = [

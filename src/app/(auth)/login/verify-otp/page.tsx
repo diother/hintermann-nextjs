@@ -1,5 +1,5 @@
+import { getUserSession } from "@/actions/auth-actions";
 import { VerifyOtpForm } from "@/components/auth/verify-otp-form";
-// import { allowOnlyUnauthenticatedUsers } from "@/server/auth/authorize";
 import { Cookie } from "@/lib/cookie";
 import { redirect } from "next/navigation";
 
@@ -8,8 +8,15 @@ export default async function Page({
 }: {
     searchParams?: Record<string, string | string[] | undefined>;
 }) {
-    // await allowOnlyUnauthenticatedUsers();
-    validateOtpSession();
+    const user = await getUserSession();
+    if (user) {
+        redirect("/");
+    }
+    const cookie = new Cookie("otp_token");
+    const userId = cookie.validateSnowflake();
+    if (!userId) {
+        redirect("/login");
+    }
     const email = searchParams?.email;
 
     return (
@@ -24,12 +31,4 @@ export default async function Page({
             <VerifyOtpForm />
         </main>
     );
-}
-
-function validateOtpSession() {
-    const cookie = new Cookie("otp_token");
-    const userId = cookie.validateSnowflake();
-    if (!userId) {
-        redirect("/login");
-    }
 }

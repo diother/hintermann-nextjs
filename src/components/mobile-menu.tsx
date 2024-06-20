@@ -1,7 +1,7 @@
 "use client";
 
+import { deleteCurrentSession } from "@/actions/auth-actions";
 import { Button } from "@/components/ui/button";
-import { deleteCurrentSession } from "@/server/auth/actions";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { useFormState } from "react-dom";

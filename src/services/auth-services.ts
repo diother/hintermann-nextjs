@@ -5,7 +5,6 @@ import {
     setOtpOnUser,
     validateOtp,
 } from "@/database/auth";
-import { type Cookie } from "@/lib/cookie";
 import { OtpSchema, generateOtp } from "@/lib/otp";
 import { Snowflake } from "@/lib/snowflake";
 import { FormError } from "@/lib/types";
@@ -36,19 +35,12 @@ export async function createOtpSession(
     return [id, otp];
 }
 
-export function validateOtpForm(
-    otp: string,
-    cookie: Cookie,
-): Buffer | undefined {
-    const userId = cookie.validateSnowflake();
-    if (!userId) {
-        return undefined;
-    }
+export function validateOtpForm(otp: string): void {
     const valid = OtpSchema.safeParse(otp);
+
     if (!valid.success) {
         throw new FormError("Codul de verificare este invalid.");
     }
-    return userId;
 }
 
 export async function checkOtp(id: Buffer, otp: string): Promise<void> {

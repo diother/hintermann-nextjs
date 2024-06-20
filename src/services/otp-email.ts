@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { env } from "@/env";
 import OtpEmail from "emails/otp-email";
+import { FormError } from "@/lib/types";
 
 const resend = new Resend(env.RESEND);
 const previewText =

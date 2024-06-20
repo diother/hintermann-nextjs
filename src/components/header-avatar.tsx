@@ -13,9 +13,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { LogOut } from "lucide-react";
-import { deleteCurrentSession } from "@/server/auth/actions";
 import { useFormState } from "react-dom";
 import { cn } from "@/lib/utils";
+import { deleteCurrentSession } from "@/actions/auth-actions";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 

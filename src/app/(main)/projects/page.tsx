@@ -5,6 +5,7 @@ import { compareDesc } from "date-fns";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { env } from "@/env";
+import { allPosts } from "@/lib/mdx";
 
 export const metadata: Metadata = {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -49,8 +50,8 @@ export default function Page() {
                 <section className="flex flex-col gap-6">
                     {posts.map((post, index) => (
                         <Link
-                            key={post._id}
-                            href={post.slug}
+                            key={post.slug}
+                            href={post.slugAsParams}
                             className={`z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110`}
                         >
                             <p className="text-sm text-muted-foreground">

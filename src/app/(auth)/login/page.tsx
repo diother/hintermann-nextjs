@@ -1,5 +1,5 @@
+import { getUserSession } from "@/actions/auth-actions";
 import { EmailForm, GoogleForm } from "@/components/auth/login-form";
-import { getUserSession } from "@/services/authorize";
 import { redirect } from "next/navigation";
 
 export default async function Page() {

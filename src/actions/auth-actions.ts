@@ -13,8 +13,11 @@ import {
     startSession,
     validateEmailForm,
     validateOtpForm,
-} from "@/services/otp-services";
+} from "@/services/auth-services";
 import { sendEmail } from "@/services/otp-email";
+import { deleteSession, validateSession } from "@/database/auth";
+import { generateCodeVerifier, generateState } from "arctic";
+import { google } from "@/arctic";
 
 export async function callEmailSignActionProgressive(
     prev: ErrorSchema,
@@ -34,8 +37,8 @@ export async function callEmailSignAction(
 async function emailSignAction(email: string): Promise<ErrorSchema> {
     try {
         validateEmailForm(email);
-        const [userId, otp] = await createOtpSession(email);
 
+        const [userId, otp] = await createOtpSession(email);
         const cookie = new Cookie("otp_token", userId);
         cookie.set();
 
@@ -69,8 +72,9 @@ export async function callVerifyOtpAction(
 
 export async function verifyOtpAction(otp: string): Promise<ErrorSchema> {
     try {
+        validateOtpForm(otp);
         const otpCookie = new Cookie("otp_token");
-        const userId = validateOtpForm(otp, otpCookie);
+        const userId = otpCookie.validateSnowflake();
         if (!userId) {
             redirect("/login");
         }
@@ -93,6 +97,41 @@ export async function verifyOtpAction(otp: string): Promise<ErrorSchema> {
             return error.message;
         }
     }
+}
+
+export async function googleSignAction(): Promise<void> {
+    const state = generateState();
+    const verifier = generateCodeVerifier();
+    const url = await google.createAuthorizationURL(state, verifier, {
+        scopes: ["profile", "email"],
+    });
+
+    const stateCookie = new Cookie("google_oauth_state", state);
+    const verifierCookie = new Cookie("google_oauth_verifier", verifier);
+    stateCookie.set();
+    verifierCookie.set();
+
+    redirect(url.href);
+}
+
+export async function deleteCurrentSession(): Promise<void> {
+    const cookie = new Cookie("auth_token");
+    const session = cookie.validateSnowflake();
+    if (!session) {
+        return undefined;
+    }
+    await deleteSession(session);
+    cookie.delete();
+    redirect("/");
+}
+
+export async function getUserSession(): Promise<Buffer | undefined> {
+    const cookie = new Cookie("auth_token");
+    const session = cookie.validateSnowflake();
+    if (!session) {
+        return undefined;
+    }
+    return await validateSession(session);
 }
 
 const EmailFormSchema = z.object({

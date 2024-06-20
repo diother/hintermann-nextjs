@@ -1,12 +1,12 @@
-import { google } from "@/server/auth/arctic";
-import { Cookie } from "@/server/auth/cookie";
+import { google } from "@/arctic";
 import {
     createGoogleUser,
     createSession,
     getUserByGoogleId,
-} from "@/server/auth/database";
-import { Snowflake } from "@/server/snowflake";
-import { FormError, type GoogleUser } from "@/server/types";
+} from "@/database/auth";
+import { Cookie } from "@/lib/cookie";
+import { Snowflake } from "@/lib/snowflake";
+import { FormError, type GoogleUser } from "@/lib/types";
 import { OAuth2RequestError } from "arctic";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "next/navigation";

@@ -4,6 +4,8 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Callout } from "@/components/mdx/callout";
 import { MdxCard } from "@/components/mdx/mdx-card";
+import { type Fragment, type Jsx, run } from "@mdx-js/mdx";
+import * as runtime_ from "react/jsx-runtime";
 
 interface Component {
     className?: string;
@@ -172,10 +174,16 @@ interface MdxProps {
     code: string;
 }
 
-export function Mdx({ code }: MdxProps) {
+export async function Mdx({ code }: MdxProps) {
+    // @ts-expect-error: the automatic react runtime is untyped.
+    const runtime: { Fragment: Fragment; jsx: Jsx; jsxs: Jsx } = runtime_;
+    const { default: MdxContent } = await run(code, {
+        ...runtime,
+        baseUrl: import.meta.url,
+    });
     return (
         <div className="mdx">
-            <Component components={components} />
+            <MdxContent components={components} />
         </div>
     );
 }
