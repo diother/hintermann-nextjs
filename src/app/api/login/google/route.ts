@@ -51,8 +51,8 @@ function validateRequirements(request: Request): [string, string] {
 
     const stateCookie = new Cookie("google_oauth_state");
     const verifierCookie = new Cookie("google_oauth_verifier");
-    const storedState = stateCookie.validate();
-    const verifier = verifierCookie.validate();
+    const storedState = stateCookie.get();
+    const verifier = verifierCookie.get();
     stateCookie.delete();
     verifierCookie.delete();
 

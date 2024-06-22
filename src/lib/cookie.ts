@@ -40,13 +40,13 @@ export class Cookie {
         cookies().delete(this.name);
     }
 
-    validate(): string | undefined {
+    get(): string | undefined {
         const cookie = cookies().get(this.name);
         return cookie?.value ?? undefined;
     }
 
-    validateSnowflake(): Buffer | undefined {
-        const value = this.validate();
+    getSnowflake(): Buffer | undefined {
+        const value = this.get();
         if (!value) {
             return undefined;
         }

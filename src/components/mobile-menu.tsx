@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteCurrentSession } from "@/actions/auth-actions";
+import { signOut } from "@/actions/auth-actions";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
@@ -11,7 +11,7 @@ export function MobileMenu({ email }: { email?: string }) {
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
     ];
-    const [, formAction] = useFormState(deleteCurrentSession, undefined);
+    const [, formAction] = useFormState(signOut, undefined);
     return (
         <nav className="fixed inset-x-0 bottom-0 top-16 flex flex-col overflow-y-auto bg-background p-6 lg:hidden">
             {email ? (

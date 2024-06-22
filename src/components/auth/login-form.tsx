@@ -15,8 +15,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useFormState } from "react-dom";
 import {
-    callEmailSignAction,
-    callEmailSignActionProgressive,
+    emailSignAction,
+    emailSignActionProgressive,
 } from "@/actions/auth-actions";
 import { type ErrorSchema } from "@/lib/types";
 // import { googleSignAction } from "@/actions/auth-actions";
@@ -26,7 +26,7 @@ import { LoadingSpinner } from "../ui/spinner";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(
-        callEmailSignActionProgressive,
+        emailSignActionProgressive,
         undefined,
     );
     const form = useForm<z.infer<typeof EmailFormSchema>>({
@@ -41,7 +41,7 @@ export function EmailForm() {
     const onSubmit = async (data: z.infer<typeof EmailFormSchema>) => {
         setIsLoading(true);
         try {
-            const response = await callEmailSignAction(data);
+            const response = await emailSignAction(data);
             if (response) {
                 form.setError("email", {
                     type: "server",

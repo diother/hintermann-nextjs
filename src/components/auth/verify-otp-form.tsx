@@ -14,19 +14,18 @@ import {
 } from "@/components/ui/form";
 import { useFormState } from "react-dom";
 import {
-    callVerifyOtpAction,
-    callVerifyOtpActionProgressive,
+    verifyOtpAction,
+    verifyOtpActionProgressive,
 } from "@/actions/auth-actions";
 import { OtpSchema } from "@/lib/otp";
 import { type ErrorSchema } from "@/lib/types";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import React from "react";
-import { LoadingSpinner } from "../ui/spinner";
 
 export function VerifyOtpForm() {
     const [state, formAction] = useFormState(
-        callVerifyOtpActionProgressive,
+        verifyOtpActionProgressive,
         undefined,
     );
     const form = useForm<z.infer<typeof VerifyOtpFormSchema>>({
@@ -41,7 +40,7 @@ export function VerifyOtpForm() {
     const onSubmit = async (data: z.infer<typeof VerifyOtpFormSchema>) => {
         setIsLoading(true);
         try {
-            const response = await callVerifyOtpAction(data);
+            const response = await verifyOtpAction(data);
             if (response) {
                 form.setError("otp", {
                     type: "server",
@@ -116,9 +115,6 @@ export function VerifyOtpForm() {
                     disabled={isLoading}
                     className="h-11 w-full text-base"
                 >
-                    {isLoading && (
-                        <LoadingSpinner className="absolute left-4" />
-                    )}
                     Validează codul
                 </Button>
             </form>

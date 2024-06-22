@@ -15,7 +15,7 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 import { LogOut } from "lucide-react";
 import { useFormState } from "react-dom";
 import { cn } from "@/lib/utils";
-import { deleteCurrentSession } from "@/actions/auth-actions";
+import { signOut } from "@/actions/auth-actions";
 
 type Checked = DropdownMenuCheckboxItemProps["checked"];
 
@@ -27,7 +27,7 @@ export function AvatarMenu({
     email?: string;
 }) {
     React.useState<Checked>(false);
-    const [, formAction] = useFormState(deleteCurrentSession, undefined);
+    const [, formAction] = useFormState(signOut, undefined);
     const avatar = email?.slice(0, 2).toUpperCase();
 
     return (

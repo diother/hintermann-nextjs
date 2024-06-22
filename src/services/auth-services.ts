@@ -43,7 +43,10 @@ export function validateOtpForm(otp: string): void {
     }
 }
 
-export async function checkOtp(id: Buffer, otp: string): Promise<void> {
+export async function validateOtpService(
+    id: Buffer,
+    otp: string,
+): Promise<void> {
     const res = await validateOtp(id, otp);
     if (!res) {
         throw new FormError("Codul de verificare este invalid.");
@@ -52,9 +55,9 @@ export async function checkOtp(id: Buffer, otp: string): Promise<void> {
 
 export async function startSession(userId: Buffer): Promise<Buffer> {
     const sessionId = Snowflake.generate();
-    const expiresAt = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
-    const session = await createSession(userId, sessionId, expiresAt);
-    if (!session) {
+    const THIRTY_DAYS = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
+    const res = await createSession(userId, sessionId, THIRTY_DAYS);
+    if (!res) {
         throw new FormError("Serverele noastre nu au putut procesa cerința.");
     }
     return sessionId;

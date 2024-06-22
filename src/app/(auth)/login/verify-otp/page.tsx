@@ -13,7 +13,7 @@ export default async function Page({
         redirect("/");
     }
     const cookie = new Cookie("otp_token");
-    const userId = cookie.validateSnowflake();
+    const userId = cookie.getSnowflake();
     if (!userId) {
         redirect("/login");
     }
