@@ -42,11 +42,7 @@ export default async function Header() {
                 {user ? (
                     <AvatarMenu className="hidden lg:flex" email={email} />
                 ) : (
-                    <Button
-                        className="hidden lg:flex"
-                        variant="outline"
-                        asChild
-                    >
+                    <Button className="hidden lg:flex" asChild>
                         <Link href="/login">Autentifică-te</Link>
                     </Button>
                 )}

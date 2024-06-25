@@ -32,7 +32,7 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-    const posts = allPosts.sort((a, b) => {
+    const posts = allPosts.projects.sort((a, b) => {
         return compareDesc(new Date(a.date), new Date(b.date));
     });
 

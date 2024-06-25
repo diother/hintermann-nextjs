@@ -9,7 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function HomePage() {
-    const posts = allPosts
+    const posts = allPosts.projects
         .sort((a, b) => {
             return compareDesc(new Date(a.date), new Date(b.date));
         })
@@ -20,7 +20,7 @@ export default async function HomePage() {
             <DecorationSection position="top-left" />
             <section className="border border-t-0 p-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
                 <h1 className="text-center text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-[3.5rem]">
-                    Hintermann Charity le oferă românilor locuințe și susținere.
+                    Oferim românilor locuințe și susținere.
                 </h1>
                 <div className="lg:col-start-12 lg:border-l" />
             </section>
@@ -28,10 +28,10 @@ export default async function HomePage() {
                 <p
                     className={`text-center text-muted-foreground sm:text-lg lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-xl [&_span]:font-medium [&_span]:text-foreground`}
                 >
-                    Asociația noastră asigură accesul celor defavorizați la
-                    <span> locuințe sigure</span>,<span> consiliere</span>, și
-                    <span> resursele esențiale</span> pentru formarea
-                    autosuficienței financiare.
+                    Organizația caritabilă care asigură accesul celor
+                    defavorizați la <span> locuințe sigure</span>,
+                    <span> consiliere</span>, și
+                    <span> resurse esențiale</span>.
                 </p>
                 <div className="lg:col-start-12 lg:border-l" />
             </section>

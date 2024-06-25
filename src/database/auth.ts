@@ -13,17 +13,6 @@ export async function getUserByEmail(
     return user[0]?.id as Buffer | undefined;
 }
 
-export async function getUserByGoogleId(
-    googleId: string,
-): Promise<Buffer | undefined> {
-    const user = await db
-        .select({ id: users.id })
-        .from(users)
-        .where(eq(users.googleId, googleId));
-
-    return user[0]?.id as Buffer | undefined;
-}
-
 export async function createUserWithOtp(
     id: Buffer,
     email: string,

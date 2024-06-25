@@ -1,11 +1,14 @@
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
 import { Icons } from "./icons";
+import CookieDialog from "./cookie-dialog";
 
 export default function Footer() {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
+        { name: "Politică de confidențialitate", href: "/legal/privacy" },
+        { name: "Termeni și condiții", href: "/legal/terms" },
     ];
     const socialIcons = [
         {
@@ -30,46 +33,51 @@ export default function Footer() {
         },
     ];
     return (
-        <footer className="border-t">
-            <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 sm:flex-row sm:items-center">
-                <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:gap-10">
-                    <div className="flex items-center gap-1.5">
-                        <Link href="/">
-                            <Icons.logo />
-                            <span className="sr-only">Hintermann Charity</span>
-                        </Link>
-                        <span className="text-sm text-muted-foreground">
-                            © 2024
-                        </span>
-                    </div>
-                    <div className="flex flex-col gap-4 sm:flex-row sm:gap-10">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="w-fit text-sm text-muted-foreground transition hover:text-foreground"
-                            >
-                                {link.name}
+        <>
+            <footer className="border-t">
+                <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 lg:flex-row lg:items-center">
+                    <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
+                        <div className="flex items-center gap-1.5">
+                            <Link href="/">
+                                <Icons.logo />
+                                <span className="sr-only">
+                                    Hintermann Charity
+                                </span>
                             </Link>
-                        ))}
+                            <span className="text-sm text-muted-foreground">
+                                © 2024
+                            </span>
+                        </div>
+                        <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
+                            {navLinks.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="w-fit text-sm text-muted-foreground transition hover:text-foreground"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                            <CookieDialog className="w-fit text-sm text-muted-foreground transition hover:text-foreground" />
+                        </div>
+                    </div>
+                    <div className="flex items-center justify-between gap-10">
+                        <div className="flex items-center gap-5">
+                            {socialIcons.map((icon) => (
+                                <Link
+                                    key={icon.name}
+                                    href={icon.href}
+                                    className="flex w-fit text-2xl text-muted-foreground transition hover:text-foreground"
+                                    aria-label={`Link leading to ${icon.name}`}
+                                >
+                                    {icon.svg}
+                                </Link>
+                            ))}
+                        </div>
+                        <ThemeToggle />
                     </div>
                 </div>
-                <div className="flex items-center justify-between gap-10">
-                    <div className="flex items-center gap-5">
-                        {socialIcons.map((icon) => (
-                            <Link
-                                key={icon.name}
-                                href={icon.href}
-                                className="flex w-fit text-2xl text-muted-foreground transition hover:text-foreground"
-                                aria-label={`Link leading to ${icon.name}`}
-                            >
-                                {icon.svg}
-                            </Link>
-                        ))}
-                    </div>
-                    <ThemeToggle />
-                </div>
-            </div>
-        </footer>
+            </footer>
+        </>
     );
 }

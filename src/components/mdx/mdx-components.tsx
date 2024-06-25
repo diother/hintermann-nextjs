@@ -1,13 +1,16 @@
 import * as React from "react";
 import Image from "next/image";
 
-import { cn } from "@/lib/utils";
+import { cn, getAnchor } from "@/lib/utils";
 import { Callout } from "@/components/mdx/callout";
 import { MdxCard } from "@/components/mdx/mdx-card";
 import { type Fragment, type Jsx, run } from "@mdx-js/mdx";
 import * as runtime_ from "react/jsx-runtime";
+import Link from "next/link";
+import { Hash } from "lucide-react";
 
 interface Component {
+    children?: React.ReactNode;
     className?: string;
 }
 const components = {
@@ -20,25 +23,52 @@ const components = {
             {...props}
         />
     ),
-    h2: ({ className, ...props }: Component) => (
-        <h2
-            className={cn(
-                "mt-10 scroll-m-20 border-b pb-1 text-3xl font-semibold tracking-tight first:mt-0",
-                className,
-            )}
-            {...props}
-        />
-    ),
-    h3: ({ className, ...props }: Component) => (
-        <h3
-            className={cn(
-                "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0",
+    h2: ({ className, children, ...props }: Component) => {
+        const anchor = getAnchor(children as string);
+        const link = `#${anchor}`;
 
-                className,
-            )}
-            {...props}
-        />
-    ),
+        return (
+            <h2
+                id={anchor}
+                className={cn(
+                    "mt-10 scroll-m-20 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+                    className,
+                )}
+                {...props}
+            >
+                <Link
+                    href={link}
+                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                >
+                    {children}
+                    <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
+                </Link>
+            </h2>
+        );
+    },
+    h3: ({ className, children, ...props }: Component) => {
+        const anchor = getAnchor(children as string);
+        const link = `#${anchor}`;
+
+        return (
+            <h3
+                id={anchor}
+                className={cn(
+                    "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0",
+                    className,
+                )}
+                {...props}
+            >
+                <Link
+                    href={link}
+                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                >
+                    {children}
+                    <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
+                </Link>
+            </h3>
+        );
+    },
     h4: ({ className, ...props }: Component) => (
         <h4
             className={cn(
@@ -88,7 +118,7 @@ const components = {
         <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
     ),
     li: ({ className, ...props }: Component) => (
-        <li className={cn("mt-2", className)} {...props} />
+        <li className={cn("mt-2 leading-7", className)} {...props} />
     ),
     blockquote: ({ className, ...props }: Component) => (
         <blockquote
@@ -150,7 +180,7 @@ const components = {
     pre: ({ className, ...props }: Component) => (
         <pre
             className={cn(
-                "mb-4 mt-6 overflow-x-auto rounded-lg border bg-black py-4 [&_code]:border-0 [&_code]:px-6",
+                "mb-4 mt-6 overflow-x-auto rounded-lg border p-8",
                 className,
             )}
             {...props}
@@ -158,10 +188,7 @@ const components = {
     ),
     code: ({ className, ...props }: Component) => (
         <code
-            className={cn(
-                "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
-                className,
-            )}
+            className={cn("relative rounded font-mono text-sm", className)}
             {...props}
         />
     ),

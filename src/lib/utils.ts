@@ -18,3 +18,12 @@ export function formatDate(input: string | number): string {
 export function absoluteUrl(path: string) {
     return `${env.NEXT_PUBLIC_APP_URL}${path}`;
 }
+
+export function getAnchor(text: string) {
+    return text
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9 ]/g, "")
+        .replace(/[ ]/g, "-");
+}

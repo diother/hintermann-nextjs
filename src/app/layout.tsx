@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { type Metadata } from "next";
 import { cn } from "@/lib/utils";
 import { env } from "@/env";
+import CookieConsent from "@/components/cookie-consent";
 
 export const metadata: Metadata = {
     metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
@@ -60,6 +61,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     {children}
+                    <CookieConsent />
                 </ThemeProvider>
             </body>
         </html>

@@ -2,7 +2,7 @@ import { google } from "@/arctic";
 import {
     createGoogleUser,
     createSession,
-    getUserByGoogleId,
+    getUserByEmail,
 } from "@/database/auth";
 import { Cookie } from "@/lib/cookie";
 import { Snowflake } from "@/lib/snowflake";
@@ -85,7 +85,7 @@ async function startSession(
     email: string,
     verified: boolean,
 ): Promise<Buffer> {
-    const user = await getUserByGoogleId(googleId);
+    const user = await getUserByEmail(email);
     const id = user ?? Snowflake.generate();
     const res = user ?? (await createGoogleUser(id, googleId, email, verified));
     if (!res) {
