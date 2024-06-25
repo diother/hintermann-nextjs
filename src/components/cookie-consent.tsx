@@ -41,8 +41,8 @@ export default function CookieConsent() {
             <div className="m-2 rounded-md border bg-background">
                 <div className="flex flex-col gap-4 p-4">
                     <p className="text-sm font-normal">
-                        Acest site folosește tehnologii de urmărire. Puteți să
-                        vă înscrieți sau să renunțați la utilizarea acestor
+                        Acest website folosește tehnologii de urmărire. Puteți
+                        să vă înscrieți sau să renunțați la utilizarea acestor
                         tehnologii.
                     </p>
                     <div className="flex items-center gap-2 bg-background/20">

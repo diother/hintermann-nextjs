@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { env } from "@/env";
 import { notFound } from "next/navigation";
 import { allPosts } from "@/lib/mdx";
-import DecorationSection from "@/components/decoration";
+import DecorationSection, { DecorationCross } from "@/components/decoration";
 
 interface PostPageProps {
     params: {
@@ -78,14 +78,13 @@ export default async function Page({ params }: PostPageProps) {
     return (
         <main className="container relative w-full max-w-3xl p-4 sm:p-10 lg:grid lg:max-w-6xl lg:grid-cols-12 lg:py-16">
             <div className="lg:col-span-12">
-                <DecorationSection position="top-left" />
-                <section className="border-x px-4 py-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
-                    <h1 className="text-center text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-[3.5rem]">
+                <section className="relative border px-4 py-6 sm:p-10 lg:p-12">
+                    <DecorationCross position="top-left" />
+                    <DecorationCross position="bottom-right" />
+                    <h1 className="text-center text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:text-[3.5rem]">
                         {post.title}
                     </h1>
-                    <div className="lg:col-start-12 lg:border-l" />
                 </section>
-                <DecorationSection position="bottom-right" />
             </div>
             <div className="border-x border-b px-4 py-10 sm:px-10 lg:col-span-8 lg:border-r-0 lg:p-12">
                 <Mdx code={post.code} />

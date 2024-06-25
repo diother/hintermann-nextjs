@@ -60,21 +60,21 @@ export default function CookieDialog({ className }: { className?: string }) {
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
             <AlertDialogTrigger onClick={onOpen} className={className}>
-                Cookies
+                Tracking
             </AlertDialogTrigger>
-            <AlertDialogContent>
+            <AlertDialogContent className="gap-6">
                 <AlertDialogHeader className="gap-4 space-y-0">
                     <AlertDialogTitle className="text-2xl tracking-tight">
-                        Setări confidențialitate
+                        Setări tracking
                     </AlertDialogTitle>
                     <AlertDialogDescription className="text-base text-foreground">
-                        Acest site folosește tehnologii de urmărire. Puteți să
-                        vă înscrieți sau să renunțați la utilizarea acestor
+                        Acest website folosește tehnologii de urmărire. Puteți
+                        să vă înscrieți sau să renunțați la utilizarea acestor
                         tehnologii.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
-                <div className="flex flex-col gap-2 space-y-0">
-                    <div className="flex items-center justify-between space-y-0 rounded-md border p-4">
+                <div className="flex flex-col gap-2 space-y-0 [&_span]:text-sm [&_span]:font-medium">
+                    <div className="flex items-center justify-between space-y-0 rounded-md border p-4 ">
                         <span>Marketing</span>
                         <Switch
                             checked={marketing}
