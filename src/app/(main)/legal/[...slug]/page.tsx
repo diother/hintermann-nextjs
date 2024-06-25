@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { env } from "@/env";
 import { notFound } from "next/navigation";
 import { allPosts } from "@/lib/mdx";
-import DecorationSection, { DecorationCross } from "@/components/decoration";
+import { DecorationCross } from "@/components/decoration";
 
 interface PostPageProps {
     params: {
