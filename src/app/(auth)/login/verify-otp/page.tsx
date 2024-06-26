@@ -1,5 +1,5 @@
 import { getUserSession } from "@/actions/auth-actions";
-import { VerifyOtpForm } from "@/components/auth/verify-otp-form";
+import { VerifyOtpForm } from "@/components/auth/login-form";
 import { Cookie } from "@/lib/cookie";
 import { redirect } from "next/navigation";
 

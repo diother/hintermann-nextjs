@@ -1,96 +1,34 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useFormState } from "react-dom";
-import {
-    emailSignAction,
-    emailSignActionProgressive,
-} from "@/actions/auth-actions";
-import { type ErrorSchema } from "@/lib/types";
+import { useFormState, useFormStatus } from "react-dom";
+import { emailSignAction } from "@/actions/auth-actions";
 import { googleSignAction } from "@/actions/auth-actions";
 import { Icons } from "../icons";
-import React from "react";
+import React, { type ReactNode } from "react";
 import { LoadingSpinner } from "../ui/spinner";
+import { ArrowRight } from "lucide-react";
+import { verifyOtpAction } from "@/actions/auth-actions";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
 export function EmailForm() {
-    const [state, formAction] = useFormState(
-        emailSignActionProgressive,
-        undefined,
-    );
-    const form = useForm<z.infer<typeof EmailFormSchema>>({
-        resolver: zodResolver(EmailFormSchema),
-        defaultValues: {
-            email: "",
-        },
-    });
-
-    const [isLoading, setIsLoading] = React.useState(false);
-
-    const onSubmit = async (data: z.infer<typeof EmailFormSchema>) => {
-        setIsLoading(true);
-        try {
-            const response = await emailSignAction(data);
-            if (response) {
-                form.setError("email", {
-                    type: "server",
-                    message: response,
-                });
-                setIsLoading(false);
-            }
-        } catch (error) {
-            form.setError("email", {
-                type: "server",
-                message: "Serverele noastre nu au putut procesa cerința.",
-            });
-            setIsLoading(false);
-        }
-    };
+    const [state, formAction] = useFormState(emailSignAction, undefined);
 
     return (
-        <Form {...form}>
-            <form action={formAction} onSubmit={form.handleSubmit(onSubmit)}>
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem className="space-y-2">
-                            <FormLabel className="hidden">Email</FormLabel>
-                            <FormControl>
-                                <Input
-                                    className="h-12 text-base"
-                                    placeholder="nume@exemplu.ro"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <ProgressiveMessage>{state}</ProgressiveMessage>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <Button
-                    type="submit"
-                    disabled={isLoading}
-                    className="relative mt-2 h-12 w-full text-base"
-                >
-                    {isLoading && (
-                        <LoadingSpinner className="absolute left-4" />
-                    )}
-                    Continuă cu Email
-                </Button>
-            </form>
-        </Form>
+        <form action={formAction} className="flex flex-col gap-3">
+            <label className="hidden">Email</label>
+            <Input
+                name="email"
+                className="h-12 text-base"
+                placeholder="nume@exemplu.ro"
+            />
+            {state && (
+                <p className="text-sm font-medium text-destructive">{state}</p>
+            )}
+            <SubmitButton>Continuă cu Email</SubmitButton>
+        </form>
     );
 }
 
@@ -106,12 +44,55 @@ export function GoogleForm() {
     );
 }
 
-const EmailFormSchema = z.object({
-    email: z.string().email({
-        message: "Te rugăm introdu un email valid.",
-    }),
-});
+export function VerifyOtpForm() {
+    const [state, formAction] = useFormState(verifyOtpAction, undefined);
 
-function ProgressiveMessage({ children }: { children: ErrorSchema }) {
-    return <p className="text-sm font-medium text-destructive">{children}</p>;
+    return (
+        <form
+            action={formAction}
+            className="flex w-[16.5rem] flex-col items-center gap-3"
+        >
+            <label className="hidden">Cod de verificare</label>
+            <InputOTP
+                name="otp"
+                maxLength={6}
+                pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+            >
+                <InputOTPGroup>
+                    <InputOTPSlot index={0} />
+                    <InputOTPSlot index={1} />
+                    <InputOTPSlot index={2} />
+                    <InputOTPSlot index={3} />
+                    <InputOTPSlot index={4} />
+                    <InputOTPSlot index={5} />
+                </InputOTPGroup>
+            </InputOTP>
+            {state && (
+                <p className="text-sm font-medium text-destructive">{state}</p>
+            )}
+            <SubmitButton>Validează codul</SubmitButton>
+        </form>
+    );
+}
+
+interface SubmitButton {
+    children: ReactNode;
+}
+
+export function SubmitButton({ children }: SubmitButton) {
+    const status = useFormStatus();
+    return (
+        <Button
+            type="submit"
+            disabled={status.pending}
+            className="relative flex h-11 w-full items-center gap-2 text-base"
+        >
+            {children}
+            {status.pending ? (
+                <LoadingSpinner className="h-[1.125rem] w-[1.125rem]" />
+            ) : (
+                <ArrowRight className="arrow h-[1.125rem] w-[1.125rem]" />
+            )}
+        </Button>
+    );
 }
