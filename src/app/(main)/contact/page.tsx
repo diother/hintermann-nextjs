@@ -35,7 +35,7 @@ export default function Page() {
             <DecorationSection position="top-left" />
             <section className="flex flex-col gap-6 border border-t-0 px-6 pb-16 pt-12 sm:gap-8 sm:px-12 lg:gap-12 lg:border-b-0 lg:border-r-0">
                 <h1 className="text-4xl font-semibold leading-tight tracking-tighter">
-                    Vorbește cu echipa noastră pentru Colaborări
+                    Vorbește cu noi
                 </h1>
                 <p className="text-muted-foreground sm:text-lg lg:text-xl">
                     Vă îndemnăm să donați orice puteți. Orice mic gest de
