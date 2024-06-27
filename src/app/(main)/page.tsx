@@ -105,31 +105,34 @@ export default async function HomePage() {
                         Partenerii noștri.
                     </h2>
                 </div>
-                {logos.map((logo) => (
-                    <Link
-                        key={logo.name}
-                        href={logo.href}
-                        className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 transition hover:bg-accent lg:h-36"
-                    >
-                        <Image
-                            className={cn("dark:hidden", logo.className)}
-                            src={`/logos/logo-${logo.name}-light.png`}
-                            width={logo.width}
-                            height={logo.height}
-                            alt={`Logo ${logo.name}`}
-                        />
-                        <Image
-                            className={cn(
-                                "hidden brightness-[93%] dark:block",
-                                logo.className,
-                            )}
-                            src={`/logos/logo-${logo.name}-dark.png`}
-                            width={logo.width}
-                            height={logo.height}
-                            alt={`Logo ${logo.name}`}
-                        />
-                    </Link>
-                ))}
+                {Object.keys(logos).map((logoName) => {
+                    const logo = logos[logoName]!;
+                    return (
+                        <Link
+                            key={logoName}
+                            href={logo.href}
+                            className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 transition hover:bg-accent lg:h-36"
+                        >
+                            <Image
+                                className={cn("dark:hidden", logo.className)}
+                                src={`/logos/logo-${logoName}-light.png`}
+                                width={logo.width}
+                                height={logo.height}
+                                alt={`Logo ${logoName}`}
+                            />
+                            <Image
+                                className={cn(
+                                    "hidden brightness-[93%] dark:block",
+                                    logo.className,
+                                )}
+                                src={`/logos/logo-${logoName}-dark.png`}
+                                width={logo.width}
+                                height={logo.height}
+                                alt={`Logo ${logoName}`}
+                            />
+                        </Link>
+                    );
+                })}
                 <div className="relative col-start-1 col-end-3 -mt-[1px] flex flex-col items-center gap-6 border-t px-6 pb-12 pt-20 sm:flex-row sm:justify-between sm:gap-10 sm:px-10 sm:pb-20 sm:pt-28 lg:col-end-4 lg:px-12 lg:pb-24 lg:pt-32">
                     <h2 className="z-10 text-center text-2xl font-semibold leading-tight tracking-tighter sm:text-start sm:text-3xl lg:text-[2.5rem]">
                         Alătură-te și susține-i pe cei defavorizați.

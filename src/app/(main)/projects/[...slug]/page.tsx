@@ -9,6 +9,8 @@ import type { Metadata } from "next";
 import { env } from "@/env";
 import { notFound } from "next/navigation";
 import { allPosts } from "@/lib/mdx";
+import Image from "next/image";
+import { logos } from "@/lib/logos";
 
 interface PostPageProps {
     params: {
@@ -44,22 +46,20 @@ export async function generateMetadata({
             description: post.description,
             type: "article",
             url: post.slugAsParams,
-            images: ogImage
-                ? [
-                      {
-                          url: ogImage,
-                          width: 300,
-                          height: 200,
-                          alt: post.title,
-                      },
-                  ]
-                : undefined,
+            images: ogImage && [
+                {
+                    url: ogImage,
+                    width: 300,
+                    height: 200,
+                    alt: post.title,
+                },
+            ],
         },
         twitter: {
             card: "summary_large_image",
             title: post.title,
             description: post.description,
-            images: ogImage ? [ogImage] : undefined,
+            images: ogImage && [ogImage],
         },
     };
 }
@@ -105,6 +105,44 @@ export default async function Page({ params }: PostPageProps) {
                 <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl">
                     {post.title}
                 </h1>
+                {post.sponsors && (
+                    <div className="mt-4 flex items-center gap-6 rounded-md border p-4">
+                        <p className="text-sm font-medium text-muted-foreground">
+                            Sponsorizat de:
+                        </p>
+                        <div className="flex h-full items-center gap-6">
+                            {post.sponsors.map((logoName) => {
+                                const logo = logos[logoName]!;
+                                const width = (logo.width / 100) * 60;
+                                const height = (logo.height / 100) * 60;
+                                return (
+                                    <Link key={logoName} href={logo.href}>
+                                        <Image
+                                            className={cn(
+                                                "dark:hidden",
+                                                logo.className,
+                                            )}
+                                            src={`/logos/logo-${logoName}-light.png`}
+                                            width={width}
+                                            height={height}
+                                            alt={`Logo ${logoName}`}
+                                        />
+                                        <Image
+                                            className={cn(
+                                                "hidden brightness-[93%] dark:block",
+                                                logo.className,
+                                            )}
+                                            src={`/logos/logo-${logoName}-dark.png`}
+                                            width={width}
+                                            height={height}
+                                            alt={`Logo ${logoName}`}
+                                        />
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
             {post.images && <ArticleSwiper images={post.images} />}
             <Mdx code={post.code} />

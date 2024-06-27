@@ -59,33 +59,37 @@ export default function Page() {
             </section>
             <section className="relative -mb-[1px] grid grid-cols-2 grid-rows-3 border-x">
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border lg:translate-x-0" />
-                {logos
-                    .map((logo) => (
-                        <div
-                            key={logo.name}
-                            className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 lg:h-full"
-                        >
-                            <Image
-                                priority={true}
-                                className={cn("dark:hidden", logo.className)}
-                                src={`/logos/logo-${logo.name}-light.png`}
-                                width={logo.width}
-                                height={logo.height}
-                                alt={`Logo ${logo.name}`}
-                            />
-                            <Image
-                                priority={true}
-                                className={cn(
-                                    "hidden brightness-[93%] dark:block",
-                                    logo.className,
-                                )}
-                                src={`/logos/logo-${logo.name}-dark.png`}
-                                width={logo.width}
-                                height={logo.height}
-                                alt={`Logo ${logo.name}`}
-                            />
-                        </div>
-                    ))
+                {Object.keys(logos)
+                    .map((logoName) => {
+                        const logo = logos[logoName]!;
+                        return (
+                            <div
+                                key={logoName}
+                                className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 lg:h-full"
+                            >
+                                <Image
+                                    className={cn(
+                                        "dark:hidden",
+                                        logo.className,
+                                    )}
+                                    src={`/logos/logo-${logoName}-light.png`}
+                                    width={logo.width}
+                                    height={logo.height}
+                                    alt={`Logo ${logoName}`}
+                                />
+                                <Image
+                                    className={cn(
+                                        "hidden brightness-[93%] dark:block",
+                                        logo.className,
+                                    )}
+                                    src={`/logos/logo-${logoName}-dark.png`}
+                                    width={logo.width}
+                                    height={logo.height}
+                                    alt={`Logo ${logoName}`}
+                                />
+                            </div>
+                        );
+                    })
                     .slice(0, 6)}
             </section>
             <DecorationSection position="bottom-right" />

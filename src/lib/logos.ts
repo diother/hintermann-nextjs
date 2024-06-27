@@ -1,46 +1,46 @@
-export const logos = [
-    {
-        name: "auchan",
+export const logos: Record<string, Logo> = {
+    auchan: {
         width: 115,
         height: 27.85,
         href: "https://www.auchan.ro/",
     },
-    {
-        name: "humana",
+    humana: {
         width: 110,
         height: 29.65,
         href: "https://humana-romania.ro/",
     },
-    {
-        name: "alex-star",
+    "alex-star": {
         width: 90,
         height: 37.97,
         href: "https://alexstar.ro/",
     },
-    {
-        name: "lista-firme",
+    "lista-firme": {
         width: 135,
         height: 17.93,
         href: "https://www.listafirme.ro/",
     },
-    {
-        name: "carmeuse",
+    carmeuse: {
         width: 100,
         height: 50.39,
         href: "https://www.carmeuse.com/ro-ro",
         className: "-mt-[10px]",
     },
-    {
-        name: "panfood",
+    panfood: {
         width: 78,
         height: 64.29,
         href: "https://panfood.ro/",
     },
-    {
-        name: "plai",
+    plai: {
         width: 60,
         height: 57.65,
         href: "https://plaicashcarry.ro/",
         className: "-mt-[7px]",
     },
-];
+};
+
+export interface Logo {
+    width: number;
+    height: number;
+    href: string;
+    className?: string;
+}
