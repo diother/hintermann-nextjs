@@ -118,6 +118,7 @@ export default async function Page({ params }: PostPageProps) {
                                 return (
                                     <Link key={logoName} href={logo.href}>
                                         <Image
+                                            priority={true}
                                             className={cn(
                                                 "dark:hidden",
                                                 logo.className,
@@ -128,6 +129,7 @@ export default async function Page({ params }: PostPageProps) {
                                             alt={`Logo ${logoName}`}
                                         />
                                         <Image
+                                            priority={true}
                                             className={cn(
                                                 "hidden brightness-[93%] dark:block",
                                                 logo.className,
