@@ -12,27 +12,36 @@ import {
     MobileMenuTrigger,
 } from "./ui/mobile-menu";
 import { Icons } from "./icons";
+import { useState } from "react";
 
 export function HeaderMobileMenu({ email }: { email?: string }) {
+    const [open, setOpen] = useState(false);
+    const handleLinkClick = () => {
+        setTimeout(() => {
+            setOpen(false);
+        }, 300);
+    };
     const [, formAction] = useFormState(signOut, undefined);
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
     ];
     return (
-        <MobileMenu>
+        <MobileMenu open={open} onOpenChange={setOpen}>
             <MobileMenuTrigger className="flex h-10 w-10 items-center justify-center rounded-md border lg:hidden">
                 <Menu />
             </MobileMenuTrigger>
             <MobileMenuContent>
                 <div className="box-content flex h-16 items-center justify-between border-b px-6">
-                    <Link href="/">
-                        <MobileMenuClose className="flex items-center gap-1.5">
-                            <Icons.logo />
-                            <span className="text-center text-xl font-semibold leading-tight tracking-tighter">
-                                Hintermann Charity
-                            </span>
-                        </MobileMenuClose>
+                    <Link
+                        href="/"
+                        className="flex items-center gap-1.5"
+                        onClick={handleLinkClick}
+                    >
+                        <Icons.logo />
+                        <span className="text-center text-xl font-semibold leading-tight tracking-tighter">
+                            Hintermann Charity
+                        </span>
                     </Link>
                     <MobileMenuClose className="flex h-10 w-10 items-center justify-center rounded-md border">
                         <X />
@@ -54,7 +63,9 @@ export function HeaderMobileMenu({ email }: { email?: string }) {
                         </div>
                     ) : (
                         <Button className="w-full" asChild>
-                            <Link href="/login">Autentifică-te</Link>
+                            <Link href="/login" onClick={handleLinkClick}>
+                                Autentifică-te
+                            </Link>
                         </Button>
                     )}
                     <hr className="my-3" />
@@ -63,6 +74,7 @@ export function HeaderMobileMenu({ email }: { email?: string }) {
                             key={link.name}
                             href={link.href}
                             className={`py-3 text-muted-foreground`}
+                            onClick={handleLinkClick}
                         >
                             {link.name}
                         </Link>
