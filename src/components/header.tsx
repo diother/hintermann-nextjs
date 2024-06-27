@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { MobileMenu } from "./mobile-menu";
 import { Button } from "./ui/button";
 import { AvatarMenu } from "./header-avatar";
 import { Icons } from "./icons";
-import MobileMenuTrigger from "./mobile-menu-trigger";
 import { getUserSession } from "@/actions/auth-actions";
 import { getUserEmail } from "@/database/auth";
+import { HeaderMobileMenu } from "./mobile-menu";
 
 export default async function Header() {
     const navLinks = [
@@ -46,9 +45,7 @@ export default async function Header() {
                         <Link href="/login">Autentifică-te</Link>
                     </Button>
                 )}
-                <MobileMenuTrigger>
-                    <MobileMenu email={email} />
-                </MobileMenuTrigger>
+                <HeaderMobileMenu email={email} />
             </div>
         </header>
     );
