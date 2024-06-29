@@ -39,7 +39,7 @@ export function HeaderMobileMenu({ email }: { email?: string }) {
                         onClick={handleLinkClick}
                     >
                         <Icons.logo />
-                        <span className="text-center text-xl font-semibold leading-tight tracking-tighter">
+                        <span className="text-center text-xl font-semibold leading-tight tracking-tight">
                             Hintermann Charity
                         </span>
                     </Link>

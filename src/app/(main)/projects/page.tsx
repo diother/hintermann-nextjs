@@ -39,9 +39,7 @@ export default function Page() {
     return (
         <main className="mx-auto flex w-full max-w-6xl flex-col gap-6 p-6 sm:gap-10 sm:p-10 lg:py-16">
             <div className="flex flex-col gap-4">
-                <h1 className="text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:text-[3.5rem]">
-                    Proiecte
-                </h1>
+                <h1 className="display-heading">Proiecte</h1>
                 <p className="text-lg text-muted-foreground">
                     Descoperă ultimele proiecte Hintermann Charity.
                 </p>
@@ -69,9 +67,7 @@ export default function Page() {
                                     />
                                 </div>
                             )}
-                            <h2 className="font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl">
-                                {post.title}
-                            </h2>
+                            <h2 className="heading-4">{post.title}</h2>
                             <p className="text-sm text-muted-foreground sm:text-base">
                                 {post.description}
                             </p>

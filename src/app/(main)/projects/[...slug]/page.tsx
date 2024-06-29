@@ -102,9 +102,7 @@ export default async function Page({ params }: PostPageProps) {
                         Publicat pe {formatDate(post.date)}
                     </time>
                 )}
-                <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl">
-                    {post.title}
-                </h1>
+                <h1 className="display-heading mt-2">{post.title}</h1>
                 {post.sponsors && (
                     <div className="mt-4 flex items-center gap-6 rounded-md border p-4">
                         <p className="text-sm font-medium text-muted-foreground">

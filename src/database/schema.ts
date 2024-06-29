@@ -17,7 +17,6 @@ export const users = mysqlTable("users", {
     otp: char("otp", { length: 6 }),
     otpExpiresAt: timestamp("otp_expires_at").default(sql`utc_timestamp()`),
     createdAt: timestamp("created_at").default(sql`utc_timestamp()`),
-    googleId: char("google_id", { length: 21 }),
 });
 
 export const sessions = mysqlTable("sessions", {

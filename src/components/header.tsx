@@ -22,7 +22,7 @@ export default async function Header() {
                 <div className="z-50 flex items-center gap-8">
                     <Link href="/" className="flex items-center gap-1.5">
                         <Icons.logo />
-                        <span className="text-center text-xl font-semibold leading-tight tracking-tighter">
+                        <span className="text-center text-xl font-semibold leading-tight tracking-tight">
                             Hintermann Charity
                         </span>
                     </Link>

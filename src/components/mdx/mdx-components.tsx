@@ -16,10 +16,7 @@ interface Component {
 const components = {
     h1: ({ className, ...props }: Component) => (
         <h1
-            className={cn(
-                "mt-2 scroll-m-20 text-4xl font-bold tracking-tight",
-                className,
-            )}
+            className={cn("heading-2 mt-2 scroll-m-20", className)}
             {...props}
         />
     ),
@@ -31,7 +28,7 @@ const components = {
             <h2
                 id={anchor}
                 className={cn(
-                    "mt-10 scroll-m-20 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+                    "heading-2 mt-10 scroll-m-20 pb-1 first:mt-0",
                     className,
                 )}
                 {...props}
@@ -54,7 +51,7 @@ const components = {
             <h3
                 id={anchor}
                 className={cn(
-                    "mt-8 scroll-m-20 text-2xl font-semibold tracking-tight first:mt-0",
+                    "heading-3 mt-8 scroll-m-20 first:mt-0",
                     className,
                 )}
                 {...props}
@@ -71,19 +68,13 @@ const components = {
     },
     h4: ({ className, ...props }: Component) => (
         <h4
-            className={cn(
-                "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-                className,
-            )}
+            className={cn("heading-4 mt-8 scroll-m-20", className)}
             {...props}
         />
     ),
     h5: ({ className, ...props }: Component) => (
         <h5
-            className={cn(
-                "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
-                className,
-            )}
+            className={cn("heading-5 mt-8 scroll-m-20", className)}
             {...props}
         />
     ),
@@ -122,10 +113,7 @@ const components = {
     ),
     blockquote: ({ className, ...props }: Component) => (
         <blockquote
-            className={cn(
-                "mt-6 border-l-2 pl-6 [&>*]:text-muted-foreground",
-                className,
-            )}
+            className={cn("mt-6 border-l-2 border-foreground pl-6", className)}
             {...props}
         />
     ),

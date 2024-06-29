@@ -18,7 +18,7 @@ export default async function HomePage() {
         <main className="mx-auto flex w-full max-w-6xl flex-col p-4 sm:p-10 lg:py-16">
             <DecorationSection position="top-left" />
             <section className="border border-t-0 p-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
-                <h1 className="text-center text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-[3.5rem]">
+                <h1 className="display-heading text-center lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12">
                     Construim case pentru familiile românilor.
                 </h1>
                 <div className="lg:col-start-12 lg:border-l" />
@@ -57,9 +57,7 @@ export default async function HomePage() {
                                     />
                                 </div>
                             )}
-                            <h2 className="font-semibold leading-tight tracking-tight sm:text-xl lg:text-2xl">
-                                {post.title}
-                            </h2>
+                            <h2 className="heading-4">{post.title}</h2>
                             <p className="text-sm text-muted-foreground sm:text-base">
                                 {post.description}
                             </p>
@@ -76,9 +74,7 @@ export default async function HomePage() {
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-1/3" />
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-2/3" />
                 <div className="z-10 border-b p-6 pt-20 sm:col-span-3 sm:p-10 sm:pt-28 lg:p-12 lg:pt-32">
-                    <h2 className="text-center text-2xl font-semibold leading-tight tracking-tighter sm:text-3xl lg:text-[2.5rem]">
-                        Valorile noastre.
-                    </h2>
+                    <h2 className="heading-2 text-center">Valorile noastre.</h2>
                 </div>
                 {values.map((value) => (
                     <div
@@ -100,7 +96,7 @@ export default async function HomePage() {
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border lg:left-2/3" />
                 <div className="relative z-10 col-span-2 border-b p-6 pt-20 sm:p-10 sm:pt-28 lg:col-span-3 lg:p-12 lg:pt-32">
                     <DecorationCross position="bottom-left" />
-                    <h2 className="text-center text-2xl font-semibold leading-tight tracking-tighter sm:text-3xl lg:text-[2.5rem]">
+                    <h2 className="heading-2 text-center">
                         Partenerii noștri.
                     </h2>
                 </div>
@@ -133,7 +129,7 @@ export default async function HomePage() {
                     );
                 })}
                 <div className="relative col-start-1 col-end-3 -mt-[1px] flex flex-col items-center gap-6 border-t px-6 pb-12 pt-20 sm:flex-row sm:justify-between sm:gap-10 sm:px-10 sm:pb-20 sm:pt-28 lg:col-end-4 lg:px-12 lg:pb-24 lg:pt-32">
-                    <h2 className="z-10 text-center text-2xl font-semibold leading-tight tracking-tighter sm:text-start sm:text-3xl lg:text-[2.5rem]">
+                    <h2 className="heading-2 z-10 text-center">
                         Alătură-te și susține-i pe cei defavorizați.
                     </h2>
                     <Button>

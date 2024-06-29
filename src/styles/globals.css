@@ -73,4 +73,19 @@
     body {
         @apply bg-background text-foreground;
     }
+    .display-heading {
+        @apply text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:text-[3.5rem];
+    }
+    .heading-2 {
+        @apply text-3xl font-semibold leading-tight tracking-tighter lg:text-4xl;
+    }
+    .heading-3 {
+        @apply text-2xl font-semibold leading-tight tracking-tight lg:text-3xl;
+    }
+    .heading-4 {
+        @apply text-xl font-semibold leading-tight tracking-tight lg:text-2xl;
+    }
+    .heading-5 {
+        @apply text-lg font-semibold leading-tight tracking-tight lg:text-xl;
+    }
 }

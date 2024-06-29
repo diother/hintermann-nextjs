@@ -17,7 +17,6 @@ export async function GET(request: Request) {
         const [code, verifier] = validateRequirements(request);
         const user = await getUserFromGoogle(code, verifier);
         const sessionId = await startSession(
-            user.sub,
             user.email,
             user.email_verified,
             user.given_name,
@@ -82,7 +81,6 @@ async function getUserFromGoogle(
 }
 
 async function startSession(
-    googleId: string,
     email: string,
     verified: boolean,
     givenName: string,
@@ -92,14 +90,7 @@ async function startSession(
     const id = user ?? Snowflake.generate();
     const res =
         user ??
-        (await createGoogleUser(
-            id,
-            googleId,
-            email,
-            verified,
-            givenName,
-            familyName,
-        ));
+        (await createGoogleUser(id, email, verified, givenName, familyName));
 
     if (!res) {
         throw new FormError("Problem with our servers");

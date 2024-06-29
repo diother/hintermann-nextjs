@@ -6,16 +6,22 @@ import { Cookie } from "@/lib/cookie";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import {
-    createOtpSession,
-    startSession,
-    validateEmailForm,
-    validateOtpForm,
-    validateOtpService,
-} from "@/services/auth-services";
-import { sendEmail } from "@/services/otp-email";
-import { deleteSession, validateSession } from "@/database/auth";
+    createSession,
+    createUserWithOtp,
+    deleteSession,
+    getUserByEmail,
+    setOtpOnUser,
+    validateOtp,
+    validateSession,
+} from "@/database/auth";
 import { generateCodeVerifier, generateState } from "arctic";
 import { google } from "@/arctic";
+import { z } from "zod";
+import { OtpSchema, generateOtp } from "@/lib/otp";
+import { Snowflake } from "@/lib/snowflake";
+import { Resend } from "resend";
+import OtpEmail from "emails/otp-email";
+import { env } from "@/env";
 
 export async function emailSignAction(
     prev: ErrorSchema,
@@ -40,6 +46,49 @@ export async function emailSignAction(
             return error.message;
         }
     }
+}
+
+function validateEmailForm(email: string): void {
+    const valid = z.string().email().safeParse(email);
+
+    if (!valid.success) {
+        throw new FormError("Te rugăm introdu un email valid.");
+    }
+}
+
+async function createOtpSession(email: string): Promise<[Buffer, string]> {
+    const user = await getUserByEmail(email);
+    const [otp, otpExpiresAt] = generateOtp();
+
+    const id = user ?? Snowflake.generate();
+    const res = user
+        ? await setOtpOnUser(id, otp, otpExpiresAt)
+        : await createUserWithOtp(id, email, otp, otpExpiresAt);
+
+    if (!res) {
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
+    }
+    return [id, otp];
+}
+
+const resend = new Resend(env.RESEND);
+const previewText =
+    "Întoarce-te la pagina de autentificare și introdu codul de mai jos pentru a finaliza procesul.";
+
+async function sendEmail(
+    email: string,
+    otp: string,
+): Promise<{ id: string } | false> {
+    const { data } = await resend.emails.send({
+        from: "Hintermann Charity <noreply@hintermann.ro>",
+        to: [email],
+        subject: "Conectează-te la Hintermann Charity",
+        react: OtpEmail({ previewText: previewText, otp: otp }),
+    });
+    if (!data) {
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
+    }
+    return data;
 }
 
 export async function verifyOtpAction(
@@ -74,6 +123,31 @@ export async function verifyOtpAction(
             return error.message;
         }
     }
+}
+
+function validateOtpForm(otp: string): void {
+    const valid = OtpSchema.safeParse(otp);
+
+    if (!valid.success) {
+        throw new FormError("Codul de verificare este invalid.");
+    }
+}
+
+async function validateOtpService(id: Buffer, otp: string): Promise<void> {
+    const res = await validateOtp(id, otp);
+    if (!res) {
+        throw new FormError("Codul de verificare este invalid.");
+    }
+}
+
+async function startSession(userId: Buffer): Promise<Buffer> {
+    const sessionId = Snowflake.generate();
+    const THIRTY_DAYS = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
+    const res = await createSession(userId, sessionId, THIRTY_DAYS);
+    if (!res) {
+        throw new FormError("Serverele noastre nu au putut procesa cerința.");
+    }
+    return sessionId;
 }
 
 export async function googleSignAction(): Promise<void> {

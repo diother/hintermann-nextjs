@@ -30,7 +30,6 @@ export async function createUserWithOtp(
 
 export async function createGoogleUser(
     id: Buffer,
-    googleId: string,
     email: string,
     verified: boolean,
     givenName: string | undefined,
@@ -39,7 +38,6 @@ export async function createGoogleUser(
     const insert = await db.insert(users).values({
         id: sql`${id}`,
         email: email,
-        googleId: googleId,
         emailVerified: verified,
         givenName: givenName,
         familyName: familyName,

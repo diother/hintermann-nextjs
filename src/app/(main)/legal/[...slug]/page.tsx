@@ -81,7 +81,7 @@ export default async function Page({ params }: PostPageProps) {
                 <section className="relative border px-4 py-6 sm:p-10 lg:p-12">
                     <DecorationCross position="top-left" />
                     <DecorationCross position="bottom-right" />
-                    <h1 className="text-center text-4xl font-semibold leading-tight tracking-tighter sm:text-5xl lg:text-[3.5rem]">
+                    <h1 className="display-heading text-center">
                         {post.title}
                     </h1>
                 </section>
