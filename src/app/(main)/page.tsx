@@ -14,7 +14,6 @@ export default async function HomePage() {
             return compareDesc(new Date(a.date), new Date(b.date));
         })
         .slice(0, 3);
-
     return (
         <main className="mx-auto flex w-full max-w-6xl flex-col p-4 sm:p-10 lg:py-16">
             <DecorationSection position="top-left" />

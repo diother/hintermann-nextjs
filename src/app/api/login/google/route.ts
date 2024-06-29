@@ -20,12 +20,13 @@ export async function GET(request: Request) {
             user.sub,
             user.email,
             user.email_verified,
+            user.given_name,
+            user.family_name,
         );
-        exposeSession(sessionId);
-
-        return new Response(null, {
-            status: 404,
-        });
+        const expiresAt = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
+        const cookie = new Cookie("auth_token", sessionId, expiresAt);
+        cookie.set();
+        redirect("/");
     } catch (error) {
         if (isRedirectError(error)) {
             throw error;
@@ -84,10 +85,22 @@ async function startSession(
     googleId: string,
     email: string,
     verified: boolean,
+    givenName: string,
+    familyName: string,
 ): Promise<Buffer> {
     const user = await getUserByEmail(email);
     const id = user ?? Snowflake.generate();
-    const res = user ?? (await createGoogleUser(id, googleId, email, verified));
+    const res =
+        user ??
+        (await createGoogleUser(
+            id,
+            googleId,
+            email,
+            verified,
+            givenName,
+            familyName,
+        ));
+
     if (!res) {
         throw new FormError("Problem with our servers");
     }
@@ -98,13 +111,6 @@ async function startSession(
         throw new FormError("Problem with our servers");
     }
     return sessionId;
-}
-
-function exposeSession(sessionId: Buffer): void {
-    const expiresAt = new Date(Date.now() + 30 * (24 * 60 * 60 * 1000));
-    const cookie = new Cookie("auth_token", sessionId, expiresAt);
-    cookie.set();
-    redirect("/");
 }
 
 const GoogleUserSchema = z.object({

@@ -33,12 +33,31 @@ export async function createGoogleUser(
     googleId: string,
     email: string,
     verified: boolean,
+    givenName: string | undefined,
+    familyName: string | undefined,
 ): Promise<boolean> {
     const insert = await db.insert(users).values({
         id: sql`${id}`,
         email: email,
         googleId: googleId,
         emailVerified: verified,
+        givenName: givenName,
+        familyName: familyName,
+    });
+    return !!insert[0].affectedRows;
+}
+
+export async function createStripeUser(
+    id: Buffer,
+    email: string,
+    givenName: string | undefined,
+    familyName: string | undefined,
+) {
+    const insert = await db.insert(users).values({
+        id: sql`${id}`,
+        email: email,
+        givenName: givenName,
+        familyName: familyName,
     });
     return !!insert[0].affectedRows;
 }
@@ -53,6 +72,22 @@ export async function setOtpOnUser(
         .set({
             otp: otp,
             otpExpiresAt: otpExpiresAt,
+        })
+        .where(eq(users.id, sql`${id}`));
+
+    return !!update[0].affectedRows;
+}
+
+export async function setNameOnUser(
+    id: Buffer,
+    givenName: string | undefined,
+    familyName: string | undefined,
+): Promise<boolean> {
+    const update = await db
+        .update(users)
+        .set({
+            givenName: givenName,
+            familyName: familyName,
         })
         .where(eq(users.id, sql`${id}`));
 

@@ -10,12 +10,15 @@ export const env = createEnv({
         GOOGLE_ID: z.string(),
         GOOGLE_SECRET: z.string(),
         RESEND: z.string(),
+        STRIPE_SECRET: z.string(),
+        STRIPE_WEBHOOK: z.string(),
         NODE_ENV: z
             .enum(["development", "test", "production"])
             .default("development"),
     },
     client: {
         NEXT_PUBLIC_APP_URL: z.string(),
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE: z.string(),
     },
     runtimeEnv: {
         DATABASE_HOST: process.env.DATABASE_HOST,
@@ -25,8 +28,12 @@ export const env = createEnv({
         GOOGLE_ID: process.env.GOOGLE_ID,
         GOOGLE_SECRET: process.env.GOOGLE_SECRET,
         RESEND: process.env.RESEND,
+        STRIPE_SECRET: process.env.STRIPE_SECRET,
+        STRIPE_WEBHOOK: process.env.STRIPE_WEBHOOK,
         NODE_ENV: process.env.NODE_ENV,
         NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+        NEXT_PUBLIC_STRIPE_PUBLISHABLE:
+            process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE,
     },
     skipValidation: !!process.env.SKIP_ENV_VALIDATION,
     emptyStringAsUndefined: true,

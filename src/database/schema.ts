@@ -12,10 +12,12 @@ export const users = mysqlTable("users", {
     id: binary("id", { length: 6 }).primaryKey(),
     email: varchar("email", { length: 254 }).unique().notNull(),
     emailVerified: boolean("email_verified").default(false).notNull(),
+    givenName: varchar("given_name", { length: 30 }),
+    familyName: varchar("family_name", { length: 50 }),
     otp: char("otp", { length: 6 }),
     otpExpiresAt: timestamp("otp_expires_at").default(sql`utc_timestamp()`),
     createdAt: timestamp("created_at").default(sql`utc_timestamp()`),
-    googleId: varchar("google_id", { length: 254 }), // unoptimized
+    googleId: char("google_id", { length: 21 }),
 });
 
 export const sessions = mysqlTable("sessions", {

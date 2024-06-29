@@ -13,17 +13,14 @@ export default function CookieConsent() {
         expiryDate.setFullYear(expiryDate.getFullYear() + 1);
         document.cookie = `cookie_consent=${value}; expires=${expiryDate.toUTCString()}; path=/`;
     };
-
     const accept = () => {
         setIsOpen(false);
         setCookie("11");
     };
-
     const decline = () => {
         setIsOpen(false);
         setCookie("00");
     };
-
     useEffect(() => {
         if (!document.cookie.includes("cookie_consent")) {
             setIsOpen(true);
