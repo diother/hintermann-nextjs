@@ -21,12 +21,11 @@ export async function POST(request: Request) {
             endpointSecret,
         );
 
-        if (event.type === "payment_intent.succeeded") {
+        if (event.type === "checkout.session.completed") {
             const data = event.data.object;
-            const paymentId = data.payment_method as string;
-            const payment = await stripe.paymentMethods.retrieve(paymentId);
-            const email = payment.billing_details.email as string;
-            const name = payment.billing_details.name as string;
+
+            const email = data.customer_details!.email!;
+            const name = data.customer_details!.name!;
             const [givenName, familyName] = name.split(" ", 2);
 
             const user = await getUserByEmail(email);

@@ -7,22 +7,36 @@ import { redirect } from "next/navigation";
 
 const stripe = new Stripe(env.STRIPE_SECRET);
 
-const products: Record<string, string> = {
-    any: "price_1PWhZoDXCtuWOFq8Unk6cjIy",
-    250: "price_1PWh3KDXCtuWOFq88qZGndtv",
+interface Plan {
+    id: string;
+    mode: "payment" | "subscription";
+}
+const plans: Record<string, Plan> = {
+    any: {
+        id: "price_1PWhZoDXCtuWOFq8Unk6cjIy",
+        mode: "payment",
+    },
+    250: {
+        id: "price_1PWh3KDXCtuWOFq88qZGndtv",
+        mode: "payment",
+    },
+    recurent: {
+        id: "price_1PX2rHDXCtuWOFq8fbj1dg7p",
+        mode: "subscription",
+    },
 };
 
 export async function ApiTest(prevState: void | undefined, formData: FormData) {
     try {
-        const sum = formData.get("sum") as string;
+        const plan = formData.get("sum") as string;
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
-                    price: products[sum],
+                    price: plans[plan]!.id,
                     quantity: 1,
                 },
             ],
-            mode: "payment",
+            mode: plans[plan]!.mode,
             success_url: `${env.NEXT_PUBLIC_APP_URL}/test?success=true`,
             cancel_url: `${env.NEXT_PUBLIC_APP_URL}/test?canceled=true`,
         });

@@ -11,6 +11,7 @@ export default function Page() {
             <select name="sum" id="sum">
                 <option value="250">250 lei</option>
                 <option value="any">Orice suma la alegere</option>
+                <option value="recurent">Recurent</option>
             </select>
             <Button>Checkout</Button>
         </form>
