@@ -3,8 +3,9 @@ import { Button } from "./ui/button";
 import { AvatarMenu } from "./header-avatar";
 import { Icons } from "./icons";
 import { getUserSession } from "@/actions/auth-actions";
-import { getUserEmail } from "@/database/auth";
+import { getStripeId, getUserEmail } from "@/database/auth";
 import { HeaderMobileMenu } from "./mobile-menu";
+import { StripeDashboard } from "./donation/donation-form";
 
 export default async function Header() {
     const navLinks = [
@@ -12,9 +13,10 @@ export default async function Header() {
         { name: "Contact", href: "/contact" },
     ];
     const user = await getUserSession();
-    let email: string | undefined;
+    let email, stripeId;
     if (user) {
         email = await getUserEmail(user);
+        stripeId = await getStripeId(user);
     }
     return (
         <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 before:absolute before:inset-0 before:-z-10 before:backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -46,6 +48,7 @@ export default async function Header() {
                     </Button>
                 )}
                 <HeaderMobileMenu email={email} />
+                {user ?? <StripeDashboard />}
             </div>
         </header>
     );

@@ -1,11 +1,14 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { ApiTest, StripeDashboard } from "./server";
 import { Button } from "@/components/ui/button";
+import {
+    checkoutAction,
+    stripeDashboardAction,
+} from "@/actions/donation-actions";
 
 export function DonationForm() {
-    const [, action] = useFormState(ApiTest, undefined);
+    const [, action] = useFormState(checkoutAction, undefined);
 
     return (
         <form action={action}>
@@ -19,11 +22,11 @@ export function DonationForm() {
     );
 }
 
-export function Billing({ stripeId }: { stripeId: string }) {
-    const [, redirect] = useFormState(StripeDashboard, stripeId);
+export function StripeDashboard() {
+    const [, action] = useFormState(stripeDashboardAction, undefined);
 
     return (
-        <form action={redirect}>
+        <form action={action}>
             <button type="submit">Manage billing</button>
         </form>
     );

@@ -4,6 +4,8 @@ import Stripe from "stripe";
 import { env } from "@/env";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "next/navigation";
+import { getUserSession } from "@/actions/auth-actions";
+import { getStripeId } from "@/database/auth";
 
 const stripe = new Stripe(env.STRIPE_SECRET);
 
@@ -26,7 +28,10 @@ const plans: Record<string, Plan> = {
     },
 };
 
-export async function ApiTest(prevState: void | undefined, formData: FormData) {
+export async function checkoutAction(
+    prevState: void | undefined,
+    formData: FormData,
+) {
     try {
         const plan = formData.get("sum") as string;
         const session = await stripe.checkout.sessions.create({
@@ -52,15 +57,19 @@ export async function ApiTest(prevState: void | undefined, formData: FormData) {
     }
 }
 
-export async function StripeDashboard(
-    prevState: string | void,
-): Promise<string | void> {
-    if (!prevState) {
+export async function stripeDashboardAction() {
+    const user = await getUserSession();
+    let stripeId;
+    if (!user) {
+        return;
+    }
+    stripeId = await getStripeId(user);
+    if (!stripeId) {
         return;
     }
     const session = await stripe.billingPortal.sessions.create({
-        customer: prevState,
-        return_url: "http://localhost:3000/",
+        customer: stripeId,
+        return_url: env.NEXT_PUBLIC_APP_URL,
         locale: "ro",
     });
     const url = session.url;

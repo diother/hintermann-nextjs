@@ -22,6 +22,7 @@ import { Snowflake } from "@/lib/snowflake";
 import { Resend } from "resend";
 import OtpEmail from "emails/otp-email";
 import { env } from "@/env";
+import { revalidatePath } from "next/cache";
 
 export async function emailSignAction(
     prev: ErrorSchema,
@@ -173,6 +174,7 @@ export async function signOut(): Promise<void> {
     }
     await deleteSession(session);
     cookie.delete();
+    revalidatePath("/");
     redirect("/");
 }
 
