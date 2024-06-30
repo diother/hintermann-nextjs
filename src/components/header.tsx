@@ -48,7 +48,7 @@ export default async function Header() {
                     </Button>
                 )}
                 <HeaderMobileMenu email={email} />
-                {user && <StripeDashboard />}
+                {stripeId && <StripeDashboard />}
             </div>
         </header>
     );

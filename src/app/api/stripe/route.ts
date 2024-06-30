@@ -25,36 +25,29 @@ export async function POST(request: Request) {
 
         if (event.type === "checkout.session.completed") {
             const data = event.data.object;
-
             const email = data.customer_details!.email!;
             const name = data.customer_details!.name!;
             const [givenName, familyName] = name.split(" ", 2);
 
-            if (data.mode === "payment") {
-                const user = await getUserByEmail(email);
-                const id = user ?? Snowflake.generate();
-                user
-                    ? await setNameOnUser(id, givenName, familyName)
-                    : await createStripeUser(id, email, givenName, familyName);
-            } else if (data.mode === "subscription") {
-                const stripeId = data.customer as string;
-                const user = await getUserByEmail(email);
-                const id = user ?? Snowflake.generate();
-                user
-                    ? await setStripeIdOnUser(
-                          id,
-                          givenName,
-                          familyName,
-                          stripeId,
-                      )
-                    : await createStripeUserWithId(
-                          id,
-                          email,
-                          givenName,
-                          familyName,
-                          stripeId,
-                      );
-            }
+            const user = await getUserByEmail(email);
+            const id = user ?? Snowflake.generate();
+
+            const mode = data.mode;
+            const stripeId = data.customer as string;
+
+            mode === "payment" && user
+                ? await setNameOnUser(id, givenName, familyName)
+                : await createStripeUser(id, email, givenName, familyName);
+
+            mode === "subscription" && user
+                ? await setStripeIdOnUser(id, givenName, familyName, stripeId)
+                : await createStripeUserWithId(
+                      id,
+                      email,
+                      givenName,
+                      familyName,
+                      stripeId,
+                  );
         }
 
         return new Response(null, {

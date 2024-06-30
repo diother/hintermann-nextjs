@@ -6,6 +6,7 @@ import { isRedirectError } from "next/dist/client/components/redirect";
 import { redirect } from "next/navigation";
 import { getUserSession } from "@/actions/auth-actions";
 import { getStripeId } from "@/database/auth";
+import { z } from "zod";
 
 const stripe = new Stripe(env.STRIPE_SECRET);
 
@@ -31,25 +32,30 @@ const plans: Record<string, Plan> = {
 export async function checkoutAction(
     prevState: void | undefined,
     formData: FormData,
-) {
+): Promise<void | undefined> {
     try {
-        const plan = formData.get("sum") as string;
-        const session = await stripe.checkout.sessions.create({
-            line_items: [
-                {
-                    price: plans[plan]!.id,
-                    quantity: 1,
-                },
-            ],
-            mode: plans[plan]!.mode,
-            success_url: `${env.NEXT_PUBLIC_APP_URL}/test?success=true`,
-            cancel_url: `${env.NEXT_PUBLIC_APP_URL}/test?canceled=true`,
-            locale: "ro",
-        });
-        if (!session?.url) {
-            throw new Error("Session could not be created");
-        }
-        redirect(session.url);
+        const mode = formData.get("mode") as string;
+        const option = formData.get("option") as string;
+
+        validateDonationForm(mode, option);
+
+        //     const plan = formData.get("sum") as string;
+        //     const session = await stripe.checkout.sessions.create({
+        //         line_items: [
+        //             {
+        //                 price: plans[plan]!.id,
+        //                 quantity: 1,
+        //             },
+        //         ],
+        //         mode: plans[plan]!.mode,
+        //         success_url: `${env.NEXT_PUBLIC_APP_URL}/`,
+        //         cancel_url: `${env.NEXT_PUBLIC_APP_URL}/`,
+        //         locale: "ro",
+        //     });
+        //     if (!session?.url) {
+        //         throw new Error("Session could not be created");
+        //     }
+        //     redirect(session.url);
     } catch (error) {
         if (isRedirectError(error)) {
             throw error;
@@ -57,13 +63,37 @@ export async function checkoutAction(
     }
 }
 
+function validateDonationForm(mode: string, option: string): void {
+    const modeEnum = z.enum(["subscription", "payment"]);
+    const optionEnum = z.enum([
+        "pay_1",
+        "pay_2",
+        "pay_3",
+        "pay_4",
+        "pay_5",
+        "sub_1",
+        "sub_2",
+        "sub_3",
+        "sub_4",
+        "sub_5",
+    ]);
+
+    const valid = z.object({ mode: modeEnum, option: optionEnum }).safeParse({
+        mode: mode,
+        option: option,
+    });
+
+    if (!valid.success) {
+        throw new Error("Te rugăm introdu date valide.");
+    }
+}
+
 export async function stripeDashboardAction() {
     const user = await getUserSession();
-    let stripeId;
     if (!user) {
         return;
     }
-    stripeId = await getStripeId(user);
+    const stripeId = await getStripeId(user);
     if (!stripeId) {
         return;
     }
