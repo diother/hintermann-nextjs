@@ -3,8 +3,10 @@ import { env } from "@/env";
 import { isRedirectError } from "next/dist/client/components/redirect";
 import {
     createStripeUser,
+    createStripeUserWithId,
     getUserByEmail,
     setNameOnUser,
+    setStripeIdOnUser,
 } from "@/database/auth";
 import { Snowflake } from "@/lib/snowflake";
 
@@ -28,11 +30,31 @@ export async function POST(request: Request) {
             const name = data.customer_details!.name!;
             const [givenName, familyName] = name.split(" ", 2);
 
-            const user = await getUserByEmail(email);
-            const id = user ?? Snowflake.generate();
-            user
-                ? await setNameOnUser(id, givenName, familyName)
-                : await createStripeUser(id, email, givenName, familyName);
+            if (data.mode === "payment") {
+                const user = await getUserByEmail(email);
+                const id = user ?? Snowflake.generate();
+                user
+                    ? await setNameOnUser(id, givenName, familyName)
+                    : await createStripeUser(id, email, givenName, familyName);
+            } else if (data.mode === "subscription") {
+                const stripeId = data.customer as string;
+                const user = await getUserByEmail(email);
+                const id = user ?? Snowflake.generate();
+                user
+                    ? await setStripeIdOnUser(
+                          id,
+                          givenName,
+                          familyName,
+                          stripeId,
+                      )
+                    : await createStripeUserWithId(
+                          id,
+                          email,
+                          givenName,
+                          familyName,
+                          stripeId,
+                      );
+            }
         }
 
         return new Response(null, {

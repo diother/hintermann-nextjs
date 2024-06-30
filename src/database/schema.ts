@@ -17,6 +17,7 @@ export const users = mysqlTable("users", {
     otp: char("otp", { length: 6 }),
     otpExpiresAt: timestamp("otp_expires_at").default(sql`utc_timestamp()`),
     createdAt: timestamp("created_at").default(sql`utc_timestamp()`),
+    stripeId: varchar("stripe_id", { length: 30 }),
 });
 
 export const sessions = mysqlTable("sessions", {

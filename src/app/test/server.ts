@@ -39,6 +39,7 @@ export async function ApiTest(prevState: void | undefined, formData: FormData) {
             mode: plans[plan]!.mode,
             success_url: `${env.NEXT_PUBLIC_APP_URL}/test?success=true`,
             cancel_url: `${env.NEXT_PUBLIC_APP_URL}/test?canceled=true`,
+            locale: "ro",
         });
         if (!session?.url) {
             throw new Error("Session could not be created");
@@ -49,4 +50,19 @@ export async function ApiTest(prevState: void | undefined, formData: FormData) {
             throw error;
         }
     }
+}
+
+export async function StripeDashboard(
+    prevState: string | void,
+): Promise<string | void> {
+    if (!prevState) {
+        return;
+    }
+    const session = await stripe.billingPortal.sessions.create({
+        customer: prevState,
+        return_url: "http://localhost:3000/",
+        locale: "ro",
+    });
+    const url = session.url;
+    redirect(url);
 }

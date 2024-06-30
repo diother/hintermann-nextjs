@@ -60,6 +60,23 @@ export async function createStripeUser(
     return !!insert[0].affectedRows;
 }
 
+export async function createStripeUserWithId(
+    id: Buffer,
+    email: string,
+    givenName: string | undefined,
+    familyName: string | undefined,
+    stripeId: string,
+) {
+    const insert = await db.insert(users).values({
+        id: sql`${id}`,
+        email: email,
+        givenName: givenName,
+        familyName: familyName,
+        stripeId: stripeId,
+    });
+    return !!insert[0].affectedRows;
+}
+
 export async function setOtpOnUser(
     id: Buffer,
     otp: string,
@@ -86,6 +103,24 @@ export async function setNameOnUser(
         .set({
             givenName: givenName,
             familyName: familyName,
+        })
+        .where(eq(users.id, sql`${id}`));
+
+    return !!update[0].affectedRows;
+}
+
+export async function setStripeIdOnUser(
+    id: Buffer,
+    givenName: string | undefined,
+    familyName: string | undefined,
+    stripeId: string,
+): Promise<boolean> {
+    const update = await db
+        .update(users)
+        .set({
+            givenName: givenName,
+            familyName: familyName,
+            stripeId: stripeId,
         })
         .where(eq(users.id, sql`${id}`));
 
@@ -132,6 +167,14 @@ export async function validateSession(
             ),
         );
     return user[0]?.id as Buffer | undefined;
+}
+
+export async function getStripeId(userId: Buffer): Promise<string | undefined> {
+    const stripeId = await db
+        .select({ id: users.stripeId })
+        .from(users)
+        .where(eq(users.id, sql`${userId}`));
+    return stripeId[0]?.id as string | undefined;
 }
 
 export async function deleteSession(id: Buffer): Promise<boolean> {
