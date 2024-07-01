@@ -2,7 +2,7 @@
 
 import { signOut } from "@/actions/auth-actions";
 import { Button } from "@/components/ui/button";
-import { LogOut, Menu, X } from "lucide-react";
+import { LogOut, Menu, Settings, X } from "lucide-react";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import {
@@ -13,15 +13,22 @@ import {
 } from "./ui/mobile-menu";
 import { Icons } from "./icons";
 import { useState } from "react";
+import { stripeDashboardAction } from "@/actions/donation-actions";
 
-export function HeaderMobileMenu({ email }: { email?: string }) {
+interface MobileMenu {
+    email?: string;
+    billing?: boolean;
+}
+export function HeaderMobileMenu({ email, billing }: MobileMenu) {
     const [open, setOpen] = useState(false);
     const handleLinkClick = () => {
         setTimeout(() => {
             setOpen(false);
         }, 300);
     };
-    const [, formAction] = useFormState(signOut, undefined);
+    const [, signOutAction] = useFormState(signOut, undefined);
+    const [, dashboardAction] = useFormState(stripeDashboardAction, undefined);
+
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
@@ -51,7 +58,10 @@ export function HeaderMobileMenu({ email }: { email?: string }) {
                     {email ? (
                         <div className="flex flex-col justify-end">
                             <span className="py-3 font-semibold">{email}</span>
-                            <form action={formAction} className="flex flex-col">
+                            <form
+                                action={signOutAction}
+                                className="flex flex-col"
+                            >
                                 <button
                                     type="submit"
                                     className="flex items-center justify-between py-3 text-muted-foreground"
@@ -67,6 +77,20 @@ export function HeaderMobileMenu({ email }: { email?: string }) {
                                 Autentifică-te
                             </Link>
                         </Button>
+                    )}
+                    {billing && (
+                        <form
+                            action={dashboardAction}
+                            className="flex flex-col"
+                        >
+                            <button
+                                type="submit"
+                                className="flex items-center justify-between py-3 text-muted-foreground"
+                            >
+                                Gestionează facturare
+                                <Settings className="h-4 w-4" />
+                            </button>
+                        </form>
                     )}
                     <hr className="my-3" />
                     {navLinks.map((link) => (

@@ -18,7 +18,6 @@ export const env = createEnv({
     },
     client: {
         NEXT_PUBLIC_APP_URL: z.string(),
-        NEXT_PUBLIC_STRIPE_PUBLISHABLE: z.string(),
     },
     runtimeEnv: {
         DATABASE_HOST: process.env.DATABASE_HOST,
@@ -32,8 +31,6 @@ export const env = createEnv({
         STRIPE_WEBHOOK: process.env.STRIPE_WEBHOOK,
         NODE_ENV: process.env.NODE_ENV,
         NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
-        NEXT_PUBLIC_STRIPE_PUBLISHABLE:
-            process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE,
     },
     skipValidation: !!process.env.SKIP_ENV_VALIDATION,
     emptyStringAsUndefined: true,

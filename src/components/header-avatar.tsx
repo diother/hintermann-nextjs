@@ -1,8 +1,5 @@
 "use client";
 
-import * as React from "react";
-import { type DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu";
-
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -12,22 +9,21 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "./ui/avatar";
-import { LogOut } from "lucide-react";
+import { LogOut, Settings } from "lucide-react";
 import { useFormState } from "react-dom";
 import { cn } from "@/lib/utils";
 import { signOut } from "@/actions/auth-actions";
+import { stripeDashboardAction } from "@/actions/donation-actions";
 
-type Checked = DropdownMenuCheckboxItemProps["checked"];
-
-export function AvatarMenu({
-    className,
-    email,
-}: {
+interface AvatarMenu {
     className?: string;
     email?: string;
-}) {
-    React.useState<Checked>(false);
+    billing?: boolean;
+}
+export function AvatarMenu({ className, email, billing }: AvatarMenu) {
     const [, formAction] = useFormState(signOut, undefined);
+    const [, dashboardAction] = useFormState(stripeDashboardAction, undefined);
+
     const avatar = email?.slice(0, 2).toUpperCase();
 
     return (
@@ -50,6 +46,18 @@ export function AvatarMenu({
                         <LogOut className="h-4 w-4" />
                     </Button>
                 </form>
+                {billing && (
+                    <form action={dashboardAction} className="flex flex-col">
+                        <Button
+                            variant="outline"
+                            type="submit"
+                            className="flex items-center justify-between border-0 px-2 py-1.5"
+                        >
+                            Gestionează facturare
+                            <Settings className="h-4 w-4" />
+                        </Button>
+                    </form>
+                )}
             </DropdownMenuContent>
         </DropdownMenu>
     );

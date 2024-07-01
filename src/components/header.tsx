@@ -5,7 +5,6 @@ import { Icons } from "./icons";
 import { getUserSession } from "@/actions/auth-actions";
 import { getStripeId, getUserEmail } from "@/database/auth";
 import { HeaderMobileMenu } from "./mobile-menu";
-import { StripeDashboard } from "./donation/donation-form";
 
 export default async function Header() {
     const navLinks = [
@@ -41,14 +40,17 @@ export default async function Header() {
                     </div>
                 </div>
                 {user ? (
-                    <AvatarMenu className="hidden lg:flex" email={email} />
+                    <AvatarMenu
+                        className="hidden lg:flex"
+                        email={email}
+                        billing={!!stripeId}
+                    />
                 ) : (
                     <Button className="hidden lg:flex" asChild>
                         <Link href="/login">Autentifică-te</Link>
                     </Button>
                 )}
-                <HeaderMobileMenu email={email} />
-                {stripeId && <StripeDashboard />}
+                <HeaderMobileMenu email={email} billing={!!stripeId} />
             </div>
         </header>
     );

@@ -7,7 +7,6 @@ import {
     stripeDashboardAction,
 } from "@/actions/donation-actions";
 import { useState } from "react";
-import { Input } from "../ui/input";
 
 export function DonationForm() {
     const [, action] = useFormState(checkoutAction, undefined);
@@ -165,7 +164,7 @@ export function StripeDashboard() {
 
     return (
         <form action={action}>
-            <button type="submit">Manage billing</button>
+            <button type="submit">Gestionează facturare</button>
         </form>
     );
 }

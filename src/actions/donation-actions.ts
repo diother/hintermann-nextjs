@@ -10,23 +10,12 @@ import { z } from "zod";
 
 const stripe = new Stripe(env.STRIPE_SECRET);
 
-interface Plan {
-    id: string;
-    mode: "payment" | "subscription";
-}
-const plans: Record<string, Plan> = {
-    any: {
-        id: "price_1PWhZoDXCtuWOFq8Unk6cjIy",
-        mode: "payment",
-    },
-    250: {
-        id: "price_1PWh3KDXCtuWOFq88qZGndtv",
-        mode: "payment",
-    },
-    recurent: {
-        id: "price_1PX2rHDXCtuWOFq8fbj1dg7p",
-        mode: "subscription",
-    },
+const payments: Record<string, string> = {
+    pay_1: "price_1PWhZoDXCtuWOFq8Unk6cjIy",
+    pay_2: "price_1PWh3KDXCtuWOFq88qZGndtv",
+};
+const subscriptions: Record<string, string> = {
+    sub_5: "price_1PX2rHDXCtuWOFq8fbj1dg7p",
 };
 
 export async function checkoutAction(
@@ -34,28 +23,30 @@ export async function checkoutAction(
     formData: FormData,
 ): Promise<void | undefined> {
     try {
-        const mode = formData.get("mode") as string;
+        const mode = formData.get("mode") as "payment" | "subscription";
         const option = formData.get("option") as string;
 
         validateDonationForm(mode, option);
 
-        //     const plan = formData.get("sum") as string;
-        //     const session = await stripe.checkout.sessions.create({
-        //         line_items: [
-        //             {
-        //                 price: plans[plan]!.id,
-        //                 quantity: 1,
-        //             },
-        //         ],
-        //         mode: plans[plan]!.mode,
-        //         success_url: `${env.NEXT_PUBLIC_APP_URL}/`,
-        //         cancel_url: `${env.NEXT_PUBLIC_APP_URL}/`,
-        //         locale: "ro",
-        //     });
-        //     if (!session?.url) {
-        //         throw new Error("Session could not be created");
-        //     }
-        //     redirect(session.url);
+        const session = await stripe.checkout.sessions.create({
+            line_items: [
+                {
+                    price:
+                        mode === "payment"
+                            ? payments[option]
+                            : subscriptions[option],
+                    quantity: 1,
+                },
+            ],
+            mode: mode,
+            success_url: `${env.NEXT_PUBLIC_APP_URL}/`,
+            cancel_url: `${env.NEXT_PUBLIC_APP_URL}/`,
+            locale: "ro",
+        });
+        if (!session?.url) {
+            throw new Error("Session could not be created");
+        }
+        redirect(session.url);
     } catch (error) {
         if (isRedirectError(error)) {
             throw error;
@@ -77,14 +68,22 @@ function validateDonationForm(mode: string, option: string): void {
         "sub_4",
         "sub_5",
     ]);
-
-    const valid = z.object({ mode: modeEnum, option: optionEnum }).safeParse({
-        mode: mode,
-        option: option,
-    });
+    const valid = z
+        .object({ mode: modeEnum, option: optionEnum })
+        .refine((data) => {
+            if (data.mode === "payment") {
+                return data.option.startsWith("pay_");
+            } else {
+                return data.option.startsWith("sub_");
+            }
+        }, "Invalid option based on mode")
+        .safeParse({
+            mode: mode,
+            option: option,
+        });
 
     if (!valid.success) {
-        throw new Error("Te rugăm introdu date valide.");
+        throw new Error("Invalid data");
     }
 }
 
