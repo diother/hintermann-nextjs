@@ -11,11 +11,34 @@ import { z } from "zod";
 const stripe = new Stripe(env.STRIPE_SECRET);
 
 const payments: Record<string, string> = {
-    pay_1: "price_1PWhZoDXCtuWOFq8Unk6cjIy",
-    pay_2: "price_1PWh3KDXCtuWOFq88qZGndtv",
+    pay_1:
+        env.NODE_ENV === "production" ? "price_1PXZZ6DXCtuWOFq8GKk48Obg" : "",
+    pay_2:
+        env.NODE_ENV === "production"
+            ? "price_1PXZeIDXCtuWOFq8aQ2kCyf8"
+            : "price_1PWh3KDXCtuWOFq88qZGndtv",
+    pay_3:
+        env.NODE_ENV === "production" ? "price_1PXZg3DXCtuWOFq8EYjf2Zpc" : "",
+    pay_4:
+        env.NODE_ENV === "production" ? "price_1PXZhIDXCtuWOFq8riYoEAQ0" : "",
+    pay_5:
+        env.NODE_ENV === "production"
+            ? "price_1PXZkyDXCtuWOFq8PZgjg9yb"
+            : "price_1PWhZoDXCtuWOFq8Unk6cjIy",
 };
 const subscriptions: Record<string, string> = {
-    sub_5: "price_1PX2rHDXCtuWOFq8fbj1dg7p",
+    sub_1:
+        env.NODE_ENV === "production" ? "price_1PXZpUDXCtuWOFq8D0VOYMaM" : "",
+    sub_2:
+        env.NODE_ENV === "production" ? "price_1PXZxADXCtuWOFq8zAMAPZf3" : "",
+    sub_3:
+        env.NODE_ENV === "production" ? "price_1PXZrODXCtuWOFq88vkimAnS" : "",
+    sub_4:
+        env.NODE_ENV === "production" ? "price_1PXZsWDXCtuWOFq82NXW393G" : "",
+    sub_5:
+        env.NODE_ENV === "production"
+            ? "price_1PXZtPDXCtuWOFq8Ujaf5b6U"
+            : "price_1PX2rHDXCtuWOFq8fbj1dg7p",
 };
 
 export async function checkoutAction(

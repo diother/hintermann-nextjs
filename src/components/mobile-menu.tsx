@@ -55,6 +55,14 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
                     </MobileMenuClose>
                 </div>
                 <div className="flex flex-col overflow-y-auto bg-background p-6">
+                    <Link href="/donate">
+                        <Button
+                            className="mb-3 w-full"
+                            variant={email ? "secondary" : "default"}
+                        >
+                            Donează
+                        </Button>
+                    </Link>
                     {email ? (
                         <div className="flex flex-col justify-end">
                             <span className="py-3 font-semibold">{email}</span>
@@ -72,11 +80,11 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
                             </form>
                         </div>
                     ) : (
-                        <Button className="w-full" asChild>
-                            <Link href="/login" onClick={handleLinkClick}>
+                        <Link href="/login" onClick={handleLinkClick}>
+                            <Button className="w-full" variant="outline">
                                 Autentifică-te
-                            </Link>
-                        </Button>
+                            </Button>
+                        </Link>
                     )}
                     {billing && (
                         <form

@@ -132,15 +132,12 @@ export default async function HomePage() {
                     <h2 className="heading-2 z-10 text-center">
                         Alătură-te și susține-i pe cei defavorizați.
                     </h2>
-                    <Button>
-                        <Link
-                            className="flex items-center gap-3"
-                            href="/contact"
-                        >
+                    <Link href="/contact">
+                        <Button className="flex items-center gap-3">
                             <Phone className="h-4 w-4" />
                             Contactează-ne
-                        </Link>
-                    </Button>
+                        </Button>
+                    </Link>
                 </div>
             </section>
         </main>

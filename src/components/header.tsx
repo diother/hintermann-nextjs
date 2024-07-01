@@ -39,17 +39,34 @@ export default async function Header() {
                         ))}
                     </div>
                 </div>
-                {user ? (
-                    <AvatarMenu
-                        className="hidden lg:flex"
-                        email={email}
-                        billing={!!stripeId}
-                    />
-                ) : (
-                    <Button className="hidden lg:flex" asChild>
-                        <Link href="/login">Autentifică-te</Link>
-                    </Button>
-                )}
+                <div
+                    className={`flex items-center gap-2 ${user && "flex-row-reverse"}`}
+                >
+                    {user ? (
+                        <AvatarMenu
+                            className="hidden lg:flex"
+                            email={email}
+                            billing={!!stripeId}
+                        />
+                    ) : (
+                        <Link href="/login">
+                            <Button
+                                className="hidden lg:flex"
+                                variant="outline"
+                            >
+                                Autentifică-te
+                            </Button>
+                        </Link>
+                    )}
+                    <Link href="/donate">
+                        <Button
+                            className="hidden lg:flex"
+                            variant={user && "outline"}
+                        >
+                            Donează
+                        </Button>
+                    </Link>
+                </div>
                 <HeaderMobileMenu email={email} billing={!!stripeId} />
             </div>
         </header>

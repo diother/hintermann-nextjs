@@ -12,7 +12,7 @@ export function DonationForm() {
     const [, action] = useFormState(checkoutAction, undefined);
 
     const [isMonthly, setMonthly] = useState(false);
-    const [sub, setSub] = useState("sub_2");
+    const [sub, setSub] = useState("sub_1");
     const [pay, setPay] = useState("pay_2");
 
     const handleSubChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,6 +39,7 @@ export function DonationForm() {
                             name="mode"
                             className="hidden"
                             value="subscription"
+                            readOnly
                         />
                         <p>Alege o sumă pe care să o dai lunar</p>
                         <div className="grid grid-cols-2">
@@ -50,7 +51,7 @@ export function DonationForm() {
                                     checked={sub === "sub_1"}
                                     onChange={handleSubChange}
                                 />
-                                Subscription 1
+                                100 lei
                             </label>
                             <label>
                                 <input
@@ -60,7 +61,7 @@ export function DonationForm() {
                                     checked={sub === "sub_2"}
                                     onChange={handleSubChange}
                                 />
-                                Subscription 2
+                                75 lei
                             </label>
                             <label>
                                 <input
@@ -70,7 +71,7 @@ export function DonationForm() {
                                     checked={sub === "sub_3"}
                                     onChange={handleSubChange}
                                 />
-                                Subscription 3
+                                50 lei
                             </label>
                             <label>
                                 <input
@@ -80,7 +81,7 @@ export function DonationForm() {
                                     checked={sub === "sub_4"}
                                     onChange={handleSubChange}
                                 />
-                                Subscription 4
+                                35 lei
                             </label>
                             <label>
                                 <input
@@ -90,14 +91,19 @@ export function DonationForm() {
                                     checked={sub === "sub_5"}
                                     onChange={handleSubChange}
                                 />
-                                Subscription 5
+                                25 lei
                             </label>
                         </div>
                         <Button type="submit">Alătură-te acum</Button>
                     </form>
                 ) : (
                     <form action={action}>
-                        <input name="mode" className="hidden" value="payment" />
+                        <input
+                            name="mode"
+                            className="hidden"
+                            value="payment"
+                            readOnly
+                        />
                         <p>Alege o sumă pe care să o dai</p>
                         <div className="grid grid-cols-2">
                             <label>
@@ -108,7 +114,7 @@ export function DonationForm() {
                                     checked={pay === "pay_1"}
                                     onChange={handlePayChange}
                                 />
-                                Payment 1
+                                500 lei
                             </label>
                             <label>
                                 <input
@@ -118,7 +124,7 @@ export function DonationForm() {
                                     checked={pay === "pay_2"}
                                     onChange={handlePayChange}
                                 />
-                                Payment 2
+                                300 lei
                             </label>
                             <label>
                                 <input
@@ -128,7 +134,7 @@ export function DonationForm() {
                                     checked={pay === "pay_3"}
                                     onChange={handlePayChange}
                                 />
-                                Payment 3
+                                200 lei
                             </label>
                             <label>
                                 <input
@@ -138,7 +144,7 @@ export function DonationForm() {
                                     checked={pay === "pay_4"}
                                     onChange={handlePayChange}
                                 />
-                                Payment 4
+                                100 lei
                             </label>
                             <label>
                                 <input
@@ -148,7 +154,7 @@ export function DonationForm() {
                                     checked={pay === "pay_5"}
                                     onChange={handlePayChange}
                                 />
-                                Payment 5
+                                Altă sumă
                             </label>
                         </div>
                         <Button type="submit">Donează</Button>
