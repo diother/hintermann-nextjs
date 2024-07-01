@@ -7,6 +7,7 @@ import {
     stripeDashboardAction,
 } from "@/actions/donation-actions";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function DonationForm() {
     const [, action] = useFormState(checkoutAction, undefined);
@@ -24,11 +25,19 @@ export function DonationForm() {
 
     return (
         <>
-            <div>
-                <Button variant="secondary" onClick={() => setMonthly(false)}>
+            <div className="grid grid-cols-2 gap-2">
+                <Button
+                    variant="secondary"
+                    disabled={!isMonthly}
+                    onClick={() => setMonthly(false)}
+                >
                     O dată
                 </Button>
-                <Button variant="secondary" onClick={() => setMonthly(true)}>
+                <Button
+                    variant="secondary"
+                    disabled={isMonthly}
+                    onClick={() => setMonthly(true)}
+                >
                     Lunar
                 </Button>
             </div>
@@ -41,60 +50,103 @@ export function DonationForm() {
                             value="subscription"
                             readOnly
                         />
-                        <p>Alege o sumă pe care să o dai lunar</p>
-                        <div className="grid grid-cols-2">
-                            <label>
+                        <p className="rounded-t-md border-x border-t p-3 text-center font-medium">
+                            Alege o sumă pe care să o dai lunar
+                        </p>
+                        <div className="grid grid-cols-2 gap-3 border p-4">
+                            <label
+                                className={cn(
+                                    "col-span-2",
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    sub === "sub_1" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="sub_1"
                                     checked={sub === "sub_1"}
                                     onChange={handleSubChange}
+                                    hidden
                                 />
                                 100 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    sub === "sub_2" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="sub_2"
                                     checked={sub === "sub_2"}
                                     onChange={handleSubChange}
+                                    hidden
                                 />
                                 75 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    sub === "sub_3" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="sub_3"
                                     checked={sub === "sub_3"}
                                     onChange={handleSubChange}
+                                    hidden
                                 />
                                 50 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    sub === "sub_4" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="sub_4"
                                     checked={sub === "sub_4"}
                                     onChange={handleSubChange}
+                                    hidden
                                 />
                                 35 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    sub === "sub_5" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="sub_5"
                                     checked={sub === "sub_5"}
                                     onChange={handleSubChange}
+                                    hidden
                                 />
                                 25 lei
                             </label>
+                            <Button
+                                type="submit"
+                                className="col-span-2 h-11 w-full"
+                            >
+                                Alătură-te acum
+                            </Button>
                         </div>
-                        <Button type="submit">Alătură-te acum</Button>
                     </form>
                 ) : (
                     <form action={action}>
@@ -104,60 +156,100 @@ export function DonationForm() {
                             value="payment"
                             readOnly
                         />
-                        <p>Alege o sumă pe care să o dai</p>
-                        <div className="grid grid-cols-2">
-                            <label>
+                        <p className="rounded-t-md border-x border-t p-3 text-center font-medium">
+                            Alege o sumă pe care să o dai
+                        </p>
+                        <div className="grid grid-cols-2 gap-3 border p-4">
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    pay === "pay_1" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="pay_1"
                                     checked={pay === "pay_1"}
                                     onChange={handlePayChange}
+                                    hidden
                                 />
                                 500 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    pay === "pay_2" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="pay_2"
                                     checked={pay === "pay_2"}
                                     onChange={handlePayChange}
+                                    hidden
                                 />
                                 300 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    pay === "pay_3" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="pay_3"
                                     checked={pay === "pay_3"}
                                     onChange={handlePayChange}
+                                    hidden
                                 />
                                 200 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    pay === "pay_4" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="pay_4"
                                     checked={pay === "pay_4"}
                                     onChange={handlePayChange}
+                                    hidden
                                 />
                                 100 lei
                             </label>
-                            <label>
+                            <label
+                                className={cn(
+                                    "col-span-2",
+                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    pay === "pay_5" &&
+                                        "bg-secondary font-semibold text-foreground",
+                                )}
+                            >
                                 <input
                                     type="radio"
                                     name="option"
                                     value="pay_5"
                                     checked={pay === "pay_5"}
                                     onChange={handlePayChange}
+                                    hidden
                                 />
                                 Altă sumă
                             </label>
                         </div>
-                        <Button type="submit">Donează</Button>
+                        <Button type="submit" className="w-full">
+                            Donează
+                        </Button>
                     </form>
                 )}
             </div>

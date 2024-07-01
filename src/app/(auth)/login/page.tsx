@@ -1,6 +1,32 @@
 import { getUserSession } from "@/actions/auth-actions";
 import { EmailForm, GoogleForm } from "@/components/auth/login-form";
+import { env } from "@/env";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    title: "Autentificare",
+    openGraph: {
+        title: "Autentificare",
+        description: "Pagina de autentificare Hintermann Charity",
+        type: "website",
+        images: [
+            {
+                url: "/hintermann-logo.png",
+                width: 300,
+                height: 300,
+                alt: "Hintermann Logo",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Autentificare",
+        description: "Pagina de autentificare Hintermann Charity",
+        images: "/hintermann-logo.png",
+    },
+};
 
 export default async function Page() {
     const user = await getUserSession();
