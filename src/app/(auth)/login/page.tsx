@@ -1,7 +1,7 @@
 import { getUserSession } from "@/actions/auth-actions";
 import { EmailForm, GoogleForm } from "@/components/auth/login-form";
 import { env } from "@/env";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export const metadata: Metadata = {
