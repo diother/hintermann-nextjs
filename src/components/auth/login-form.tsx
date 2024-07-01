@@ -12,6 +12,7 @@ import { ArrowRight } from "lucide-react";
 import { verifyOtpAction } from "@/actions/auth-actions";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "../ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+import { cn } from "@/lib/utils";
 
 export function EmailForm() {
     const [state, formAction] = useFormState(emailSignAction, undefined);
@@ -77,15 +78,18 @@ export function VerifyOtpForm() {
 
 interface SubmitButton {
     children: ReactNode;
+    className?: string;
 }
-
-export function SubmitButton({ children }: SubmitButton) {
+export function SubmitButton({ children, className }: SubmitButton) {
     const status = useFormStatus();
     return (
         <Button
             type="submit"
             disabled={status.pending}
-            className="relative flex h-11 w-full items-center gap-2 text-base"
+            className={cn(
+                "relative flex h-11 w-full items-center gap-2 text-base",
+                className,
+            )}
         >
             {children}
             {status.pending ? (

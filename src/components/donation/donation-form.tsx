@@ -8,6 +8,7 @@ import {
 } from "@/actions/donation-actions";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { SubmitButton } from "../auth/login-form";
 
 export function DonationForm() {
     const [, action] = useFormState(checkoutAction, undefined);
@@ -140,12 +141,9 @@ export function DonationForm() {
                                 />
                                 25 lei
                             </label>
-                            <Button
-                                type="submit"
-                                className="col-span-2 h-11 w-full"
-                            >
+                            <SubmitButton className="col-span-2 h-11 w-full">
                                 Alătură-te acum
-                            </Button>
+                            </SubmitButton>
                         </div>
                     </form>
                 ) : (
@@ -246,10 +244,10 @@ export function DonationForm() {
                                 />
                                 Altă sumă
                             </label>
+                            <SubmitButton className="col-span-2">
+                                Donează
+                            </SubmitButton>
                         </div>
-                        <Button type="submit" className="w-full">
-                            Donează
-                        </Button>
                     </form>
                 )}
             </div>
