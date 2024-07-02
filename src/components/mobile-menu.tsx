@@ -95,7 +95,7 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
                                 type="submit"
                                 className="flex items-center justify-between py-3 text-muted-foreground"
                             >
-                                Gestionează facturare
+                                Gestionează plăți
                                 <Settings className="h-4 w-4" />
                             </button>
                         </form>

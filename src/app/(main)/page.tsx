@@ -24,9 +24,7 @@ export default async function HomePage() {
                 <div className="lg:col-start-12 lg:border-l" />
             </section>
             <section className="border-span-0 border border-y-0 p-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
-                <p
-                    className={`text-center text-muted-foreground sm:text-lg lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-xl [&_span]:font-medium [&_span]:text-foreground`}
-                >
+                <p className="text-center text-muted-foreground sm:text-lg lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-xl [&_span]:font-medium [&_span]:text-foreground">
                     Suntem o organizație caritabilă care și-a propus să
                     construiască și să ofere case famiililor aflate în
                     dificultate.
@@ -63,14 +61,10 @@ export default async function HomePage() {
                             </p>
                         </Link>
                     ))}
-                <div
-                    className={`xl:col-start-12 xl:row-span-3 xl:row-start-1 xl:border-l`}
-                />
+                <div className="xl:col-start-12 xl:row-span-3 xl:row-start-1 xl:border-l" />
             </section>
             <DecorationSection position="bottom-left" />
-            <section
-                className={`relative grid border border-t-0 py-6 sm:grid-cols-3 sm:py-0 [&_span]:font-semibold [&_span]:text-foreground`}
-            >
+            <section className="relative grid border border-t-0 py-6 sm:grid-cols-3 sm:py-0 [&_span]:font-semibold [&_span]:text-foreground">
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-1/3" />
                 <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-2/3" />
                 <div className="z-10 border-b p-6 pt-20 sm:col-span-3 sm:p-10 sm:pt-28 lg:p-12 lg:pt-32">

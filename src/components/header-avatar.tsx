@@ -53,7 +53,7 @@ export function AvatarMenu({ className, email, billing }: AvatarMenu) {
                             type="submit"
                             className="flex items-center justify-between border-0 px-2 py-1.5"
                         >
-                            Gestionează facturare
+                            Gestionează plăți
                             <Settings className="h-4 w-4" />
                         </Button>
                     </form>

@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { SubmitButton } from "../auth/login-form";
+import { Check } from "lucide-react";
 
 export function DonationForm() {
     const [, action] = useFormState(checkoutAction, undefined);
@@ -29,17 +30,23 @@ export function DonationForm() {
             <div className="grid grid-cols-2 gap-2">
                 <Button
                     variant="secondary"
-                    disabled={!isMonthly}
+                    className={`relative text-base ${!isMonthly && "bg-secondary/60 hover:bg-secondary/60"}`}
                     onClick={() => setMonthly(false)}
                 >
                     O dată
+                    {!isMonthly && (
+                        <Check className="absolute right-4 h-[1.125rem] w-[1.125rem]" />
+                    )}
                 </Button>
                 <Button
                     variant="secondary"
-                    disabled={isMonthly}
+                    className={`relative text-base ${isMonthly && "bg-secondary/60 hover:bg-secondary/60"}`}
                     onClick={() => setMonthly(true)}
                 >
                     Lunar
+                    {isMonthly && (
+                        <Check className="absolute right-4 h-[1.125rem] w-[1.125rem]" />
+                    )}
                 </Button>
             </div>
             <div>
