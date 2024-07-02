@@ -23,7 +23,7 @@ const config = {
     }),
 };
 
-type PostClass = keyof typeof config;
+export type PostClass = keyof typeof config;
 type AllPosts = {
     [Key in PostClass]: z.infer<(typeof config)[Key]>[];
 };
@@ -82,4 +82,4 @@ async function compileMdxFile(filePath: string, postClass: PostClass) {
     return validated;
 }
 
-export const allPosts = await compileMdx();
+export const allPosts: AllPosts = await compileMdx();

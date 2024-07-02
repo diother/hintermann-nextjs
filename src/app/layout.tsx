@@ -19,13 +19,14 @@ export const metadata: Metadata = {
             template: "%s | Hintermann Charity",
             default: "Hintermann Charity",
         },
-        description: "Pagina oficială Hintermann Charity",
+        description:
+            "O organizație caritabilă care și-a propus să construiască case famiililor aflate în dificultate.",
         type: "website",
         images: [
             {
-                url: "/hintermann-logo.png",
-                width: 300,
-                height: 300,
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
                 alt: "Hintermann Logo",
             },
         ],
@@ -36,8 +37,9 @@ export const metadata: Metadata = {
             template: "%s | Hintermann Charity",
             default: "Hintermann Charity",
         },
-        description: "Pagina oficială Hintermann Charity",
-        images: "/hintermann-logo.png",
+        description:
+            "O organizație caritabilă care și-a propus să construiască case famiililor aflate în dificultate.",
+        images: "/og-image.png",
     },
 };
 

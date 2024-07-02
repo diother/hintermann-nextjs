@@ -43,9 +43,9 @@ export async function generateMetadata({
             url: post.slugAsParams,
             images: [
                 {
-                    url: "/hintermann-logo.png",
-                    width: 300,
-                    height: 300,
+                    url: "/og-image.png",
+                    width: 1200,
+                    height: 630,
                     alt: "Hintermann Logo",
                 },
             ],
@@ -54,7 +54,7 @@ export async function generateMetadata({
             card: "summary_large_image",
             title: post.title,
             description: post.description,
-            images: "/hintermann-logo.png",
+            images: "/og-image.png",
         },
     };
 }

@@ -12,9 +12,9 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "/hintermann-logo.png",
-                width: 300,
-                height: 300,
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
                 alt: "Hintermann Logo",
             },
         ],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
         card: "summary_large_image",
         title: "Portal donații",
         description: "Portal donații Hintermann Charity",
-        images: "/hintermann-logo.png",
+        images: "/og-image.png",
     },
 };
 

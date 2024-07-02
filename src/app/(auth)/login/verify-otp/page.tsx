@@ -1,7 +1,33 @@
 import { getUserSession } from "@/actions/auth-actions";
 import { VerifyOtpForm } from "@/components/auth/login-form";
 import { Cookie } from "@/lib/cookie";
+import { type Metadata } from "next";
 import { redirect } from "next/navigation";
+import { env } from "@/env";
+
+export const metadata: Metadata = {
+    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+    title: "Autentificare",
+    openGraph: {
+        title: "Autentificare",
+        description: "Pagina de autentificare Hintermann Charity",
+        type: "website",
+        images: [
+            {
+                url: "/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Hintermann Logo",
+            },
+        ],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Autentificare",
+        description: "Pagina de autentificare Hintermann Charity",
+        images: "/og-image.png",
+    },
+};
 
 export default async function Page({
     searchParams,
