@@ -40,7 +40,7 @@ export default async function Page() {
                 Autentificare
             </h1>
             <GoogleForm />
-            <div className="relative pb-6 pt-8">
+            <div className="relative py-6">
                 <div className="absolute inset-0 flex items-center">
                     <span className="w-full border-t" />
                 </div>

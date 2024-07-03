@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
         rules: {
             userAgent: "*",
             allow: "/",
-            disallow: "/login/verify-otp",
+            disallow: ["/api/", "/login/verify-otp"],
         },
         sitemap: env.NEXT_PUBLIC_APP_URL + "/sitemap.xml",
     };
