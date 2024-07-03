@@ -62,8 +62,8 @@ export async function checkoutAction(
                 },
             ],
             mode: mode,
-            success_url: `${env.NEXT_PUBLIC_APP_URL}/`,
-            cancel_url: `${env.NEXT_PUBLIC_APP_URL}/`,
+            success_url: `${env.NEXT_PUBLIC_APP_URL}/donate/thank-you`,
+            cancel_url: `${env.NEXT_PUBLIC_APP_URL}/donate`,
             locale: "ro",
         });
         if (!session?.url) {

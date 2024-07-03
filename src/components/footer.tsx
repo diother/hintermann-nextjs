@@ -3,34 +3,34 @@ import { ThemeToggle } from "./theme-toggle";
 import { Icons } from "./icons";
 import CookieDialog from "./cookie-dialog";
 
+export const socialIcons = [
+    {
+        name: "Facebook",
+        svg: <Icons.facebook className="h-5 w-5" />,
+        href: "https://www.facebook.com/people/Hintermann-Charity/61556605667252/",
+    },
+    {
+        name: "Instagram",
+        svg: <Icons.instagram className="h-5 w-5" />,
+        href: "https://www.instagram.com/hintermann_charity/",
+    },
+    {
+        name: "LinkedIn",
+        svg: <Icons.linkedin className="h-5 w-5" />,
+        href: "https://www.linkedin.com/company/101937853/",
+    },
+    {
+        name: "X",
+        svg: <Icons.twitter className="h-5 w-5" />,
+        href: "https://twitter.com/hintermann_",
+    },
+];
 export default function Footer() {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
         { name: "Politică de confidențialitate", href: "/legal/privacy" },
         { name: "Termeni și condiții", href: "/legal/terms" },
-    ];
-    const socialIcons = [
-        {
-            name: "Facebook",
-            svg: <Icons.facebook className="h-5 w-5" />,
-            href: "https://www.facebook.com/people/Hintermann-Charity/61556605667252/",
-        },
-        {
-            name: "Instagram",
-            svg: <Icons.instagram className="h-5 w-5" />,
-            href: "https://www.instagram.com/hintermann_charity/",
-        },
-        {
-            name: "LinkedIn",
-            svg: <Icons.linkedin className="h-5 w-5" />,
-            href: "https://www.linkedin.com/company/101937853/",
-        },
-        {
-            name: "X",
-            svg: <Icons.twitter className="h-5 w-5" />,
-            href: "https://twitter.com/hintermann_",
-        },
     ];
     return (
         <>
