@@ -1,10 +1,9 @@
-import DecorationSection, { DecorationCross } from "@/components/decoration";
 import { Button } from "@/components/ui/button";
 import { logos } from "@/lib/logos";
 import { allPosts } from "@/lib/mdx";
 import { cn, formatDate } from "@/lib/utils";
 import { compareDesc } from "date-fns";
-import { Home, Phone, Rss, Smartphone } from "lucide-react";
+import { Home, Rss, Smartphone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,37 +13,103 @@ export default async function HomePage() {
             return compareDesc(new Date(a.date), new Date(b.date));
         })
         .slice(0, 3);
+
+    const logoName = "auchan";
+    const logo = logos[logoName]!;
+    const width = (logo.width / 100) * 60;
+    const height = (logo.height / 100) * 60;
     return (
-        <main className="mx-auto flex w-full max-w-6xl flex-col p-4 sm:p-10 lg:py-16">
-            <DecorationSection position="top-left" />
-            <section className="border border-t-0 p-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
-                <h1 className="display-heading text-center lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12">
+        <main className="relative mx-auto my-8 flex w-full max-w-6xl flex-col gap-24 border border-border/75 py-8 sm:my-16 sm:gap-40 sm:py-20">
+            <div className="absolute bottom-0 left-1/2 top-0 -z-10 ml-[-0.5px] w-[1px] bg-border/75 lg:left-1/3" />
+            <div className="absolute bottom-0 left-1/2 top-0 -z-10 ml-[-0.5px] w-[1px] bg-border/75 lg:left-2/3" />
+            <section className="mx-auto flex max-w-sm flex-col items-center gap-8 px-6 sm:max-w-none ">
+                <div className="flex flex-col items-center gap-2">
+                    <p className="text-sm text-muted-foreground lg:hidden">
+                        Realizat pe{" "}
+                        <span className="font-medium text-foreground">
+                            26 iunie
+                        </span>
+                        . Vezi ultimul proiect.
+                    </p>
+                    <div className="flex items-center gap-4">
+                        <span className="flex items-center gap-2 text-xl font-semibold tracking-tight">
+                            <span className="hidden text-base font-normal tracking-normal text-muted-foreground lg:block">
+                                Vezi
+                            </span>
+                            <span>Proiect cu</span>
+                            <div className="-mt-1">
+                                <Image
+                                    priority={true}
+                                    className={cn(
+                                        "dark:hidden",
+                                        logo.className,
+                                    )}
+                                    src={`/logos/logo-${logoName}-light.png`}
+                                    width={width}
+                                    height={height}
+                                    alt={`Logo ${logoName}`}
+                                />
+                                <Image
+                                    priority={true}
+                                    className={cn(
+                                        "hidden brightness-[93%] dark:block",
+                                        logo.className,
+                                    )}
+                                    src={`/logos/logo-${logoName}-dark.png`}
+                                    width={width}
+                                    height={height}
+                                    alt={`Logo ${logoName}`}
+                                />
+                            </div>
+                            <span className="hidden text-base font-normal tracking-normal text-muted-foreground lg:block">
+                                realizat pe{" "}
+                                <span className="font-medium text-foreground">
+                                    26 iunie
+                                </span>
+                            </span>
+                        </span>
+                        <Link href="/projects/auchan">
+                            <Button className="h-7 p-3">Citește articol</Button>
+                        </Link>
+                    </div>
+                </div>
+                <h1 className="max-w-2xl bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-3xl font-bold leading-none tracking-tight text-transparent sm:text-[3.5rem] lg:max-w-4xl lg:text-[4.5rem]">
                     Construim case pentru familiile românilor.
                 </h1>
-                <div className="lg:col-start-12 lg:border-l" />
-            </section>
-            <section className="border-span-0 border border-y-0 p-6 sm:p-10 lg:grid lg:grid-cols-12 lg:p-0">
-                <p className="text-center text-muted-foreground sm:text-lg lg:col-span-10 lg:col-start-2 lg:border-l lg:p-12 lg:text-xl [&_span]:font-medium [&_span]:text-foreground">
-                    Suntem o organizație caritabilă care și-a propus să
-                    construiască și să ofere case famiililor aflate în
-                    dificultate.
+                <p className="max-w-lg text-center text-xl tracking-tight text-muted-foreground lg:max-w-2xl lg:text-2xl">
+                    <span className="sm:hidden">
+                        Organizație caritabilă care vrea să ofere locuințe celor
+                        în nevoie.
+                    </span>
+                    <span className="hidden sm:block">
+                        Suntem o organizație caritabilă care și-a propus să
+                        construiască și să ofere case famiililor aflate în
+                        dificultate.
+                    </span>
                 </p>
-                <div className="lg:col-start-12 lg:border-l" />
+                <div className="grid w-full max-w-md grid-cols-2 gap-4">
+                    <Button className="h-11 text-base">Donează</Button>
+                    <Button variant="outline" className="h-11 text-base">
+                        Contactează-ne
+                    </Button>
+                </div>
             </section>
-            <DecorationSection position="bottom-right" />
-            <section className="border-x xl:grid xl:grid-cols-12 xl:p-0">
+            <section className="grid gap-y-6 lg:grid-cols-3 lg:gap-y-10">
+                <h2 className="bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-2xl font-bold leading-none tracking-tight text-transparent sm:text-4xl lg:col-span-3 lg:text-5xl">
+                    Ultimele noastre proiecte
+                </h2>
                 {posts?.length &&
                     posts.map((post, index) => (
                         <Link
                             key={post.slug}
                             href={post.slugAsParams}
-                            className={`${!index ? "" : "border-t"} z-10 grid gap-4 p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:p-10 md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 xl:col-span-10 xl:col-start-2 xl:border-l [&:hover_img]:scale-110`}
+                            className="z-10 mx-auto grid w-full gap-4 rounded-lg p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:max-w-3xl sm:grid-cols-[300px_1fr] sm:grid-rows-[auto_auto_1fr] sm:gap-x-6 lg:flex lg:flex-col [&:hover_img]:scale-110"
                         >
                             <p className="text-sm text-muted-foreground">
                                 {formatDate(post.date)}
                             </p>
                             {post.images?.[0] && (
-                                <div className="overflow-hidden rounded-md md:row-span-3 md:row-start-1">
+                                <div className="overflow-hidden rounded-md sm:row-span-3 sm:row-start-1">
                                     <Image
                                         priority={index <= 1}
                                         className="h-auto w-full transition"
@@ -56,51 +121,46 @@ export default async function HomePage() {
                                 </div>
                             )}
                             <h2 className="heading-4">{post.title}</h2>
-                            <p className="text-sm text-muted-foreground sm:text-base">
+                            <p className="text-muted-foreground">
                                 {post.description}
                             </p>
                         </Link>
                     ))}
-                <div className="xl:col-start-12 xl:row-span-3 xl:row-start-1 xl:border-l" />
             </section>
-            <DecorationSection position="bottom-left" />
-            <section className="relative grid border border-t-0 py-6 sm:grid-cols-3 sm:py-0 [&_span]:font-semibold [&_span]:text-foreground">
-                <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-1/3" />
-                <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border sm:left-2/3" />
-                <div className="z-10 border-b p-6 pt-20 sm:col-span-3 sm:p-10 sm:pt-28 lg:p-12 lg:pt-32">
-                    <h2 className="heading-2 text-center">Valorile noastre.</h2>
+            <section className="relative mx-auto grid max-w-2xl gap-y-6 lg:max-w-none lg:grid-cols-3">
+                <div className="z-10 lg:col-span-3">
+                    <h2 className="bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-2xl font-bold leading-none tracking-tight text-transparent sm:text-4xl lg:col-span-3 lg:text-5xl">
+                        Valorile noastre.
+                    </h2>
                 </div>
                 {values.map((value) => (
                     <div
                         key={value.value}
-                        className={`z-10 flex flex-col items-center gap-4 p-6 sm:items-start sm:gap-6 sm:px-10 sm:py-20`}
+                        className="z-10 flex flex-col items-center gap-4 p-6 sm:gap-6 sm:p-10 lg:items-start"
                     >
                         <div className="flex text-[2.5rem] text-foreground">
                             {value.svg}
                         </div>
-                        <p className="text-center font-medium text-muted-foreground sm:text-start sm:text-xl lg:text-2xl lg:-tracking-[.03rem]">
-                            <span>{value.value}</span> {value.desc}
+                        <p className="text-center text-lg font-medium text-muted-foreground sm:text-2xl lg:text-start lg:-tracking-[.03rem]">
+                            <span className="font-semibold text-foreground">
+                                {value.value}
+                            </span>{" "}
+                            {value.desc}
                         </p>
                     </div>
                 ))}
             </section>
-            <section className="relative mt-4 grid grid-cols-2 border lg:grid-cols-3">
-                <DecorationCross position="bottom-right" />
-                <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border lg:left-1/3" />
-                <div className="absolute bottom-0 left-1/2 top-0 ml-[-0.5px] w-[1px] translate-x-1/2 bg-border lg:left-2/3" />
-                <div className="relative z-10 col-span-2 border-b p-6 pt-20 sm:p-10 sm:pt-28 lg:col-span-3 lg:p-12 lg:pt-32">
-                    <DecorationCross position="bottom-left" />
-                    <h2 className="heading-2 text-center">
-                        Partenerii noștri.
-                    </h2>
-                </div>
+            <section className="relative grid grid-cols-2 lg:grid-cols-3">
+                <h2 className="col-span-2 mb-6 bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-2xl font-bold leading-none tracking-tight text-transparent sm:text-4xl lg:col-span-3 lg:text-5xl">
+                    Partenerii noștri.
+                </h2>
                 {Object.keys(logos).map((logoName) => {
                     const logo = logos[logoName]!;
                     return (
                         <Link
                             key={logoName}
                             href={logo.href}
-                            className="flex aspect-video h-24 w-full items-center justify-center border-b p-6 transition hover:bg-accent lg:h-36"
+                            className="flex aspect-video h-24 w-full items-center justify-center p-6 transition hover:bg-accent lg:h-36"
                         >
                             <Image
                                 className={cn("dark:hidden", logo.className)}
@@ -122,17 +182,6 @@ export default async function HomePage() {
                         </Link>
                     );
                 })}
-                <div className="relative col-start-1 col-end-3 -mt-[1px] flex flex-col items-center gap-6 border-t px-6 pb-12 pt-20 sm:flex-row sm:justify-between sm:gap-10 sm:px-10 sm:pb-20 sm:pt-28 lg:col-end-4 lg:px-12 lg:pb-24 lg:pt-32">
-                    <h2 className="heading-2 z-10 text-center">
-                        Alătură-te și susține-i pe cei defavorizați.
-                    </h2>
-                    <Link href="/contact">
-                        <Button className="flex items-center gap-3">
-                            <Phone className="h-4 w-4" />
-                            Contactează-ne
-                        </Button>
-                    </Link>
-                </div>
             </section>
         </main>
     );

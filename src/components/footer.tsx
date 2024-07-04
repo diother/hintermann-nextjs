@@ -26,18 +26,21 @@ export const socialIcons = [
     },
 ];
 export default function Footer() {
-    const navLinks = [
+    const pages = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
+        { name: "Portal donații", href: "/donate" },
+    ];
+    const legal = [
         { name: "Politică de confidențialitate", href: "/legal/privacy" },
         { name: "Termeni și condiții", href: "/legal/terms" },
     ];
     return (
         <>
-            <footer className="border-t">
-                <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 lg:flex-row lg:items-center">
-                    <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
-                        <div className="flex items-center gap-1.5">
+            <footer>
+                <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 md:grid md:grid-cols-4 xl:flex xl:flex-row xl:items-center">
+                    <div className="grid gap-6 sm:grid-cols-3 md:col-span-3 xl:flex xl:items-center">
+                        <div className="flex items-center gap-1.5 self-start">
                             <Link href="/">
                                 <Icons.logo />
                                 <span className="sr-only">
@@ -48,8 +51,25 @@ export default function Footer() {
                                 © 2024
                             </span>
                         </div>
-                        <div className="flex flex-col gap-4 sm:flex-row sm:gap-6">
-                            {navLinks.map((link) => (
+                        <div className="flex flex-col gap-4 xl:flex-row xl:gap-6">
+                            <span className="text-sm font-semibold xl:hidden">
+                                Pagini
+                            </span>
+                            {pages.map((link) => (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="w-fit text-sm text-muted-foreground transition hover:text-foreground"
+                                >
+                                    {link.name}
+                                </Link>
+                            ))}
+                        </div>
+                        <div className="flex flex-col gap-4 xl:flex-row xl:gap-6">
+                            <span className="text-sm font-semibold xl:hidden">
+                                Legal
+                            </span>
+                            {legal.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
@@ -61,8 +81,8 @@ export default function Footer() {
                             <CookieDialog className="w-fit text-sm text-muted-foreground transition hover:text-foreground" />
                         </div>
                     </div>
-                    <div className="flex items-center justify-between gap-10">
-                        <div className="flex items-center gap-5">
+                    <div className="flex items-center justify-between gap-6 md:flex-col-reverse xl:flex-row xl:justify-end">
+                        <div className="flex items-center gap-5 self-end xl:self-auto">
                             {socialIcons.map((icon) => (
                                 <Link
                                     key={icon.name}
@@ -74,7 +94,7 @@ export default function Footer() {
                                 </Link>
                             ))}
                         </div>
-                        <ThemeToggle />
+                        <ThemeToggle className="self-end xl:self-auto" />
                     </div>
                 </div>
             </footer>

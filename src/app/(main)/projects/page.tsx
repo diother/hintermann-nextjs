@@ -50,7 +50,7 @@ export default function Page() {
                         <Link
                             key={post.slug}
                             href={post.slugAsParams}
-                            className={`z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110`}
+                            className="z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110"
                         >
                             <p className="text-sm text-muted-foreground">
                                 {formatDate(post.date)}
@@ -68,7 +68,7 @@ export default function Page() {
                                 </div>
                             )}
                             <h2 className="heading-4">{post.title}</h2>
-                            <p className="text-sm text-muted-foreground sm:text-base">
+                            <p className="text-sm text-muted-foreground sm:text-base lg:text-lg">
                                 {post.description}
                             </p>
                         </Link>

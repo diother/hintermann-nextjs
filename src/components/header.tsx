@@ -10,6 +10,7 @@ export default async function Header() {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
+        { name: "Portal donații", href: "/donate" },
     ];
     const user = await getUserSession();
     let email, stripeId;
@@ -27,12 +28,12 @@ export default async function Header() {
                             Hintermann Charity
                         </span>
                     </Link>
-                    <div className="hidden items-center gap-6 lg:flex">
+                    <div className="hidden items-center gap-8 lg:flex">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                                className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                             >
                                 {link.name}
                             </Link>
@@ -40,7 +41,7 @@ export default async function Header() {
                     </div>
                 </div>
                 <div
-                    className={`flex items-center gap-2 ${user && "flex-row-reverse"}`}
+                    className={`flex items-center gap-4 ${user && "flex-row-reverse"}`}
                 >
                     {user ? (
                         <AvatarMenu

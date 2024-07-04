@@ -95,7 +95,7 @@ export function SubmitButton({ children, className }: SubmitButton) {
             {status.pending ? (
                 <LoadingSpinner className="h-[1.125rem] w-[1.125rem]" />
             ) : (
-                <ArrowRight className="arrow h-[1.125rem] w-[1.125rem]" />
+                <ArrowRight className="h-[1.125rem] w-[1.125rem]" />
             )}
         </Button>
     );

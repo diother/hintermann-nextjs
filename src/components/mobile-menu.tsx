@@ -32,6 +32,7 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
     const navLinks = [
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
+        { name: "Portal donații", href: "/donate" },
     ];
     return (
         <MobileMenu open={open} onOpenChange={setOpen}>
