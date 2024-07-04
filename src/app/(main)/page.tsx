@@ -88,10 +88,19 @@ export default async function HomePage() {
                     </span>
                 </p>
                 <div className="grid w-full max-w-md grid-cols-2 gap-4">
-                    <Button className="h-11 text-base">Donează</Button>
-                    <Button variant="outline" className="h-11 text-base">
-                        Contactează-ne
-                    </Button>
+                    <Link href="/donate">
+                        <Button className="h-11 w-full text-base">
+                            Donează
+                        </Button>
+                    </Link>
+                    <Link href="/contact">
+                        <Button
+                            variant="outline"
+                            className="h-11 w-full text-base"
+                        >
+                            Contactează-ne
+                        </Button>
+                    </Link>
                 </div>
             </section>
             <section className="grid gap-y-6 lg:grid-cols-3 lg:gap-y-10">

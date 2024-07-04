@@ -38,6 +38,7 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
         <MobileMenu open={open} onOpenChange={setOpen}>
             <MobileMenuTrigger className="flex h-10 w-10 items-center justify-center rounded-md border lg:hidden">
                 <Menu />
+                <span className="sr-only">Mobile Menu Trigger</span>
             </MobileMenuTrigger>
             <MobileMenuContent>
                 <div className="box-content flex h-16 items-center justify-between border-b px-6">
