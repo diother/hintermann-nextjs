@@ -169,7 +169,7 @@ export default async function HomePage() {
                         <Link
                             key={logoName}
                             href={logo.href}
-                            className="flex aspect-video h-24 w-full items-center justify-center p-6 transition hover:bg-accent lg:h-36"
+                            className="flex aspect-video h-24 w-full items-center justify-center border-b border-border/75 p-6 transition hover:bg-accent lg:h-36"
                         >
                             <Image
                                 className={cn("dark:hidden", logo.className)}
