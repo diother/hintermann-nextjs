@@ -37,7 +37,7 @@ export default function Footer() {
     ];
     return (
         <>
-            <footer>
+            <footer className="border-t">
                 <div className="mx-auto flex max-w-6xl flex-col justify-between gap-6 p-6 md:grid md:grid-cols-4 xl:flex xl:flex-row xl:items-center">
                     <div className="grid gap-6 sm:grid-cols-3 md:col-span-3 xl:flex xl:items-center">
                         <div className="flex items-center gap-1.5 self-start">

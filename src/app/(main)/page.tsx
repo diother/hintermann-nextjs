@@ -19,7 +19,7 @@ export default async function HomePage() {
     const width = (logo.width / 100) * 60;
     const height = (logo.height / 100) * 60;
     return (
-        <main className="relative mx-auto my-8 flex w-full max-w-6xl flex-col gap-24 border border-border/75 py-8 sm:my-16 sm:gap-40 sm:py-20">
+        <main className="relative mx-auto my-8 flex w-full max-w-6xl flex-col gap-24 border border-border/75 pt-8 sm:my-16 sm:gap-40 sm:pt-20">
             <div className="absolute bottom-0 left-1/2 top-0 -z-10 ml-[-0.5px] w-[1px] bg-border/75 lg:left-1/3" />
             <div className="absolute bottom-0 left-1/2 top-0 -z-10 ml-[-0.5px] w-[1px] bg-border/75 lg:left-2/3" />
             <section className="mx-auto flex max-w-sm flex-col items-center gap-8 px-6 sm:max-w-none ">
@@ -76,7 +76,7 @@ export default async function HomePage() {
                 <h1 className="max-w-2xl bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-3xl font-bold leading-none tracking-tight text-transparent sm:text-[3.5rem] lg:max-w-4xl lg:text-[4.5rem]">
                     Construim case pentru familiile românilor.
                 </h1>
-                <p className="max-w-lg text-center text-xl tracking-tight text-muted-foreground lg:max-w-2xl lg:text-2xl">
+                <p className="max-w-lg text-center text-muted-foreground sm:text-lg lg:max-w-2xl lg:text-2xl">
                     <span className="sm:hidden">
                         Organizație caritabilă care vrea să ofere locuințe celor
                         în nevoie.
@@ -89,14 +89,14 @@ export default async function HomePage() {
                 </p>
                 <div className="grid w-full max-w-md grid-cols-2 gap-4">
                     <Link href="/donate">
-                        <Button className="h-11 w-full text-base">
+                        <Button className="w-full sm:h-11 sm:text-base">
                             Donează
                         </Button>
                     </Link>
                     <Link href="/contact">
                         <Button
                             variant="outline"
-                            className="h-11 w-full text-base"
+                            className="w-full sm:h-11 sm:text-base"
                         >
                             Contactează-ne
                         </Button>
@@ -122,7 +122,7 @@ export default async function HomePage() {
                                     <Image
                                         priority={index <= 1}
                                         className="h-auto w-full transition"
-                                        src={post.images[0]}
+                                        src={post.slugAsParams + post.images[0]}
                                         width="300"
                                         height="200"
                                         alt={post.title}
@@ -150,7 +150,7 @@ export default async function HomePage() {
                         <div className="flex text-[2.5rem] text-foreground">
                             {value.svg}
                         </div>
-                        <p className="text-center text-lg font-medium text-muted-foreground sm:text-2xl lg:text-start lg:-tracking-[.03rem]">
+                        <p className="text-center text-lg font-medium text-muted-foreground sm:text-2xl lg:text-start">
                             <span className="font-semibold text-foreground">
                                 {value.value}
                             </span>{" "}
@@ -159,7 +159,7 @@ export default async function HomePage() {
                     </div>
                 ))}
             </section>
-            <section className="relative grid grid-cols-2 lg:grid-cols-3">
+            <section className="relative -mb-[1px] grid grid-cols-2 lg:grid-cols-3">
                 <h2 className="col-span-2 mb-6 bg-gradient-to-r from-foreground/70 to-foreground bg-clip-text text-center text-2xl font-bold leading-none tracking-tight text-transparent sm:text-4xl lg:col-span-3 lg:text-5xl">
                     Partenerii noștri.
                 </h2>

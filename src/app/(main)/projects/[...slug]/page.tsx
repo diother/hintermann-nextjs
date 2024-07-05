@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import { allPosts } from "@/lib/mdx";
 import Image from "next/image";
 import { logos } from "@/lib/logos";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface PostPageProps {
     params: {
@@ -31,7 +32,9 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
     const slug = params.slug[0]!;
     const post = await getPostFromParams(slug);
-    const ogImage = post?.images?.[0];
+    const ogImage = post?.images?.[0]
+        ? post.slugAsParams + post.images[0]
+        : undefined;
 
     if (!post) {
         return {};
@@ -81,76 +84,81 @@ export default async function Page({ params }: PostPageProps) {
     }
 
     return (
-        <main className="container relative max-w-3xl p-6 sm:p-10 lg:py-16">
-            <Link
-                href="/projects"
-                className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "absolute left-[-200px] top-24 hidden xl:inline-flex",
-                )}
-            >
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Toate proiectele
-            </Link>
-
-            <div>
-                {post.date && (
-                    <time
-                        dateTime={post.date}
-                        className="block text-sm text-muted-foreground"
-                    >
-                        Publicat pe {formatDate(post.date)}
-                    </time>
-                )}
-                <h1 className="display-heading mt-2">{post.title}</h1>
-                {post.sponsors && (
-                    <div className="mt-4 flex items-center gap-6 rounded-md border p-4">
-                        <p className="text-sm font-medium text-muted-foreground">
-                            Sponsorizat de:
-                        </p>
-                        <div className="flex h-full items-center gap-6">
-                            {post.sponsors.map((logoName) => {
-                                const logo = logos[logoName]!;
-                                const width = (logo.width / 100) * 60;
-                                const height = (logo.height / 100) * 60;
-                                return (
-                                    <Link key={logoName} href={logo.href}>
-                                        <Image
-                                            priority={true}
-                                            className={cn(
-                                                "dark:hidden",
-                                                logo.className,
-                                            )}
-                                            src={`/logos/logo-${logoName}-light.png`}
-                                            width={width}
-                                            height={height}
-                                            alt={`Logo ${logoName}`}
-                                        />
-                                        <Image
-                                            priority={true}
-                                            className={cn(
-                                                "hidden brightness-[93%] dark:block",
-                                                logo.className,
-                                            )}
-                                            src={`/logos/logo-${logoName}-dark.png`}
-                                            width={width}
-                                            height={height}
-                                            alt={`Logo ${logoName}`}
-                                        />
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    </div>
-                )}
+        <main className="container relative my-10 max-w-3xl px-6 sm:my-16 sm:px-10">
+            <h1 className="text-3xl font-bold tracking-[-.03em] sm:text-5xl">
+                {post.title}
+            </h1>
+            <p className="mt-4 text-lg text-muted-foreground sm:mt-6 sm:text-2xl">
+                {post.description}
+            </p>
+            <div className="mt-8 flex items-center gap-3 sm:mt-10 sm:gap-4">
+                <Avatar className="h-11 w-11 sm:h-12 sm:w-12">
+                    <AvatarImage src="/logo.png" />
+                    <AvatarFallback>HC</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                    <span className="sm:text-lg">Hintermann Charity</span>
+                    <span className="text-sm text-muted-foreground sm:text-base">
+                        {post.read} min read <span className="mx-1">·</span>{" "}
+                        <time dateTime={post.date}>
+                            {formatDate(post.date)}
+                        </time>
+                    </span>
+                </div>
             </div>
-            {post.images && <ArticleSwiper images={post.images} />}
+            {post.sponsors && (
+                <div className="mt-6 flex items-center gap-6 border-y border-border/75 py-4 text-muted-foreground">
+                    <p className="text-sm sm:text-base">Sponsorizat de:</p>
+                    <div className="flex h-full items-center gap-6">
+                        {post.sponsors.map((logoName) => {
+                            const logo = logos[logoName]!;
+                            const width = (logo.width / 100) * 60;
+                            const height = (logo.height / 100) * 60;
+                            return (
+                                <Link key={logoName} href={logo.href}>
+                                    <Image
+                                        priority={true}
+                                        className={cn(
+                                            "dark:hidden",
+                                            logo.className,
+                                        )}
+                                        src={`/logos/logo-${logoName}-light.png`}
+                                        width={width}
+                                        height={height}
+                                        alt={`Logo ${logoName}`}
+                                    />
+                                    <Image
+                                        priority={true}
+                                        className={cn(
+                                            "hidden brightness-[93%] dark:block",
+                                            logo.className,
+                                        )}
+                                        src={`/logos/logo-${logoName}-dark.png`}
+                                        width={width}
+                                        height={height}
+                                        alt={`Logo ${logoName}`}
+                                    />
+                                </Link>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+            {post.images && (
+                <ArticleSwiper
+                    slugAsParams={post.slugAsParams}
+                    images={post.images}
+                />
+            )}
             <Mdx code={post.code} />
             <hr className="mt-12" />
             <div className="flex justify-center py-6 lg:py-10">
                 <Link
                     href="/projects"
-                    className={cn(buttonVariants({ variant: "ghost" }))}
+                    className={cn(
+                        buttonVariants({ variant: "ghost" }),
+                        "text-base font-normal",
+                    )}
                 >
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Vezi toate proiectele

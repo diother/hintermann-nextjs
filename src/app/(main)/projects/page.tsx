@@ -60,7 +60,7 @@ export default function Page() {
                                     <Image
                                         priority={index <= 1}
                                         className="h-auto w-full transition"
-                                        src={post.images[0]}
+                                        src={post.slugAsParams + post.images[0]}
                                         width="300"
                                         height="200"
                                         alt={post.title}

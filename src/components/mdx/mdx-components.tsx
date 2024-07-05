@@ -14,12 +14,29 @@ interface Component {
     className?: string;
 }
 const components = {
-    h1: ({ className, ...props }: Component) => (
-        <h1
-            className={cn("heading-2 mt-2 scroll-m-20", className)}
-            {...props}
-        />
-    ),
+    h1: ({ className, children, ...props }: Component) => {
+        const anchor = getAnchor(children as string);
+        const link = `#${anchor}`;
+
+        return (
+            <h1
+                id={anchor}
+                className={cn(
+                    "mt-10 scroll-m-20 text-2xl font-bold tracking-[-.03em] sm:text-3xl",
+                    className,
+                )}
+                {...props}
+            >
+                <Link
+                    href={link}
+                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                >
+                    {children}
+                    <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
+                </Link>
+            </h1>
+        );
+    },
     h2: ({ className, children, ...props }: Component) => {
         const anchor = getAnchor(children as string);
         const link = `#${anchor}`;
@@ -28,7 +45,7 @@ const components = {
             <h2
                 id={anchor}
                 className={cn(
-                    "heading-2 mt-10 scroll-m-20 pb-1 first:mt-0",
+                    "mt-10 scroll-m-20 text-xl font-bold tracking-[-.03em] sm:text-2xl",
                     className,
                 )}
                 {...props}
@@ -51,7 +68,7 @@ const components = {
             <h3
                 id={anchor}
                 className={cn(
-                    "heading-3 mt-8 scroll-m-20 first:mt-0",
+                    "mt-10 scroll-m-20 text-lg font-bold tracking-[-.03em] sm:text-xl",
                     className,
                 )}
                 {...props}
@@ -90,7 +107,7 @@ const components = {
     a: ({ className, ...props }: Component) => (
         <a
             className={cn(
-                "font-medium underline underline-offset-4",
+                "text-lg leading-relaxed text-foreground/80 underline underline-offset-4 transition-colors first:mt-0 hover:text-foreground sm:text-xl sm:leading-relaxed",
                 className,
             )}
             {...props}
@@ -98,7 +115,10 @@ const components = {
     ),
     p: ({ className, ...props }: Component) => (
         <p
-            className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+            className={cn(
+                "mt-6 text-lg leading-relaxed text-foreground/80 first:mt-0 sm:text-xl sm:leading-relaxed",
+                className,
+            )}
             {...props}
         />
     ),
@@ -109,11 +129,20 @@ const components = {
         <ol className={cn("my-6 ml-6 list-decimal", className)} {...props} />
     ),
     li: ({ className, ...props }: Component) => (
-        <li className={cn("mt-2 leading-7", className)} {...props} />
+        <li
+            className={cn(
+                "mt-2 text-lg leading-relaxed text-foreground/80 sm:text-xl sm:leading-relaxed",
+                className,
+            )}
+            {...props}
+        />
     ),
     blockquote: ({ className, ...props }: Component) => (
         <blockquote
-            className={cn("mt-6 border-l-2 border-foreground pl-6", className)}
+            className={cn(
+                "mt-6 border-l-2 border-foreground pl-6 text-lg leading-relaxed text-foreground/80 sm:text-xl sm:leading-relaxed",
+                className,
+            )}
             {...props}
         />
     ),
@@ -123,11 +152,7 @@ const components = {
         ...props
     }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
-            className={cn("rounded-md border", className)}
-            alt={alt}
-            {...props}
-        />
+        <img className={cn(className)} alt={alt} {...props} />
     ),
     hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
     table: ({
@@ -176,7 +201,10 @@ const components = {
     ),
     code: ({ className, ...props }: Component) => (
         <code
-            className={cn("relative rounded font-mono text-sm", className)}
+            className={cn(
+                "relative rounded font-mono text-sm sm:text-base",
+                className,
+            )}
             {...props}
         />
     ),

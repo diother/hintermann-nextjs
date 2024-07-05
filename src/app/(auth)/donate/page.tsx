@@ -34,10 +34,10 @@ export default async function Page() {
                 Cadoul tău merge înspre construcția de case caritabile și suport
                 pentru familii în nevoie.
             </h1>
-            <p>
+            <p className="sm:text-lg">
                 Suntem într-o misiune de a oferi case caritabile românilor care
-                au cea mai mare nevoie de ele. Poți să te alături nouă. Oricât
-                de mult poți da, fiecare bănuț susține impactul nostru.
+                au cea mai mare nevoie de ele. Oricât de mult poți da, fiecare
+                bănuț susține impactul nostru.
             </p>
             <DonationForm />
             <p className="text-sm text-muted-foreground">

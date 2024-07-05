@@ -9,12 +9,16 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
 
-export default function ArticleSwiper({ images }: { images: string[] }) {
+interface ArticleSwiper {
+    slugAsParams: string;
+    images: string[];
+}
+export default function ArticleSwiper({ slugAsParams, images }: ArticleSwiper) {
     if (images.length === 1) {
         return (
             <Image
                 className="my-10 w-full rounded-md"
-                src={images[0]!}
+                src={slugAsParams + images[0]!}
                 width="510"
                 height="340"
                 alt="Article image"
@@ -34,13 +38,13 @@ export default function ArticleSwiper({ images }: { images: string[] }) {
             pagination={{ clickable: true }}
             spaceBetween={50}
             slidesPerView={1}
-            className={`my-10 rounded-md [&_.disabled]:opacity-45 [&_.swiper-pagination-bullet-active]:bg-white [&_.swiper-pagination-bullet]:bg-white`}
+            className={`my-10 [&_.disabled]:opacity-45 [&_.swiper-pagination-bullet-active]:bg-white [&_.swiper-pagination-bullet]:bg-white`}
         >
             {images.map((image, index) => (
                 <SwiperSlide key={image} className="cursor-grab">
                     <Image
                         className="w-full"
-                        src={image}
+                        src={slugAsParams + image}
                         width="510"
                         height="340"
                         alt={`Article image ${index}`}
