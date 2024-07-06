@@ -40,7 +40,7 @@ export default async function Page() {
                 bănuț susține impactul nostru.
             </p>
             <DonationForm />
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground sm:text-base">
                 <Lock className="mb-[.30rem] mr-1 inline h-4 w-4" /> În
                 continuare, veți fi redirecționat(ă) către o pagină de plată
                 securizată.

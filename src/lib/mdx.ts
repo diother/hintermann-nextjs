@@ -16,7 +16,8 @@ const PostSchema = z.object({
 const config = {
     projects: PostSchema.extend({
         read: z.number(),
-        images: z.array(z.string()),
+        featureImage: z.string(),
+        images: z.array(z.string()).optional(),
         sponsors: z.array(z.string()).optional(),
     }),
     legal: PostSchema.extend({

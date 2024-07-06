@@ -83,7 +83,7 @@ export default async function HomePage() {
                     </span>
                     <span className="hidden sm:block">
                         Suntem o organizație caritabilă care și-a propus să
-                        construiască și să ofere case famiililor aflate în
+                        construiască și să ofere case familiilor aflate în
                         dificultate.
                     </span>
                 </p>
@@ -114,15 +114,18 @@ export default async function HomePage() {
                             href={post.slugAsParams}
                             className="z-10 mx-auto grid w-full gap-4 rounded-lg p-6 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary sm:max-w-3xl sm:grid-cols-[300px_1fr] sm:grid-rows-[auto_auto_1fr] sm:gap-x-6 lg:flex lg:flex-col [&:hover_img]:scale-110"
                         >
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-sm text-muted-foreground sm:text-base">
                                 {formatDate(post.date)}
                             </p>
-                            {post.images?.[0] && (
+                            {post.featureImage && (
                                 <div className="overflow-hidden rounded-md sm:row-span-3 sm:row-start-1">
                                     <Image
                                         priority={index <= 1}
                                         className="h-auto w-full transition"
-                                        src={post.slugAsParams + post.images[0]}
+                                        src={
+                                            post.slugAsParams +
+                                            post.featureImage
+                                        }
                                         width="300"
                                         height="200"
                                         alt={post.title}
@@ -130,7 +133,7 @@ export default async function HomePage() {
                                 </div>
                             )}
                             <h2 className="heading-4">{post.title}</h2>
-                            <p className="text-muted-foreground">
+                            <p className="text-muted-foreground sm:text-lg">
                                 {post.description}
                             </p>
                         </Link>

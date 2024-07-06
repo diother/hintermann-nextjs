@@ -32,9 +32,7 @@ export async function generateMetadata({
 }: PostPageProps): Promise<Metadata> {
     const slug = params.slug[0]!;
     const post = await getPostFromParams(slug);
-    const ogImage = post?.images?.[0]
-        ? post.slugAsParams + post.images[0]
-        : undefined;
+    const ogImage = post ? post.slugAsParams + post.featureImage : undefined;
 
     if (!post) {
         return {};

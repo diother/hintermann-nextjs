@@ -52,15 +52,18 @@ export default function Page() {
                             href={post.slugAsParams}
                             className="z-10 grid gap-4 rounded-lg border p-4 transition hover:shadow-xl dark:hover:shadow-none dark:hover:outline dark:hover:outline-2 dark:hover:outline-primary md:grid-cols-[300px_1fr] md:grid-rows-[auto_auto_1fr] md:gap-x-6 [&:hover_img]:scale-110"
                         >
-                            <p className="text-sm text-muted-foreground">
+                            <p className="text-sm text-muted-foreground sm:text-base">
                                 {formatDate(post.date)}
                             </p>
-                            {post.images?.[0] && (
+                            {post.featureImage && (
                                 <div className="overflow-hidden rounded-md md:row-span-3 md:row-start-1">
                                     <Image
                                         priority={index <= 1}
                                         className="h-auto w-full transition"
-                                        src={post.slugAsParams + post.images[0]}
+                                        src={
+                                            post.slugAsParams +
+                                            post.featureImage
+                                        }
                                         width="300"
                                         height="200"
                                         alt={post.title}
@@ -68,7 +71,7 @@ export default function Page() {
                                 </div>
                             )}
                             <h2 className="heading-4">{post.title}</h2>
-                            <p className="text-sm text-muted-foreground sm:text-base lg:text-lg">
+                            <p className="text-sm text-muted-foreground sm:text-base lg:text-xl">
                                 {post.description}
                             </p>
                         </Link>
