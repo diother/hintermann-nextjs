@@ -149,10 +149,11 @@ const components = {
     img: ({
         className,
         alt,
+        src,
         ...props
     }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         // eslint-disable-next-line @next/next/no-img-element
-        <img className={cn(className)} alt={alt} {...props} />
+        <Image src={src!} alt={alt!} width="700" height="700" />
     ),
     hr: ({ ...props }) => <hr className="my-4 md:my-8" {...props} />,
     table: ({
