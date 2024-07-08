@@ -30,6 +30,7 @@ export default function Footer() {
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
         { name: "Portal donații", href: "/donate" },
+        { name: "Blog", href: "/blog" },
     ];
     const legal = [
         { name: "Politică de confidențialitate", href: "/legal/privacy" },

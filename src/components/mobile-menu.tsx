@@ -33,6 +33,7 @@ export function HeaderMobileMenu({ email, billing }: MobileMenu) {
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
         { name: "Portal donații", href: "/donate" },
+        { name: "Blog", href: "/blog" },
     ];
     return (
         <MobileMenu open={open} onOpenChange={setOpen}>

@@ -11,6 +11,7 @@ export default async function Header() {
         { name: "Proiecte", href: "/projects" },
         { name: "Contact", href: "/contact" },
         { name: "Portal donații", href: "/donate" },
+        { name: "Blog", href: "/blog" },
     ];
     const user = await getUserSession();
     let email, stripeId;
