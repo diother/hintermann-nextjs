@@ -146,12 +146,7 @@ const components = {
             {...props}
         />
     ),
-    img: ({
-        className,
-        alt,
-        src,
-        ...props
-    }: React.ImgHTMLAttributes<HTMLImageElement>) => (
+    img: ({ alt, src }: React.ImgHTMLAttributes<HTMLImageElement>) => (
         // eslint-disable-next-line @next/next/no-img-element
         <Image src={src!} alt={alt!} width="700" height="700" />
     ),
