@@ -2,8 +2,7 @@ import "@/styles/mdx.css";
 import { Mdx } from "@/components/mdx/mdx-components";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn, formatDate } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 import { env } from "@/env";
 import { notFound } from "next/navigation";
@@ -104,13 +103,7 @@ export default async function Page({ params }: PostPageProps) {
             <Mdx code={post.code} />
             <hr className="mt-12" />
             <div className="flex justify-center py-6 lg:py-10">
-                <Link
-                    href="/blog"
-                    className={cn(
-                        buttonVariants({ variant: "ghost" }),
-                        "text-base font-normal",
-                    )}
-                >
+                <Link href="/blog" className="text-base font-normal">
                     <ArrowLeft className="mr-2 h-4 w-4" />
                     Vezi toate articolele
                 </Link>

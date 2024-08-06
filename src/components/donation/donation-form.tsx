@@ -30,7 +30,10 @@ export function DonationForm() {
             <div className="grid grid-cols-2 gap-2">
                 <Button
                     variant="secondary"
-                    className={`relative text-base ${!isMonthly && "bg-secondary/60 hover:bg-secondary/60"}`}
+                    className={cn(
+                        "relative text-base",
+                        !isMonthly && "bg-secondary/60 hover:bg-secondary/60",
+                    )}
                     onClick={() => setMonthly(false)}
                 >
                     O dată
@@ -40,7 +43,10 @@ export function DonationForm() {
                 </Button>
                 <Button
                     variant="secondary"
-                    className={`relative text-base ${isMonthly && "bg-secondary/60 hover:bg-secondary/60"}`}
+                    className={cn(
+                        "relative text-base",
+                        isMonthly && "bg-secondary/60 hover:bg-secondary/60",
+                    )}
                     onClick={() => setMonthly(true)}
                 >
                     Lunar
@@ -180,7 +186,7 @@ export function DonationForm() {
                                     onChange={handlePayChange}
                                     hidden
                                 />
-                                500 lei
+                                100 lei
                             </label>
                             <label
                                 className={cn(
@@ -197,7 +203,7 @@ export function DonationForm() {
                                     onChange={handlePayChange}
                                     hidden
                                 />
-                                300 lei
+                                50 lei
                             </label>
                             <label
                                 className={cn(
@@ -214,7 +220,7 @@ export function DonationForm() {
                                     onChange={handlePayChange}
                                     hidden
                                 />
-                                200 lei
+                                25 lei
                             </label>
                             <label
                                 className={cn(
@@ -231,7 +237,7 @@ export function DonationForm() {
                                     onChange={handlePayChange}
                                     hidden
                                 />
-                                100 lei
+                                10 lei
                             </label>
                             <label
                                 className={cn(

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ThemeToggle } from "./theme-toggle";
 import { Icons } from "./icons";
 import CookieDialog from "./cookie-dialog";
 
@@ -95,7 +94,6 @@ export default function Footer() {
                                 </Link>
                             ))}
                         </div>
-                        <ThemeToggle className="self-end xl:self-auto" />
                     </div>
                 </div>
             </footer>

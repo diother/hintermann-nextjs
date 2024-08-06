@@ -1,7 +1,5 @@
 import { socialIcons } from "@/components/footer";
-import { buttonVariants } from "@/components/ui/button";
 import { env } from "@/env";
-import { cn } from "@/lib/utils";
 import { ArrowLeft, Check } from "lucide-react";
 import { type Metadata } from "next";
 import Link from "next/link";
@@ -59,13 +57,7 @@ export default async function Page() {
                     </Link>
                 ))}
             </div>
-            <Link
-                href="/"
-                className={cn(
-                    buttonVariants({ variant: "ghost" }),
-                    "justify-start",
-                )}
-            >
+            <Link href="/" className="justify-start">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Acasă
             </Link>
