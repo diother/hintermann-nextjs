@@ -1,16 +1,13 @@
 import "@/styles/mdx.css";
-import ArticleSwiper from "@/components/article-swiper";
 import { Mdx } from "@/components/mdx/mdx-components";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { cn, formatDate } from "@/lib/utils";
-import type { Metadata } from "next";
-import { env } from "@/env";
+import { formatDate } from "@/lib/utils";
 import { notFound } from "next/navigation";
 import { allPosts } from "@/lib/mdx";
 import Image from "next/image";
 import { logos } from "@/lib/logos";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Button from "@/components/ui/button";
+import Meta from "@/lib/metadata";
 
 interface PostPageProps {
     params: {
@@ -18,17 +15,10 @@ interface PostPageProps {
     };
 }
 
-async function getPostFromParams(slug: string) {
-    const post = allPosts.projects.find((post) => post.slug === slug);
-    if (!post) {
-        null;
-    }
-    return post;
-}
+const getPostFromParams = async (slug: string) =>
+    allPosts.projects.find((post) => post.slug === slug);
 
-export async function generateMetadata({
-    params,
-}: PostPageProps): Promise<Metadata> {
+export const generateMetadata = async ({ params }: PostPageProps) => {
     const slug = params.slug[0]!;
     const post = await getPostFromParams(slug);
     const ogImage = post ? post.slugAsParams + post.featureImage : undefined;
@@ -36,43 +26,15 @@ export async function generateMetadata({
     if (!post) {
         return {};
     }
+    return Meta(post.title, post.description, ogImage, "article");
+};
 
-    return {
-        metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-        title: post.title,
-        description: post.description,
-        openGraph: {
-            title: post.title,
-            description: post.description,
-            type: "article",
-            url: post.slugAsParams,
-            images: ogImage && [
-                {
-                    url: ogImage,
-                    width: 300,
-                    height: 200,
-                    alt: post.title,
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: post.title,
-            description: post.description,
-            images: ogImage && [ogImage],
-        },
-    };
-}
-
-export async function generateStaticParams(): Promise<
-    PostPageProps["params"][]
-> {
-    return allPosts.projects.map((post) => ({
+export const generateStaticParams = async () =>
+    allPosts.projects.map((post) => ({
         slug: post.slug.split("/"),
     }));
-}
 
-export default async function Page({ params }: PostPageProps) {
+const Page = async ({ params }: PostPageProps) => {
     const slug = params.slug[0]!;
     const post = await getPostFromParams(slug);
 
@@ -82,20 +44,15 @@ export default async function Page({ params }: PostPageProps) {
 
     return (
         <main className="container relative my-10 max-w-3xl px-6 sm:my-16 sm:px-10">
-            <h1 className="text-3xl font-bold tracking-[-.03em] sm:text-5xl">
+            <h1 className="font-display text-3xl leading-tight">
                 {post.title}
             </h1>
-            <p className="mt-4 text-lg text-muted-foreground sm:mt-6 sm:text-2xl">
-                {post.description}
-            </p>
-            <div className="mt-8 flex items-center gap-3 sm:mt-10 sm:gap-4">
-                <Avatar className="h-11 w-11 sm:h-12 sm:w-12">
-                    <AvatarImage src="/logo.png" />
-                    <AvatarFallback>HC</AvatarFallback>
-                </Avatar>
+            <p className="mt-4 text-lg text-muted">{post.description}</p>
+            <div className="mt-8 flex items-center gap-3">
+                <div className="h-11 w-11">hey</div>
                 <div className="flex flex-col">
-                    <span className="sm:text-lg">Hintermann Charity</span>
-                    <span className="text-sm text-muted-foreground sm:text-base">
+                    <span>Hintermann Charity</span>
+                    <span className="text-sm text-muted">
                         {post.read} min read <span className="mx-1">·</span>{" "}
                         <time dateTime={post.date}>
                             {formatDate(post.date)}
@@ -103,58 +60,38 @@ export default async function Page({ params }: PostPageProps) {
                     </span>
                 </div>
             </div>
-            {post.sponsors && (
-                <div className="mt-6 flex items-center gap-6 border-y border-border/75 py-4 text-muted-foreground">
-                    <p className="text-sm sm:text-base">Sponsorizat de:</p>
-                    <div className="flex h-full items-center gap-6">
-                        {post.sponsors.map((logoName) => {
-                            const logo = logos[logoName]!;
-                            const width = (logo.width / 100) * 60;
-                            const height = (logo.height / 100) * 60;
-                            return (
-                                <Link key={logoName} href={logo.href}>
-                                    <Image
-                                        priority={true}
-                                        className={cn(
-                                            "dark:hidden",
-                                            logo.className,
-                                        )}
-                                        src={`/logos/logo-${logoName}-light.png`}
-                                        width={width}
-                                        height={height}
-                                        alt={`Logo ${logoName}`}
-                                    />
-                                    <Image
-                                        priority={true}
-                                        className={cn(
-                                            "hidden brightness-[93%] dark:block",
-                                            logo.className,
-                                        )}
-                                        src={`/logos/logo-${logoName}-dark.png`}
-                                        width={width}
-                                        height={height}
-                                        alt={`Logo ${logoName}`}
-                                    />
-                                </Link>
-                            );
-                        })}
-                    </div>
-                </div>
-            )}
-            {post.images && (
-                <ArticleSwiper
-                    slugAsParams={post.slugAsParams}
-                    images={post.images}
-                />
-            )}
+            <Sponsors sponsors={post.sponsors} />
             <Mdx code={post.code} />
             <hr className="mt-12" />
-            <div className="flex justify-center py-6 lg:py-10">
-                <Link href="/projects" className="text-base font-normal">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Vezi toate proiectele
-                </Link>
-            </div>
+            <Button href="/projects">Vezi toate proiectele</Button>
         </main>
     );
-}
+};
+
+const Sponsors = ({ sponsors }: { sponsors?: string[] }) =>
+    sponsors && (
+        <div className="border-border/75 mt-6 flex items-center gap-6 border-y py-4 text-muted">
+            <p className="text-sm">Sponsorizat de:</p>
+            <div className="flex h-full items-center gap-6">
+                {sponsors.map((logoName) => {
+                    const logo = logos[logoName]!;
+                    const width = (logo.width / 100) * 60;
+                    const height = (logo.height / 100) * 60;
+                    return (
+                        <Link key={logoName} href={logo.href}>
+                            <Image
+                                priority={true}
+                                className={logo.className}
+                                src={`/logos/logo-${logoName}.png`}
+                                width={width}
+                                height={height}
+                                alt={`Logo ${logoName}`}
+                            />
+                        </Link>
+                    );
+                })}
+            </div>
+        </div>
+    );
+
+export default Page;

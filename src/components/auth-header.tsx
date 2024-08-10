@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
+import Button from "./ui/button";
 import { Icons } from "./icons";
 
 export default function AuthHeader() {
@@ -9,8 +9,8 @@ export default function AuthHeader() {
                 <Icons.logo />
                 <span className="sr-only">Hintermann Charity</span>
             </Link>
-            <Button variant="outline" asChild>
-                <Link href="/contact">Contact</Link>
+            <Button href="/contact" variant="secondary">
+                Contact
             </Button>
         </header>
     );

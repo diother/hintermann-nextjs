@@ -8,8 +8,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         { href: "/projects", change: "weekly" },
         { href: "/contact", change: "monthly" },
         { href: "/donate", change: "monthly" },
-        { href: "/login", change: "monthly" },
-        { href: "/blog", change: "weekly" },
     ];
 
     const pages: MetadataRoute.Sitemap = [];

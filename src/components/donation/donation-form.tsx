@@ -1,14 +1,10 @@
 "use client";
 
 import { useFormState } from "react-dom";
-import { Button } from "@/components/ui/button";
-import {
-    checkoutAction,
-    stripeDashboardAction,
-} from "@/actions/donation-actions";
+import Button from "@/components/ui/button";
+import { checkoutAction } from "@/actions/donation-actions";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { SubmitButton } from "../auth/login-form";
 import { Check } from "lucide-react";
 
 export function DonationForm() {
@@ -71,7 +67,7 @@ export function DonationForm() {
                             <label
                                 className={cn(
                                     "col-span-2",
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     sub === "sub_1" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -88,7 +84,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     sub === "sub_2" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -105,7 +101,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     sub === "sub_3" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -122,7 +118,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     sub === "sub_4" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -139,7 +135,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     sub === "sub_5" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -154,9 +150,12 @@ export function DonationForm() {
                                 />
                                 25 lei
                             </label>
-                            <SubmitButton className="col-span-2 h-11 w-full">
+                            <button
+                                type="submit"
+                                className="col-span-2 h-11 w-full"
+                            >
                                 Alătură-te acum
-                            </SubmitButton>
+                            </button>
                         </div>
                     </form>
                 ) : (
@@ -173,7 +172,7 @@ export function DonationForm() {
                         <div className="grid grid-cols-2 gap-3 border p-4">
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     pay === "pay_1" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -190,7 +189,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     pay === "pay_2" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -207,7 +206,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     pay === "pay_3" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -224,7 +223,7 @@ export function DonationForm() {
                             </label>
                             <label
                                 className={cn(
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     pay === "pay_4" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -242,7 +241,7 @@ export function DonationForm() {
                             <label
                                 className={cn(
                                     "col-span-2",
-                                    "flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground",
+                                    "text-muted-foreground flex h-11 cursor-pointer items-center justify-center rounded-md border p-3 transition-colors hover:bg-secondary hover:text-foreground",
                                     pay === "pay_5" &&
                                         "bg-secondary font-semibold text-foreground",
                                 )}
@@ -257,23 +256,13 @@ export function DonationForm() {
                                 />
                                 Altă sumă
                             </label>
-                            <SubmitButton className="col-span-2">
+                            <button type="submit" className="col-span-2">
                                 Donează
-                            </SubmitButton>
+                            </button>
                         </div>
                     </form>
                 )}
             </div>
         </>
-    );
-}
-
-export function StripeDashboard() {
-    const [, action] = useFormState(stripeDashboardAction, undefined);
-
-    return (
-        <form action={action}>
-            <button type="submit">Gestionează facturare</button>
-        </form>
     );
 }

@@ -23,14 +23,10 @@ const config = {
     legal: PostSchema.extend({
         headings: z.array(z.string()),
     }),
-    blog: PostSchema.extend({
-        read: z.number(),
-        featureImage: z.string(),
-    }),
 };
 
 export type PostClass = keyof typeof config;
-type AllPosts = {
+export type AllPosts = {
     [Key in PostClass]: z.infer<(typeof config)[Key]>[];
 };
 

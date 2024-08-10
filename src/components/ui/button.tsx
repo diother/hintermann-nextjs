@@ -2,14 +2,23 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { HTMLAttributes } from "react";
 
-const buttonVariants = {
-    primary: "bg-blue-500 hover:bg-blue-700 text-white",
-    secondary: "bg-gray-500 hover:bg-gray-700 text-white",
-    danger: "bg-red-500 hover:bg-red-700 text-white",
+const base =
+    "w-fit rounded-full border text-center font-display transition-colors";
+
+const variants = {
+    primary: "border-primary bg-primary text-white hover:bg-primary/80",
+    secondary: "border-primary bg-white text-primary hover:bg-white/80",
+};
+
+const sizes = {
+    base: "px-4 py-1 text-base",
+    lg: "px-5 py-1.5 text-lg",
+    xl: "px-6 py-2 text-xl",
 };
 
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-    variant?: keyof typeof buttonVariants;
+    variant?: keyof typeof variants;
+    size?: keyof typeof sizes;
     href?: string;
 }
 
@@ -17,21 +26,20 @@ const Button = ({
     children,
     className,
     variant = "primary",
+    size = "base",
     href,
     ...props
 }: ButtonProps) => {
-    const base = "rounded-full w-fit px-4 font-display border py-2 text-center";
-
     return href ? (
         <Link
-            className={cn(base, className, buttonVariants[variant])}
+            className={cn(base, className, variants[variant], sizes[size])}
             href={href}
         >
             {children}
         </Link>
     ) : (
         <button
-            className={cn(base, className, buttonVariants[variant])}
+            className={cn(base, className, variants[variant], sizes[size])}
             {...props}
         >
             {children}

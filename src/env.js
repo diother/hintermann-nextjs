@@ -3,13 +3,6 @@ import { z } from "zod";
 
 export const env = createEnv({
     server: {
-        DATABASE_HOST: z.string(),
-        DATABASE_USER: z.string(),
-        DATABASE_PASSWORD: z.string(),
-        DATABASE_NAME: z.string(),
-        GOOGLE_ID: z.string(),
-        GOOGLE_SECRET: z.string(),
-        RESEND: z.string(),
         STRIPE_SECRET: z.string(),
         STRIPE_WEBHOOK: z.string(),
         NODE_ENV: z
@@ -20,13 +13,6 @@ export const env = createEnv({
         NEXT_PUBLIC_APP_URL: z.string(),
     },
     runtimeEnv: {
-        DATABASE_HOST: process.env.DATABASE_HOST,
-        DATABASE_USER: process.env.DATABASE_USER,
-        DATABASE_PASSWORD: process.env.DATABASE_PASSWORD,
-        DATABASE_NAME: process.env.DATABASE_NAME,
-        GOOGLE_ID: process.env.GOOGLE_ID,
-        GOOGLE_SECRET: process.env.GOOGLE_SECRET,
-        RESEND: process.env.RESEND,
         STRIPE_SECRET: process.env.STRIPE_SECRET,
         STRIPE_WEBHOOK: process.env.STRIPE_WEBHOOK,
         NODE_ENV: process.env.NODE_ENV,
