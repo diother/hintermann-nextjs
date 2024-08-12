@@ -22,14 +22,14 @@ const components = {
             <h1
                 id={anchor}
                 className={cn(
-                    "mt-10 scroll-m-20 text-2xl font-bold tracking-[-.03em] sm:text-3xl",
+                    "mt-10 scroll-m-20 font-display text-2xl leading-tight",
                     className,
                 )}
                 {...props}
             >
                 <Link
                     href={link}
-                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                    className="w-fit transition hover:text-muted [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
                 >
                     {children}
                     <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
@@ -45,14 +45,14 @@ const components = {
             <h2
                 id={anchor}
                 className={cn(
-                    "mt-10 scroll-m-20 text-xl font-bold tracking-[-.03em] sm:text-2xl",
+                    "mt-10 scroll-m-20 font-display text-xl leading-tight",
                     className,
                 )}
                 {...props}
             >
                 <Link
                     href={link}
-                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                    className="w-fit transition hover:text-muted [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
                 >
                     {children}
                     <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
@@ -68,14 +68,14 @@ const components = {
             <h3
                 id={anchor}
                 className={cn(
-                    "mt-10 scroll-m-20 text-lg font-bold tracking-[-.03em] sm:text-xl",
+                    "mt-10 scroll-m-20 font-display text-lg leading-tight",
                     className,
                 )}
                 {...props}
             >
                 <Link
                     href={link}
-                    className="w-fit transition hover:text-muted-foreground [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
+                    className="w-fit transition hover:text-muted [&_svg]:opacity-0 [&_svg]:hover:opacity-100"
                 >
                     {children}
                     <Hash className="ml-2 hidden h-5 w-5 sm:inline" />
@@ -171,7 +171,7 @@ const components = {
     th: ({ className, ...props }: Component) => (
         <th
             className={cn(
-                "border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right",
+                "border px-4 py-2 text-left font-display leading-tight [&[align=center]]:text-center [&[align=right]]:text-right",
                 className,
             )}
             {...props}
@@ -198,7 +198,7 @@ const components = {
     code: ({ className, ...props }: Component) => (
         <code
             className={cn(
-                "relative rounded font-mono text-sm sm:text-base",
+                "font-mono relative rounded text-sm sm:text-base",
                 className,
             )}
             {...props}
@@ -213,7 +213,7 @@ interface MdxProps {
     code: string;
 }
 
-export async function Mdx({ code }: MdxProps) {
+export const Mdx = async ({ code }: MdxProps) => {
     // @ts-expect-error: the automatic react runtime is untyped.
     const runtime: { Fragment: Fragment; jsx: Jsx; jsxs: Jsx } = runtime_;
     const { default: MdxContent } = await run(code, {
@@ -225,4 +225,4 @@ export async function Mdx({ code }: MdxProps) {
             <MdxContent components={components} />
         </div>
     );
-}
+};

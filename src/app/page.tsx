@@ -10,8 +10,8 @@ const posts = allPosts.projects
     .slice(0, 3);
 
 const Page = () => (
-    <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-12">
-        <section className="relative aspect-square">
+    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-12 md:text-lg">
+        <section className="relative aspect-square md:aspect-video">
             <video
                 width="1280"
                 height="720"
@@ -34,27 +34,24 @@ const Page = () => (
         <section className="flex flex-col gap-6 px-6">
             <h1 className="font-display text-3xl">Cine suntem?</h1>
             <p>
-                Suntem o organizație non-profit, formată dintr-o echipă de
-                voluntari dedicați să răspândească mesajul bunătății.
+                Suntem o organizație non-profit care vrea să arate că poți face
+                bine din bucurie și conexiuni reale, nu doar din milă sau
+                obligație socială.
             </p>
             <p>
-                Nu credem că poveștile triste, mila sau vinovăția ar trebui să
-                fie motivația principală din spatele actelor de bunătate.
-            </p>
-            <p>
-                În schimb, suntem motivați de bucuria și conexiunea umană care
-                iau naștere din legăturile pe care le creăm cu ceilalți, atunci
-                când împărtășim bunătate și bucurie.
+                Ne propunem să folosim rețelele sociale nu doar pentru a strânge
+                fonduri și a ajuta, ci și pentru a aduce vibe-uri pozitive și a
+                crea o comunitate activă și fun în jurul acestor inițiative.
             </p>
         </section>
-        <section className="flex flex-col gap-16 px-6">
+        <section className="flex flex-col gap-10 bg-secondary/15 px-6 py-12">
             <ProjectArchive posts={posts} />
         </section>
         <section className="flex flex-col gap-6 px-6">
             <h1 className="font-display text-3xl">Parteneri</h1>
             <p>
-                Dorim să le mulțumim partenerilor noștri pentru generozitatea
-                lor, care ne permite să răspândim bunătatea.
+                Mulțumim partenerilor noștri pentru sprijinul lor în răspândirea
+                bunătății.
             </p>
             <div className="grid grid-cols-2">
                 <Logos />

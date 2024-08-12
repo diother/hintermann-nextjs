@@ -37,7 +37,7 @@ const Page = async ({ params }: PostPageProps) => {
     }
 
     return (
-        <main className="relative mx-auto w-full max-w-3xl px-6 py-12">
+        <main className="mx-auto w-full max-w-screen-sm px-6 py-12">
             <h1 className="font-display text-3xl leading-tight">
                 {post.title}
             </h1>

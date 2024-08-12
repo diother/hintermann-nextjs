@@ -39,10 +39,10 @@ const subscriptions: Record<string, string> = {
             : "price_1PX2rHDXCtuWOFq8fbj1dg7p",
 };
 
-export async function checkoutAction(
+export const checkoutAction = async (
     prevState: void | undefined,
     formData: FormData,
-): Promise<void | undefined> {
+) => {
     try {
         const mode = formData.get("mode") as "payment" | "subscription";
         const option = formData.get("option") as string;
@@ -73,9 +73,9 @@ export async function checkoutAction(
             throw error;
         }
     }
-}
+};
 
-function validateDonationForm(mode: string, option: string): void {
+const validateDonationForm = (mode: string, option: string) => {
     const modeEnum = z.enum(["subscription", "payment"]);
     const optionEnum = z.enum([
         "pay_1",
@@ -106,4 +106,4 @@ function validateDonationForm(mode: string, option: string): void {
     if (!valid.success) {
         throw new Error("Invalid data");
     }
-}
+};

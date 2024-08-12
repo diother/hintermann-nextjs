@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { HTMLAttributes } from "react";
 
 const base =
-    "w-fit rounded-full border text-center font-display transition-colors";
+    "block w-fit rounded-full border text-center font-display transition-colors";
 
 const variants = {
     primary: "border-primary bg-primary text-white hover:bg-primary/80",
@@ -20,6 +20,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     variant?: keyof typeof variants;
     size?: keyof typeof sizes;
     href?: string;
+    type?: "button" | "submit" | "reset";
 }
 
 const Button = ({
@@ -28,6 +29,7 @@ const Button = ({
     variant = "primary",
     size = "base",
     href,
+    type = "button",
     ...props
 }: ButtonProps) => {
     return href ? (
@@ -40,6 +42,7 @@ const Button = ({
     ) : (
         <button
             className={cn(base, className, variants[variant], sizes[size])}
+            type={type}
             {...props}
         >
             {children}

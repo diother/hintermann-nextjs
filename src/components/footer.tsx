@@ -31,23 +31,29 @@ const links = [
 ];
 
 const Footer = () => (
-    <footer className="flex flex-col items-center gap-6 border-t px-6 py-12">
-        {links.map((link) => (
-            <Link key={link.name} href={link.href} className="">
-                {link.name}
-            </Link>
-        ))}
-        <div className="flex gap-6">
-            {socialIcons.map((icon) => (
+    <footer className="border-t md:text-lg">
+        <div className="mx-auto flex max-w-screen-sm flex-col items-center gap-4 px-6 py-12">
+            {links.map((link) => (
                 <Link
-                    key={icon.name}
-                    href={icon.href}
-                    className="text-muted-foreground flex w-fit text-2xl transition hover:text-foreground"
-                    aria-label={`Link leading to ${icon.name}`}
+                    key={link.name}
+                    href={link.href}
+                    className="underline underline-offset-2"
                 >
-                    {icon.svg}
+                    {link.name}
                 </Link>
             ))}
+            <div className="mt-4 flex gap-6 text-secondary">
+                {socialIcons.map((icon) => (
+                    <Link
+                        key={icon.name}
+                        href={icon.href}
+                        className="flex w-fit text-2xl"
+                        aria-label={`Link leading to ${icon.name}`}
+                    >
+                        {icon.svg}
+                    </Link>
+                ))}
+            </div>
         </div>
     </footer>
 );

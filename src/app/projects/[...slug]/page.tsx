@@ -43,13 +43,15 @@ const Page = async ({ params }: PostPageProps) => {
     }
 
     return (
-        <main className="container relative my-10 max-w-3xl px-6 sm:my-16 sm:px-10">
+        <main className="mx-auto w-full max-w-screen-sm px-6 py-12">
             <h1 className="font-display text-3xl leading-tight">
                 {post.title}
             </h1>
             <p className="mt-4 text-lg text-muted">{post.description}</p>
             <div className="mt-8 flex items-center gap-3">
-                <div className="h-11 w-11">hey</div>
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-xl text-white">
+                    HC
+                </div>
                 <div className="flex flex-col">
                     <span>Hintermann Charity</span>
                     <span className="text-sm text-muted">
@@ -61,9 +63,19 @@ const Page = async ({ params }: PostPageProps) => {
                 </div>
             </div>
             <Sponsors sponsors={post.sponsors} />
+            {post.featureImage && (
+                <Image
+                    src={post.slugAsParams + post.featureImage}
+                    width="700"
+                    height="700"
+                    alt="feature image"
+                    className="my-10"
+                />
+            )}
             <Mdx code={post.code} />
-            <hr className="mt-12" />
-            <Button href="/projects">Vezi toate proiectele</Button>
+            <Button href="/projects" size="lg" className="mt-12 w-full">
+                Vezi toate proiectele
+            </Button>
         </main>
     );
 };

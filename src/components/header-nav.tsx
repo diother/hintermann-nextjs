@@ -16,7 +16,7 @@ const navLinks = [
 const HeaderNav = () => {
     const pathname = usePathname();
     return (
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
                 <Link
                     key={link.name}
@@ -43,7 +43,7 @@ const MobileMenu = () => {
 
     return (
         <Menu.Root open={open} onOpenChange={setOpen}>
-            <Menu.Trigger className="lg:hidden">
+            <Menu.Trigger className="md:hidden">
                 <MenuIcon className="h-8 w-8" />
             </Menu.Trigger>
             <Menu.Portal>

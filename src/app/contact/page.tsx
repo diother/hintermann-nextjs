@@ -3,7 +3,7 @@ import Meta from "@/lib/metadata";
 export const metadata = Meta("Contact", "Pagina de contact Hintermann Charity");
 
 const Page = () => (
-    <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12">
+    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-10 px-6 py-12 md:text-lg">
         <h1 className="font-display text-3xl">Vorbește cu noi</h1>
         <div className="flex flex-col gap-4 sm:text-lg">
             <p>

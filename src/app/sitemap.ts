@@ -2,7 +2,7 @@ import { env } from "@/env";
 import { type PostClass, allPosts } from "@/lib/mdx";
 import { type MetadataRoute } from "next";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+const sitemap = async (): Promise<MetadataRoute.Sitemap> => {
     const staticPages: StaticPage[] = [
         { href: "", change: "weekly" },
         { href: "/projects", change: "weekly" },
@@ -27,9 +27,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     );
 
     return [...pages];
-}
+};
 
 interface StaticPage {
     href: string;
     change: "weekly" | "monthly" | "yearly";
 }
+
+export default sitemap;

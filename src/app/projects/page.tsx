@@ -13,7 +13,7 @@ const posts = allPosts.projects.sort((a, b) =>
 );
 
 const Page = () => (
-    <main className="relative mx-auto flex w-full max-w-6xl flex-col gap-6 px-6 py-12">
+    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-10 px-6 py-12 md:text-lg">
         <h1 className="font-display text-3xl leading-tight">Proiecte</h1>
         <ProjectArchive posts={posts} />
     </main>

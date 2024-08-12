@@ -4,6 +4,8 @@ import { Raleway, Roboto } from "next/font/google";
 import { cn } from "@/lib/utils";
 import CookieConsent from "@/components/cookie-consent";
 import Meta from "@/lib/metadata";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export const metadata = Meta(
     "Hintermann Charity",
@@ -38,7 +40,9 @@ export default function RootLayout({
                     raleway.variable,
                 )}
             >
+                <Header />
                 {children}
+                <Footer />
                 <CookieConsent />
             </body>
         </html>

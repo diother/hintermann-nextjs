@@ -1,33 +1,10 @@
 import { socialIcons } from "@/components/footer";
 import Button from "@/components/ui/button";
-import { env } from "@/env";
-import { ArrowLeft, Check } from "lucide-react";
-import { type Metadata } from "next";
+import { Check } from "lucide-react";
 import Link from "next/link";
+import Meta from "@/lib/metadata";
 
-export const metadata: Metadata = {
-    metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
-    title: "Mulțumim",
-    openGraph: {
-        title: "Mulțumim",
-        description: "Mulțumim pentru donație",
-        type: "website",
-        images: [
-            {
-                url: "/og-image.png",
-                width: 1200,
-                height: 630,
-                alt: "Hintermann Logo",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Mulțumim",
-        description: "Mulțumim pentru donație",
-        images: "/og-image.png",
-    },
-};
+export const metadata = Meta("Mulțumim", "Mulțumim pentru donație");
 
 const Page = () => (
     <main className="mx-auto flex min-h-[100vh] w-full max-w-lg flex-col justify-center gap-6 px-6 py-[6rem]">
