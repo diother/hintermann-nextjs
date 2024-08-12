@@ -26,13 +26,13 @@ const payments: Record<string, string> = {
 };
 const subscriptions: Record<string, string> = {
     sub_1:
-        env.NODE_ENV === "production" ? "price_1PXZpUDXCtuWOFq8D0VOYMaM" : "",
-    sub_2:
-        env.NODE_ENV === "production" ? "price_1PXZxADXCtuWOFq8zAMAPZf3" : "",
-    sub_3:
-        env.NODE_ENV === "production" ? "price_1PXZrODXCtuWOFq88vkimAnS" : "",
-    sub_4:
         env.NODE_ENV === "production" ? "price_1PXZsWDXCtuWOFq82NXW393G" : "",
+    sub_2:
+        env.NODE_ENV === "production" ? "price_1PXZrODXCtuWOFq88vkimAnS" : "",
+    sub_3:
+        env.NODE_ENV === "production" ? "price_1Pmzd3DXCtuWOFq8PxCT7fyK" : "",
+    sub_4:
+        env.NODE_ENV === "production" ? "price_1PmzdpDXCtuWOFq83NrAzZH5" : "",
     sub_5:
         env.NODE_ENV === "production"
             ? "price_1PXZtPDXCtuWOFq8Ujaf5b6U"
