@@ -7,7 +7,7 @@ import Meta from "@/lib/metadata";
 export const metadata = Meta("Mulțumim", "Mulțumim pentru donație");
 
 const Page = () => (
-    <main className="mx-auto flex min-h-[100vh] w-full max-w-lg flex-col justify-center gap-6 px-6 py-[6rem]">
+    <main className="mx-auto flex w-full max-w-lg flex-col justify-center gap-6 px-6 py-12">
         <Check className="h-10 w-10 text-primary" />
         <h1 className="font-display text-2xl">
             Mulțumim! <span className="italic">Serios.</span>
@@ -32,7 +32,7 @@ const Page = () => (
                 </Link>
             ))}
         </div>
-        <Button href="/" className="justify-start" variant="secondary">
+        <Button href="/" className="justify-start">
             Acasă
         </Button>
     </main>
