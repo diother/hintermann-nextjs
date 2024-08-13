@@ -7,6 +7,7 @@ import Button from "./ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { MenuIcon, XIcon } from "lucide-react";
+import { Icons } from "./icons";
 
 const navLinks = [
     { name: "Proiecte", href: "/projects" },
@@ -48,11 +49,10 @@ const MobileMenu = () => {
             </Menu.Trigger>
             <Menu.Portal>
                 <Menu.Overlay />
-                <Menu.Content className="fixed inset-0 z-50 flex flex-col bg-background px-6">
-                    <div className="box-content flex h-16 items-center justify-between border-b">
+                <Menu.Content className="fixed inset-0 z-50 flex flex-col bg-background px-4 xs:px-6">
+                    <div className="flex min-h-16 flex-col justify-between gap-4 border-b py-4 xs:flex-row xs:items-center">
                         <Link href="/" className="font-display text-2xl">
-                            Hintermann
-                            <span className="text-primary"> Charity</span>
+                            <Icons.logo className="h-[24px] w-[232px]" />
                         </Link>
                         <Menu.Close>
                             <XIcon className="h-8 w-8" />
