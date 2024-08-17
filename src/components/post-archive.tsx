@@ -24,7 +24,7 @@ const ProjectArchive = ({ posts }: { posts: AllPosts["projects"] }) =>
                 {post.title}
             </h2>
             <p>{post.description}</p>
-            <Button className="w-full" size="lg">
+            <Button className="w-full md:w-fit" size="lg">
                 Vezi poveste
             </Button>
         </Link>
