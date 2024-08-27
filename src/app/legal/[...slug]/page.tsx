@@ -37,8 +37,8 @@ const Page = async ({ params }: PostPageProps) => {
     }
 
     return (
-        <main className="mx-auto w-full max-w-screen-sm px-6 py-12">
-            <h1 className="font-display text-3xl leading-tight">
+        <main className="mx-auto w-full max-w-screen-md px-6 py-12">
+            <h1 className="font-display text-3xl leading-tight md:text-4xl">
                 {post.title}
             </h1>
             <Mdx code={post.code} />

@@ -33,6 +33,8 @@ const config = {
                 foreground: "hsl(var(--foreground))",
                 primary: "hsl(var(--primary))",
                 secondary: "hsl(var(--secondary))",
+                ternary: "hsl(var(--ternary))",
+                quaternary: "hsl(var(--quaternary))",
                 muted: "hsl(var(--muted))",
             },
             screens: {

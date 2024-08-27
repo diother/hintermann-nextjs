@@ -43,18 +43,18 @@ const Page = async ({ params }: PostPageProps) => {
     }
 
     return (
-        <main className="mx-auto w-full max-w-screen-sm px-6 py-12">
-            <h1 className="font-display text-3xl leading-tight">
+        <main className="mx-auto w-full max-w-screen-md px-6 py-12">
+            <h1 className="font-display text-3xl leading-tight md:text-4xl">
                 {post.title}
             </h1>
             <p className="mt-4 text-lg text-muted">{post.description}</p>
             <div className="mt-8 flex items-center gap-3">
-                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-xl text-white">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-xl text-white md:h-12 md:w-12">
                     HC
                 </div>
                 <div className="flex flex-col">
-                    <span>Hintermann Charity</span>
-                    <span className="text-sm text-muted">
+                    <span className="md:text-lg">Hintermann Charity</span>
+                    <span className="text-sm text-muted md:text-base">
                         {post.read} min read <span className="mx-1">·</span>{" "}
                         <time dateTime={post.date}>
                             {formatDate(post.date)}
@@ -83,7 +83,7 @@ const Page = async ({ params }: PostPageProps) => {
 const Sponsors = ({ sponsors }: { sponsors?: string[] }) =>
     sponsors && (
         <div className="border-border/75 mt-6 flex items-center gap-6 border-y py-4 text-muted">
-            <p className="text-sm">Sponsorizat de:</p>
+            <p className="text-sm md:text-base">Sponsorizat de:</p>
             <div className="flex h-full items-center gap-6">
                 {sponsors.map((logoName) => {
                     const logo = logos[logoName]!;

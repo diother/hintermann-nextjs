@@ -8,8 +8,10 @@ export const metadata = Meta(
 );
 
 const Page = () => (
-    <main className="mx-auto flex w-full max-w-screen-sm flex-col gap-6 px-6 py-12 md:text-lg">
-        <h1 className="font-display text-3xl leading-tight">Cum poți ajuta?</h1>
+    <main className="mx-auto flex w-full max-w-[480px] flex-col gap-6 px-6 py-12 md:text-lg">
+        <h1 className="font-display text-3xl leading-tight md:text-4xl">
+            Cum poți ajuta?
+        </h1>
         <p>
             Donația ta ne permite să continuăm să susținem cauzele noastre și pe
             cei aflați în nevoie. Scopul nostru este să facem lumea un loc mai

@@ -29,7 +29,7 @@ export type AllPosts = {
     [Key in PostClass]: z.infer<(typeof config)[Key]>[];
 };
 
-async function compileMdx() {
+const compileMdx = async () => {
     const allPosts: AllPosts = {} as AllPosts;
     const postClasses = Object.keys(config) as PostClass[];
 
@@ -40,9 +40,9 @@ async function compileMdx() {
         }),
     );
     return allPosts;
-}
+};
 
-async function compileMdxType(postClass: PostClass) {
+const compileMdxType = async (postClass: PostClass) => {
     const TYPE_DIR = path.join(process.cwd(), "content", postClass);
     const EXTENSION = ".mdx";
     const files = fs.readdirSync(TYPE_DIR);
@@ -58,9 +58,9 @@ async function compileMdxType(postClass: PostClass) {
             compileMdxFile(path.join(TYPE_DIR, file), postClass),
         ),
     );
-}
+};
 
-async function compileMdxFile(filePath: string, postClass: PostClass) {
+const compileMdxFile = async (filePath: string, postClass: PostClass) => {
     const fileContent = fs.readFileSync(filePath, "utf8");
     const { content, data } = matter(fileContent);
 
@@ -81,6 +81,6 @@ async function compileMdxFile(filePath: string, postClass: PostClass) {
     });
 
     return validated;
-}
+};
 
 export const allPosts: AllPosts = await compileMdx();

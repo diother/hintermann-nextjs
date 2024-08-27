@@ -32,7 +32,7 @@ const links = [
 
 const Footer = () => (
     <footer className="border-t md:text-lg">
-        <div className="mx-auto flex max-w-screen-sm flex-col items-center gap-4 px-6 py-12 text-center">
+        <div className="mx-auto flex max-w-screen-md flex-col items-center gap-4 px-6 py-12 text-center">
             {links.map((link) => (
                 <Link
                     key={link.name}

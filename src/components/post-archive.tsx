@@ -9,7 +9,7 @@ const ProjectArchive = ({ posts }: { posts: AllPosts["projects"] }) =>
         <Link
             key={post.slug}
             href={post.slugAsParams}
-            className="flex flex-col gap-4"
+            className="flex flex-col gap-4 md:gap-6"
         >
             {post.featureImage && (
                 <Image
@@ -20,10 +20,10 @@ const ProjectArchive = ({ posts }: { posts: AllPosts["projects"] }) =>
                     alt={post.title}
                 />
             )}
-            <h2 className="font-display text-2xl leading-tight">
+            <h2 className="font-display text-2xl leading-tight md:text-3xl">
                 {post.title}
             </h2>
-            <p>{post.description}</p>
+            <p className="grow">{post.description}</p>
             <Button className="w-full md:w-fit" size="lg">
                 Vezi poveste
             </Button>
